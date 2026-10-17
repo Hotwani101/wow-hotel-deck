@@ -1,0 +1,1135 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" href="data:,">
+<title>The Guest's Journey — Wow Ceramics</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&amp;family=Manrope:wght@400;500;600&amp;display=swap">
+<style>
+body{margin:0;background:#F7F4EE}
+a{color:#7A5C25}a:hover{color:#1F1D1A}
+.sec{position:relative;overflow:hidden}
+.pour{position:absolute;left:0;right:0;top:-160px;height:calc(100% + 320px);z-index:5;pointer-events:none;transform:translateY(110%);transition:transform 1.5s cubic-bezier(.7,0,.2,1)}
+.pour.p2{transition-duration:1.8s;transition-delay:.12s}
+.pour svg{display:block;width:200%;height:160px;animation:flow 6s linear infinite}
+.pour .fill{height:calc(100% - 160px)}
+.armed .pour{transform:translateY(0)}
+.pour{display:none}
+.armed.in .pour{transform:translateY(105%);transition-delay:.85s}
+.armed.in .pour.p2{transition-delay:1s}
+.tiles{position:absolute;left:0;right:0;top:0;z-index:6;display:grid;grid-template-columns:repeat(8,minmax(0,1fr));gap:2px;pointer-events:none}
+.tl{display:block;aspect-ratio:1;background:#1F1D1A;clip-path:inset(0 0 100% 0)}
+.tl.b{background:#B89A5E}
+@keyframes tb{0%{clip-path:inset(0 0 100% 0)}38%{clip-path:inset(0 0 0 0)}55%{clip-path:inset(0 0 0 0)}100%{clip-path:inset(0 0 0 100%)}}
+.armed.in .tl{animation:tb 1.4s cubic-bezier(.77,0,.18,1) both}
+@keyframes flow{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+.rise{transition:opacity .6s linear,transform .8s cubic-bezier(.16,1,.3,1)}
+.armed .rise{opacity:0;transform:translateY(28px)}
+.armed.in .rise{opacity:1;transform:none;transition-delay:1.3s}
+.armed.in .d1{transition-delay:1.42s}.armed.in .d2{transition-delay:1.54s}.armed.in .d3{transition-delay:1.66s}.armed.in .d4{transition-delay:1.78s}
+.armed .ph{clip-path:inset(100% 0 0 0)}
+.ph{transition:clip-path .9s cubic-bezier(.77,0,.18,1) 1.35s}
+.armed.in .ph{clip-path:inset(0 0 0 0)}
+.ph img{transition:transform 3s cubic-bezier(.16,1,.3,1) 1.35s}
+.armed.in .ph img{transform:scale(1.06)}
+.room{transition:opacity .2s linear,transform .3s cubic-bezier(.16,1,.3,1)}
+.armed .room{opacity:0;transform:scale(.4)}
+.armed.in .room{opacity:1;transform:none}
+.door{position:absolute;top:0;bottom:0;width:50%;z-index:6;background:#E9E4DA}
+.door.l{left:0;border-right:1px solid #CDBF9F;transform:translateX(-101%)}.door.r{right:0;border-left:1px solid #CDBF9F;transform:translateX(101%)}
+.armed .door.l,.armed .door.r{transform:none}
+.armed.opened .door{transition:transform 2.6s cubic-bezier(.65,0,.2,1) .2s}
+.armed.opened .door.l{transform:translateX(-101%)}.armed.opened .door.r{transform:translateX(101%)}
+.armed.in .tile:hover{transform:translateY(-6px)}
+.ripple path{animation:flow 14s linear infinite}
+.ripple path:nth-child(2){animation-duration:20s}.ripple path:nth-child(3){animation-duration:27s}
+.tile{transition:transform .5s cubic-bezier(.2,.8,.2,1),box-shadow .5s}
+.tile:hover{transform:translateY(-6px);box-shadow:0 18px 40px rgba(31,29,26,.12)}
+.cue{animation:cue 2.2s ease-in-out infinite}
+@keyframes cue{0%,100%{transform:translateY(0);opacity:.4}50%{transform:translateY(10px);opacity:1}}
+.rail{position:fixed;right:24px;top:50%;transform:translateY(-50%);z-index:20}
+.rail button{background:none;border:0;cursor:pointer;min-height:44px}
+.rail button span:first-child{opacity:0!important;background:#F7F4EE;padding:4px 8px;transition:opacity .25s}
+.rail button:hover span:first-child,.rail button:focus-visible span:first-child{opacity:1!important}
+@media (max-width:820px){.rail{display:none}}
+@media (prefers-reduced-motion:reduce){.pour,.rise,.ph,.room,.door,.ph img{transition:none!important}.armed .pour{transform:translateY(105%)}.armed .rise,.armed .room{opacity:1;transform:none}.armed .ph{clip-path:none}.pour svg,.ripple path,.cue{animation:none}.tl{animation:none!important;opacity:0!important}}
+.walls path{stroke-dasharray:4000;stroke-dashoffset:0}
+.armed .walls path{stroke-dashoffset:4000}
+.armed.in .walls path{stroke-dashoffset:0;transition:stroke-dashoffset 1.2s cubic-bezier(.85,0,.15,1) 1.3s}
+.flood{transform:translateX(1500px)}
+.armed .flood{transform:translateX(0)}
+.armed.in .flood{transform:translateX(1500px);transition:transform 1.2s cubic-bezier(.85,0,.15,1) 1.9s}
+.route{animation:march 1.4s linear infinite}.route-halo{animation:none}
+@keyframes march{to{stroke-dashoffset:-32}}
+.armed .route,.armed .labels{opacity:0}
+.armed.in .route{opacity:1;transition:opacity .4s linear 3s}
+.armed.in .labels{opacity:1;transition:opacity .4s linear 2.3s}
+.mk{transform-box:fill-box;transform-origin:center}
+.armed .mk{opacity:0;transform:scale(.2)}
+.armed.in .mk{opacity:1;transform:none;transition:opacity .15s,transform .35s cubic-bezier(.3,1.8,.5,1)}
+.armed.in .m1{transition-delay:1.3s}.armed.in .m2{transition-delay:1.45s}.armed.in .m3{transition-delay:1.6s}.armed.in .m4{transition-delay:1.75s}
+@media (prefers-reduced-motion:reduce){.armed .walls path{stroke-dashoffset:0}.armed .flood{transform:translateX(1500px)}.armed .route,.armed .labels,.armed .mk{opacity:1;transform:none}.route{animation:none}}
+.swi{background-image:url(assets/tile-atlas-hd.jpg);background-size:800% 600%;transition:transform .2s cubic-bezier(.16,1,.3,1)}
+.swi:hover{transform:scale(1.08)}
+.zone{cursor:pointer}
+.zone rect{transition:fill-opacity .2s;stroke:transparent}
+.zone:not(.has) rect{fill-opacity:0}
+.zone:not(.has):hover rect{fill-opacity:.22}
+.zone.on:not(.has) rect{fill-opacity:.3}
+.zone.has rect{fill-opacity:1!important;transition:none}
+.zone.on rect{stroke:#7A5C25;stroke-width:4;stroke-dasharray:12 8;animation:march 1s linear infinite}
+.armed .crise{opacity:0;transform:translateY(36px)}
+.armed.opened .crise{opacity:1;transform:none;transition:opacity 1.8s ease,transform 2.4s cubic-bezier(.16,1,.3,1)}
+.armed.opened .cr1{transition-delay:1.6s}.armed.opened .cr2{transition-delay:2s}.armed.opened .cr3{transition-delay:2.6s}.armed.opened .cr4{transition-delay:3.1s}
+@media (prefers-reduced-motion:reduce){.crise{transition:none!important;opacity:1!important;transform:none!important}}
+</style>
+</helmet>
+<div style="font-family: Manrope, 'Segoe UI', sans-serif; color: #1F1D1A; background: #F7F4EE; width: 100%">
+
+<svg width="0" height="0" style="position: absolute" aria-hidden="true">
+<filter id="liquid"><feTurbulence type="fractalNoise" baseFrequency="0.012 0.03" numOctaves="2" seed="4" result="n"><animate attributeName="baseFrequency" dur="9s" values="0.012 0.03;0.02 0.05;0.012 0.03" repeatCount="indefinite"></animate></feTurbulence><feDisplacementMap in="SourceGraphic" in2="n" scale="0"><animate attributeName="scale" begin="2.2s" dur="3.4s" values="70;0" fill="freeze"></animate></feDisplacementMap></filter>
+</svg>
+
+<nav class="rail" aria-label="Journey">
+<div style="display: flex; flex-direction: column; align-items: flex-end">
+<sc-for list="{{rail}}" as="r" hint-placeholder-count="6">
+<button onClick="{{r.go}}" aria-label="{{r.label}}" style="display: flex; align-items: center; gap: 12px; padding: 0">
+<span style="font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; color: #6B655C; opacity: {{r.op}}; transition: opacity .4s">{{r.label}}</span>
+<span style="display: block; width: {{r.w}}px; height: 2px; background: #1F1D1A; transition: width .5s"></span>
+</button>
+</sc-for>
+</div>
+</nav>
+
+<!-- 01 ARRIVAL -->
+
+
+<!-- 02 WELCOME / WHO WE ARE -->
+<section data-sec="0" class="{{cover}}" style="min-height: 860px; display: flex; flex-direction: column; justify-content: center; padding: 96px 8vw 72px; box-sizing: border-box; position: relative; overflow: hidden">
+<div class="door l" aria-hidden="true"></div>
+<div class="door r" aria-hidden="true"></div>
+<p class="crise cr1" style="position: relative; z-index: 2; margin: 0 0 32px; font-size: 13px; letter-spacing: 0.32em; text-transform: uppercase; color: #6B655C">Wow Ceramics · Jabalpur</p>
+<h1 class="crise cr2" style="position: relative; z-index: 2; margin: 0; font-family: 'Cormorant Garamond', Georgia, serif; font-weight: 500; font-size: clamp(52px, 8vw, 128px); line-height: 0.95; letter-spacing: -0.01em; max-width: 13ch; filter: url(#liquid)">Every guest walks on your floors first.</h1>
+<p class="crise cr3" style="position: relative; z-index: 2; margin: 40px 0 0; max-width: 560px; font-size: 19px; line-height: 1.6; color: #4A453E">A tile proposal for your hotel: the lobby, reception, 28 guest rooms and their washrooms.</p>
+<div class="crise cr4" style="position: relative; z-index: 2; display: flex; align-items: center; gap: 16px; margin-top: 72px; font-size: 12px; letter-spacing: 0.24em; text-transform: uppercase; color: #6B655C">
+<svg class="cue" width="18" height="30" viewBox="0 0 18 30" fill="none" stroke="#1F1D1A" stroke-width="1.4" aria-hidden="true"><rect x="1" y="1" width="16" height="28" rx="8"></rect><line x1="9" y1="7" x2="9" y2="12"></line></svg>
+Scroll to step inside
+</div>
+<svg class="ripple" aria-hidden="true" viewBox="0 0 2880 160" preserveAspectRatio="none" style="position: absolute; left: 0; bottom: 0; width: 200%; height: 160px; opacity: 0.5" fill="none" stroke="#B89A5E" stroke-width="1.2">
+<path d="M0 80 C240 40 480 120 720 80 S1200 40 1440 80 S1920 120 2160 80 S2640 40 2880 80"></path>
+<path d="M0 110 C240 70 480 150 720 110 S1200 70 1440 110 S1920 150 2160 110 S2640 70 2880 110"></path>
+<path d="M0 140 C240 110 480 170 720 140 S1200 110 1440 140 S1920 170 2160 140 S2640 110 2880 140"></path>
+</svg>
+</section>
+
+<!-- 03 OUR STAYS -->
+<section data-sec="1" class="{{c1}}" style="background: #EFEAE1; padding: 140px 8vw; box-sizing: border-box">
+<canvas data-ml="1" aria-hidden="true" style="position: absolute; inset: 0; width: 100%; height: 100%; display: block; pointer-events: none; z-index: 0"></canvas>
+<div class="pour" aria-hidden="true"><svg viewBox="0 0 2880 160" preserveAspectRatio="none"><path fill="#F7F4EE" d="M0 80 C240 0 480 160 720 80 S1200 0 1440 80 S1920 160 2160 80 S2640 0 2880 80 V160 H0Z"></path></svg><div class="fill" style="background: #F7F4EE"></div></div>
+<div class="pour p2" aria-hidden="true"><svg viewBox="0 0 2880 160" preserveAspectRatio="none"><path fill="#E2D6BC" d="M0 90 C240 30 480 150 720 90 S1200 30 1440 90 S1920 150 2160 90 S2640 30 2880 90 V160 H0Z"></path></svg><div class="fill" style="background: #E2D6BC"></div></div>
+<div class="tiles" aria-hidden="true" style="--tc: #E2D6BC; --tc2: #D6C7A6"><sc-for list="{{tiles}}" as="t" hint-placeholder-count="40"><span class="tl {{t.k}}" style="animation-delay: {{t.d}}ms"></span></sc-for></div>
+<div style="position: relative; z-index: 1; display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 64px; align-items: end; max-width: 1240px">
+<div>
+<p class="rise" style="margin: 0 0 20px; font-size: 12px; letter-spacing: 0.3em; text-transform: uppercase; color: #7A5C25">02 · Welcome</p>
+<h2 class="rise d1" style="margin: 0; font-family: 'Cormorant Garamond', Georgia, serif; font-weight: 500; font-size: clamp(40px, 5vw, 76px); line-height: 1">The tile partner behind Jabalpur's hotels and landmark projects.</h2>
+</div>
+<p class="rise d2" style="margin: 0; font-size: 18px; line-height: 1.7; color: #4A453E">Hotels, banquet halls, homes and commercial buildings across the region stand on tiles we have supplied. We take a project from the first conversation to the last box on site, and we stay one call away after the keys are handed over.</p>
+</div>
+<div style="position: relative; z-index: 1; display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 1px; background: #CDBF9F; margin-top: 96px; max-width: 1240px; border: 1px solid #CDBF9F">
+<div class="rise d2" style="background: #EFEAE1; padding: 36px 28px">
+<svg width="36" height="36" viewBox="0 0 36 36" fill="none" stroke="#7A5C25" stroke-width="1.4" aria-hidden="true"><rect x="5" y="5" width="12" height="12"></rect><rect x="19" y="5" width="12" height="12"></rect><rect x="5" y="19" width="12" height="12"></rect><rect x="19" y="19" width="12" height="12"></rect></svg>
+<h3 style="margin: 20px 0 8px; font-family: 'Cormorant Garamond', Georgia, serif; font-weight: 500; font-size: 30px">See it in real light</h3>
+<p style="margin: 0; font-size: 15px; line-height: 1.6; color: #6B655C">Walk the showroom with your architect and compare finishes side by side before you commit.</p>
+</div>
+<div class="rise d3" style="background: #EFEAE1; padding: 36px 28px">
+<svg width="36" height="36" viewBox="0 0 36 36" fill="none" stroke="#7A5C25" stroke-width="1.4" aria-hidden="true"><path d="M18 4 L31 11 L31 25 L18 32 L5 25 L5 11 Z"></path><path d="M5 11 L18 18 L31 11 M18 18 L18 32"></path></svg>
+<h3 style="margin: 20px 0 8px; font-family: 'Cormorant Garamond', Georgia, serif; font-weight: 500; font-size: 30px">Preview in 3D</h3>
+<p style="margin: 0; font-size: 15px; line-height: 1.6; color: #6B655C">Put any tile into a real room on your phone, on the floor or the walls, before a single box is ordered.</p>
+</div>
+<div class="rise d4" style="background: #EFEAE1; padding: 36px 28px">
+<svg width="36" height="36" viewBox="0 0 36 36" fill="none" stroke="#7A5C25" stroke-width="1.4" aria-hidden="true"><path d="M4 26 H24 V12 H4 Z"></path><path d="M24 17 H29 L32 21 V26 H24"></path><circle cx="10" cy="28" r="3"></circle><circle cx="27" cy="28" r="3"></circle></svg>
+<h3 style="margin: 20px 0 8px; font-family: 'Cormorant Garamond', Georgia, serif; font-weight: 500; font-size: 30px">Supply at project scale</h3>
+<p style="margin: 0; font-size: 15px; line-height: 1.6; color: #6B655C">One point of contact for quantities, scheduling and delivery, phased to match your site.</p>
+</div>
+</div>
+</section><section data-sec="2" class="{{c2}}" style="padding: 0 8vw 140px; box-sizing: border-box; touch-action: pan-y">
+<div class="pour" aria-hidden="true"><svg viewBox="0 0 2880 160" preserveAspectRatio="none"><path fill="#EFEAE1" d="M0 80 C240 0 480 160 720 80 S1200 0 1440 80 S1920 160 2160 80 S2640 0 2880 80 V160 H0Z"></path></svg><div class="fill" style="background: #EFEAE1"></div></div>
+<div class="pour p2" aria-hidden="true"><svg viewBox="0 0 2880 160" preserveAspectRatio="none"><path fill="#1F1D1A" d="M0 90 C240 30 480 150 720 90 S1200 30 1440 90 S1920 150 2160 90 S2640 30 2880 90 V160 H0Z"></path></svg><div class="fill" style="background: #1F1D1A"></div></div>
+<div class="tiles" aria-hidden="true" style="--tc: #E6DCC8; --tc2: #D9CBB0"><sc-for list="{{tiles}}" as="t" hint-placeholder-count="40"><span class="tl {{t.k}}" style="animation-delay: {{t.d}}ms"></span></sc-for></div>
+<canvas data-bp="1" aria-label="Interactive field of white spheres. Move the cursor to push them, drag one to grab it, click to burst them apart." style="position: absolute; inset: 0; width: 100%; height: 100%; display: block; pointer-events: none; z-index: 0"></canvas>
+<div class="ballpit" style="position: relative; z-index: 1; height: 500px; margin: 0 -8vw">
+<div style="position: absolute; inset: 0; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; padding: 0 8vw; pointer-events: none">
+<p class="rise" style="margin: 0 0 20px; font-size: 12px; letter-spacing: 0.3em; text-transform: uppercase; color: #7A5C25">03 · Hotels that trust us</p>
+<h2 class="rise d1" style="margin: 0; max-width: 16ch; font-family: 'Cormorant Garamond', Georgia, serif; font-weight: 500; font-size: clamp(44px, 6vw, 96px); line-height: 1; color: #1F1D1A">Their guests already walk on our tiles.</h2>
+</div>
+</div>
+
+<div style="position: relative; z-index: 1; margin-top: 40px; display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 32px; align-items: start">
+<figure class="ph" style="margin: 0; grid-column: span 2; overflow: hidden; aspect-ratio: 3 / 2; min-width: 0"><img src="assets/vijan-lobby.jpg" alt="Vijan Mahal lobby with polished floor tiles" style="width: 100%; height: 100%; object-fit: cover; display: block"></figure>
+<div class="rise d2" style="align-self: end">
+<p style="margin: 0; font-size: 12px; letter-spacing: 0.24em; text-transform: uppercase; color: #6B655C">Jabalpur</p>
+<h3 style="margin: 12px 0 16px; font-family: 'Cormorant Garamond', Georgia, serif; font-weight: 500; font-size: 52px; line-height: 1">Vijan Mahal</h3>
+<p style="margin: 0 0 24px; font-size: 16px; line-height: 1.7; color: #4A453E">A 108-room hotel with a spa, pool and banquet spaces, built with tiles supplied by Wow Ceramics.</p>
+<figure class="ph" style="margin: 0; overflow: hidden; aspect-ratio: 3 / 2"><img src="assets/vijan-room.jpg" alt="Vijan Mahal guest room and bathroom" style="width: 100%; height: 100%; object-fit: cover; display: block"></figure>
+</div>
+</div>
+
+<div style="position: relative; z-index: 1; margin-top: 120px; display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 32px; align-items: start">
+<div class="rise d2" style="align-self: end">
+<p style="margin: 0; font-size: 12px; letter-spacing: 0.24em; text-transform: uppercase; color: #6B655C">Jabalpur · opened 2023</p>
+<h3 style="margin: 12px 0 16px; font-family: 'Cormorant Garamond', Georgia, serif; font-weight: 500; font-size: 52px; line-height: 1">Shawn Elizey</h3>
+<p style="margin: 0 0 24px; font-size: 16px; line-height: 1.7; color: #4A453E">A 92-room hotel with a spa, gym and banquet hall, built with tiles supplied by Wow Ceramics.</p>
+<figure class="ph" style="margin: 0; overflow: hidden; aspect-ratio: 3 / 2"><img src="assets/shawn-wash.jpg" alt="Shawn Elizey washroom with stone-look tiles" style="width: 100%; height: 100%; object-fit: cover; display: block"></figure>
+</div>
+<figure class="ph" style="margin: 0; overflow: hidden; aspect-ratio: 3 / 2; min-width: 0"><img src="assets/shawn-room.jpg" alt="Shawn Elizey guest room with glossy floor tiles" style="width: 100%; height: 100%; object-fit: cover; display: block"></figure>
+<figure class="ph" style="margin: 0; overflow: hidden; aspect-ratio: 3 / 2; min-width: 0"><img src="assets/shawn-hall.jpg" alt="Shawn Elizey banquet hall with polished floor" style="width: 100%; height: 100%; object-fit: cover; display: block"></figure>
+</div>
+</section>
+
+<!-- 04 YOUR HOTEL -->
+<section data-sec="3" class="{{c3}}" style="background: #1F1D1A; color: #F7F4EE; padding: 140px 8vw; box-sizing: border-box">
+<canvas data-wv="1" aria-hidden="true" style="position: absolute; inset: 0; width: 100%; height: 100%; display: block; pointer-events: none; z-index: 0"></canvas>
+<div class="pour" aria-hidden="true"><svg viewBox="0 0 2880 160" preserveAspectRatio="none"><path fill="#F7F4EE" d="M0 80 C240 0 480 160 720 80 S1200 0 1440 80 S1920 160 2160 80 S2640 0 2880 80 V160 H0Z"></path></svg><div class="fill" style="background: #F7F4EE"></div></div>
+<div class="pour p2" aria-hidden="true"><svg viewBox="0 0 2880 160" preserveAspectRatio="none"><path fill="#B89A5E" d="M0 90 C240 30 480 150 720 90 S1200 30 1440 90 S1920 150 2160 90 S2640 30 2880 90 V160 H0Z"></path></svg><div class="fill" style="background: #B89A5E"></div></div>
+<div class="tiles" aria-hidden="true" style="--tc: #2C2925; --tc2: #3A3631"><sc-for list="{{tiles}}" as="t" hint-placeholder-count="40"><span class="tl {{t.k}}" style="animation-delay: {{t.d}}ms"></span></sc-for></div>
+<p class="rise" style="position: relative; z-index: 1; margin: 0 0 20px; font-size: 12px; letter-spacing: 0.3em; text-transform: uppercase; color: #D9C49A">04 · Your hotel</p>
+<h2 class="rise d1" style="position: relative; z-index: 1; margin: 0; max-width: 16ch; font-family: 'Cormorant Garamond', Georgia, serif; font-weight: 500; font-size: clamp(40px, 5vw, 76px); line-height: 1">Four kinds of space, one walk through.</h2>
+<div style="position: relative; z-index: 1; margin-top: 88px; display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 1px">
+<div class="rise d1" style="background: rgba(31, 29, 26, 0.72); box-shadow: 0 0 0 1px #4A453E; padding: 40px 32px; min-height: 340px; box-sizing: border-box; display: flex; flex-direction: column; justify-content: space-between">
+<div style="font-family: 'Cormorant Garamond', Georgia, serif; font-size: 22px; color: #D9C49A">i.</div>
+<div><h3 style="margin: 0 0 12px; font-family: 'Cormorant Garamond', Georgia, serif; font-weight: 500; font-size: 40px">Lobby</h3><p style="margin: 0; font-size: 15px; line-height: 1.6; color: #C9C2B6">The first impression. Large open floor, heavy footfall, needs to shine and stay tough.</p></div>
+</div>
+<div class="rise d2" style="background: rgba(31, 29, 26, 0.72); box-shadow: 0 0 0 1px #4A453E; padding: 40px 32px; min-height: 340px; box-sizing: border-box; display: flex; flex-direction: column; justify-content: space-between">
+<div style="font-family: 'Cormorant Garamond', Georgia, serif; font-size: 22px; color: #D9C49A">ii.</div>
+<div><h3 style="margin: 0 0 12px; font-family: 'Cormorant Garamond', Georgia, serif; font-weight: 500; font-size: 40px">Reception</h3><p style="margin: 0; font-size: 15px; line-height: 1.6; color: #C9C2B6">Where guests pause. Floor and counter backdrop that carry the brand.</p></div>
+</div>
+<div class="rise d3" style="background: rgba(31, 29, 26, 0.72); box-shadow: 0 0 0 1px #4A453E; padding: 40px 32px; min-height: 340px; box-sizing: border-box; display: flex; flex-direction: column; justify-content: space-between">
+<div style="display: grid; grid-template-columns: repeat(7, minmax(0, 1fr)); gap: 6px; max-width: 210px">
+<sc-for list="{{rooms}}" as="rm" hint-placeholder-count="28">
+<span class="room" style="display: block; aspect-ratio: 1; border: 1px solid #D9C49A; transition-delay: {{rm.d}}ms"></span>
+</sc-for>
+</div>
+<div><h3 style="margin: 0 0 12px; font-family: 'Cormorant Garamond', Georgia, serif; font-weight: 500; font-size: 40px">28 Guest rooms</h3><p style="margin: 0; font-size: 15px; line-height: 1.6; color: #C9C2B6">Calm, warm and easy to clean, built to look fresh for years.</p></div>
+</div>
+<div class="rise d4" style="background: rgba(31, 29, 26, 0.72); box-shadow: 0 0 0 1px #4A453E; padding: 40px 32px; min-height: 340px; box-sizing: border-box; display: flex; flex-direction: column; justify-content: space-between">
+<div style="font-family: 'Cormorant Garamond', Georgia, serif; font-size: 22px; color: #D9C49A">iv.</div>
+<div><h3 style="margin: 0 0 12px; font-family: 'Cormorant Garamond', Georgia, serif; font-weight: 500; font-size: 40px">Washrooms</h3><p style="margin: 0; font-size: 15px; line-height: 1.6; color: #C9C2B6">Walls and floors that handle water every day, with grip where feet get wet.</p></div>
+</div>
+</div>
+</section>
+
+<!-- 05 UP CLOSE -->
+<section data-sec="4" class="{{c4}}" style="background: #0B0A09; color: #F7F4EE; padding: 120px 0 0; box-sizing: border-box">
+<div class="tiles" aria-hidden="true"><sc-for list="{{tiles}}" as="t" hint-placeholder-count="40"><span class="tl {{t.k}}" style="animation-delay: {{t.d}}ms"></span></sc-for></div>
+<div style="position: relative; z-index: 1; padding: 0 8vw; display: flex; flex-wrap: wrap; justify-content: space-between; align-items: end; gap: 24px 64px">
+<div style="flex: 1 1 480px">
+<p class="rise" style="margin: 0 0 20px; font-size: 12px; letter-spacing: 0.3em; text-transform: uppercase; color: #D9C49A">05 · Up close</p>
+<h2 class="rise d1" style="margin: 0; max-width: 15ch; font-family: 'Cormorant Garamond', Georgia, serif; font-weight: 500; font-size: clamp(40px, 5vw, 76px); line-height: 1">Leaf through the surfaces, one by one.</h2>
+</div>
+<p class="rise d2" style="flex: 0 1 380px; margin: 0; font-size: 16px; line-height: 1.7; color: #C9C2B6">Scroll or drag to move through our collections, in real rooms and up close. Tap any picture to hold it up, and tap again to put it back.</p>
+</div>
+<div data-mag="1" class="rise d3" style="position: relative; height: clamp(440px, 52vw, 700px); margin-top: 48px; overflow: hidden; touch-action: pan-y; cursor: grab">
+<canvas role="img" aria-label="A corridor of tile samples that moves as you scroll; tap a tile to hold it up close" style="position: absolute; inset: 0; width: 100%; height: 100%; display: block"></canvas>
+<sc-if value="{{magNoGL}}" hint-placeholder-val="{{ false }}">
+<img src="assets/mag-atlas.jpg" alt="A selection of tiles from the collection" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover">
+</sc-if>
+<div aria-live="polite" style="position: absolute; left: 8vw; bottom: 32px; pointer-events: none; transition: opacity .4s; opacity: {{magCap.op}}">
+<p style="margin: 0 0 8px; font-size: 11px; letter-spacing: 0.24em; text-transform: uppercase; color: #D9C49A">{{magCap.sub}}</p>
+<p style="margin: 0; font-family: 'Cormorant Garamond', Georgia, serif; font-size: 34px; line-height: 1.1; color: #F7F4EE">{{magCap.title}}</p>
+</div>
+</div>
+</section>
+
+<!-- 06 EVERY SPACE -->
+<section data-sec="5" class="{{c5}}" style="background: #F7F4EE; padding: 140px 8vw; box-sizing: border-box">
+<canvas data-tg="1" aria-hidden="true" style="position: absolute; inset: 0; width: 100%; height: 100%; display: block; pointer-events: none; z-index: 0"></canvas>
+<div class="pour" aria-hidden="true"><svg viewBox="0 0 2880 160" preserveAspectRatio="none"><path fill="#1F1D1A" d="M0 80 C240 0 480 160 720 80 S1200 0 1440 80 S1920 160 2160 80 S2640 0 2880 80 V160 H0Z"></path></svg><div class="fill" style="background: #1F1D1A"></div></div>
+<div class="pour p2" aria-hidden="true"><svg viewBox="0 0 2880 160" preserveAspectRatio="none"><path fill="#B89A5E" d="M0 90 C240 30 480 150 720 90 S1200 30 1440 90 S1920 150 2160 90 S2640 30 2880 90 V160 H0Z"></path></svg><div class="fill" style="background: #B89A5E"></div></div>
+<div class="tiles" aria-hidden="true" style="--tc: #E6DCC8; --tc2: #D9CBB0"><sc-for list="{{tiles}}" as="t" hint-placeholder-count="40"><span class="tl {{t.k}}" style="animation-delay: {{t.d}}ms"></span></sc-for></div>
+<div style="position: relative; z-index: 1; display: flex; flex-wrap: wrap; justify-content: space-between; align-items: end; gap: 32px 64px">
+<div style="flex: 1 1 520px">
+<p class="rise" style="margin: 0 0 20px; font-size: 12px; letter-spacing: 0.3em; text-transform: uppercase; color: #7A5C25">06 · Every space, considered</p>
+<h2 class="rise d1" style="margin: 0; max-width: 14ch; font-family: 'Cormorant Garamond', Georgia, serif; font-weight: 500; font-size: clamp(44px, 5.6vw, 88px); line-height: 0.98">Planned room by room, from the front door in.</h2>
+</div>
+<p class="rise d2" style="flex: 0 1 380px; margin: 0; font-size: 17px; line-height: 1.7; color: #4A453E">We map your floor plan and match each space to the right tile: how much footfall it carries, how wet it gets and how it should feel underfoot.</p>
+</div>
+
+<div class="mapwrap" style="position: relative; z-index: 1; margin-top: 72px; display: flex; flex-wrap: wrap; gap: 40px; align-items: flex-start">
+<figure class="plan" style="margin: 0; flex: 1 1 620px; min-width: 0; position: sticky; top: 80px">
+<svg viewBox="0 0 1200 620" role="img" aria-label="Interactive hotel floor plan. Choose a space, then choose a tile to see it laid on the plan." style="display: block; width: 100%; height: auto">
+<defs>
+<pattern id="tilegrid" width="40" height="40" patternUnits="userSpaceOnUse"><rect width="40" height="40" fill="#E6D9BD"></rect><path d="M40 0 H0 V40" fill="none" stroke="#C2A673" stroke-width="1.2"></path></pattern>
+<pattern id="sw0" width="90" height="90" patternUnits="userSpaceOnUse"><image href="assets/tile-atlas-hd.jpg" x="0" y="0" width="720" height="540" preserveAspectRatio="none"></image><path d="M90 0 H0 V90" fill="none" stroke="rgba(255,255,255,0.7)" stroke-width="2"></path></pattern>
+<pattern id="sw1" width="90" height="90" patternUnits="userSpaceOnUse"><image href="assets/tile-atlas-hd.jpg" x="-90" y="0" width="720" height="540" preserveAspectRatio="none"></image><path d="M90 0 H0 V90" fill="none" stroke="rgba(255,255,255,0.7)" stroke-width="2"></path></pattern>
+<pattern id="sw2" width="90" height="90" patternUnits="userSpaceOnUse"><image href="assets/tile-atlas-hd.jpg" x="-180" y="0" width="720" height="540" preserveAspectRatio="none"></image><path d="M90 0 H0 V90" fill="none" stroke="rgba(255,255,255,0.7)" stroke-width="2"></path></pattern>
+<pattern id="sw3" width="90" height="90" patternUnits="userSpaceOnUse"><image href="assets/tile-atlas-hd.jpg" x="-270" y="0" width="720" height="540" preserveAspectRatio="none"></image><path d="M90 0 H0 V90" fill="none" stroke="rgba(255,255,255,0.7)" stroke-width="2"></path></pattern>
+<pattern id="sw4" width="90" height="90" patternUnits="userSpaceOnUse"><image href="assets/tile-atlas-hd.jpg" x="-360" y="0" width="720" height="540" preserveAspectRatio="none"></image><path d="M90 0 H0 V90" fill="none" stroke="rgba(255,255,255,0.7)" stroke-width="2"></path></pattern>
+<pattern id="sw5" width="90" height="90" patternUnits="userSpaceOnUse"><image href="assets/tile-atlas-hd.jpg" x="-450" y="0" width="720" height="540" preserveAspectRatio="none"></image><path d="M90 0 H0 V90" fill="none" stroke="rgba(255,255,255,0.7)" stroke-width="2"></path></pattern>
+<pattern id="sw6" width="90" height="90" patternUnits="userSpaceOnUse"><image href="assets/tile-atlas-hd.jpg" x="-540" y="0" width="720" height="540" preserveAspectRatio="none"></image><path d="M90 0 H0 V90" fill="none" stroke="rgba(255,255,255,0.7)" stroke-width="2"></path></pattern>
+<pattern id="sw7" width="90" height="90" patternUnits="userSpaceOnUse"><image href="assets/tile-atlas-hd.jpg" x="-630" y="0" width="720" height="540" preserveAspectRatio="none"></image><path d="M90 0 H0 V90" fill="none" stroke="rgba(255,255,255,0.7)" stroke-width="2"></path></pattern>
+<pattern id="sw8" width="90" height="90" patternUnits="userSpaceOnUse"><image href="assets/tile-atlas-hd.jpg" x="0" y="-90" width="720" height="540" preserveAspectRatio="none"></image><path d="M90 0 H0 V90" fill="none" stroke="rgba(255,255,255,0.7)" stroke-width="2"></path></pattern>
+<pattern id="sw9" width="90" height="90" patternUnits="userSpaceOnUse"><image href="assets/tile-atlas-hd.jpg" x="-90" y="-90" width="720" height="540" preserveAspectRatio="none"></image><path d="M90 0 H0 V90" fill="none" stroke="rgba(255,255,255,0.7)" stroke-width="2"></path></pattern>
+<pattern id="sw10" width="90" height="90" patternUnits="userSpaceOnUse"><image href="assets/tile-atlas-hd.jpg" x="-180" y="-90" width="720" height="540" preserveAspectRatio="none"></image><path d="M90 0 H0 V90" fill="none" stroke="rgba(255,255,255,0.7)" stroke-width="2"></path></pattern>
+<pattern id="sw11" width="90" height="90" patternUnits="userSpaceOnUse"><image href="assets/tile-atlas-hd.jpg" x="-270" y="-90" width="720" height="540" preserveAspectRatio="none"></image><path d="M90 0 H0 V90" fill="none" stroke="rgba(255,255,255,0.7)" stroke-width="2"></path></pattern>
+<pattern id="sw12" width="90" height="90" patternUnits="userSpaceOnUse"><image href="assets/tile-atlas-hd.jpg" x="-360" y="-90" width="720" height="540" preserveAspectRatio="none"></image><path d="M90 0 H0 V90" fill="none" stroke="rgba(255,255,255,0.7)" stroke-width="2"></path></pattern>
+<pattern id="sw13" width="90" height="90" patternUnits="userSpaceOnUse"><image href="assets/tile-atlas-hd.jpg" x="-450" y="-90" width="720" height="540" preserveAspectRatio="none"></image><path d="M90 0 H0 V90" fill="none" stroke="rgba(255,255,255,0.7)" stroke-width="2"></path></pattern>
+<pattern id="sw14" width="90" height="90" patternUnits="userSpaceOnUse"><image href="assets/tile-atlas-hd.jpg" x="-540" y="-90" width="720" height="540" preserveAspectRatio="none"></image><path d="M90 0 H0 V90" fill="none" stroke="rgba(255,255,255,0.7)" stroke-width="2"></path></pattern>
+<pattern id="sw15" width="90" height="90" patternUnits="userSpaceOnUse"><image href="assets/tile-atlas-hd.jpg" x="-630" y="-90" width="720" height="540" preserveAspectRatio="none"></image><path d="M90 0 H0 V90" fill="none" stroke="rgba(255,255,255,0.7)" stroke-width="2"></path></pattern>
+<pattern id="sw16" width="90" height="90" patternUnits="userSpaceOnUse"><image href="assets/tile-atlas-hd.jpg" x="0" y="-180" width="720" height="540" preserveAspectRatio="none"></image><path d="M90 0 H0 V90" fill="none" stroke="rgba(255,255,255,0.7)" stroke-width="2"></path></pattern>
+<pattern id="sw17" width="90" height="90" patternUnits="userSpaceOnUse"><image href="assets/tile-atlas-hd.jpg" x="-90" y="-180" width="720" height="540" preserveAspectRatio="none"></image><path d="M90 0 H0 V90" fill="none" stroke="rgba(255,255,255,0.7)" stroke-width="2"></path></pattern>
+<pattern id="sw18" width="90" height="90" patternUnits="userSpaceOnUse"><image href="assets/tile-atlas-hd.jpg" x="-180" y="-180" width="720" height="540" preserveAspectRatio="none"></image><path d="M90 0 H0 V90" fill="none" stroke="rgba(255,255,255,0.7)" stroke-width="2"></path></pattern>
+<pattern id="sw19" width="90" height="90" patternUnits="userSpaceOnUse"><image href="assets/tile-atlas-hd.jpg" x="-270" y="-180" width="720" height="540" preserveAspectRatio="none"></image><path d="M90 0 H0 V90" fill="none" stroke="rgba(255,255,255,0.7)" stroke-width="2"></path></pattern>
+<pattern id="sw20" width="90" height="90" patternUnits="userSpaceOnUse"><image href="assets/tile-atlas-hd.jpg" x="-360" y="-180" width="720" height="540" preserveAspectRatio="none"></image><path d="M90 0 H0 V90" fill="none" stroke="rgba(255,255,255,0.7)" stroke-width="2"></path></pattern>
+<pattern id="sw21" width="90" height="90" patternUnits="userSpaceOnUse"><image href="assets/tile-atlas-hd.jpg" x="-450" y="-180" width="720" height="540" preserveAspectRatio="none"></image><path d="M90 0 H0 V90" fill="none" stroke="rgba(255,255,255,0.7)" stroke-width="2"></path></pattern>
+<pattern id="sw22" width="90" height="90" patternUnits="userSpaceOnUse"><image href="assets/tile-atlas-hd.jpg" x="-540" y="-180" width="720" height="540" preserveAspectRatio="none"></image><path d="M90 0 H0 V90" fill="none" stroke="rgba(255,255,255,0.7)" stroke-width="2"></path></pattern>
+<pattern id="sw23" width="90" height="90" patternUnits="userSpaceOnUse"><image href="assets/tile-atlas-hd.jpg" x="-630" y="-180" width="720" height="540" preserveAspectRatio="none"></image><path d="M90 0 H0 V90" fill="none" stroke="rgba(255,255,255,0.7)" stroke-width="2"></path></pattern>
+<pattern id="sw24" width="90" height="90" patternUnits="userSpaceOnUse"><image href="assets/tile-atlas-hd.jpg" x="0" y="-270" width="720" height="540" preserveAspectRatio="none"></image><path d="M90 0 H0 V90" fill="none" stroke="rgba(255,255,255,0.7)" stroke-width="2"></path></pattern>
+<pattern id="sw25" width="90" height="90" patternUnits="userSpaceOnUse"><image href="assets/tile-atlas-hd.jpg" x="-90" y="-270" width="720" height="540" preserveAspectRatio="none"></image><path d="M90 0 H0 V90" fill="none" stroke="rgba(255,255,255,0.7)" stroke-width="2"></path></pattern>
+<pattern id="sw26" width="90" height="90" patternUnits="userSpaceOnUse"><image href="assets/tile-atlas-hd.jpg" x="-180" y="-270" width="720" height="540" preserveAspectRatio="none"></image><path d="M90 0 H0 V90" fill="none" stroke="rgba(255,255,255,0.7)" stroke-width="2"></path></pattern>
+<pattern id="sw27" width="90" height="90" patternUnits="userSpaceOnUse"><image href="assets/tile-atlas-hd.jpg" x="-270" y="-270" width="720" height="540" preserveAspectRatio="none"></image><path d="M90 0 H0 V90" fill="none" stroke="rgba(255,255,255,0.7)" stroke-width="2"></path></pattern>
+<pattern id="sw28" width="90" height="90" patternUnits="userSpaceOnUse"><image href="assets/tile-atlas-hd.jpg" x="-360" y="-270" width="720" height="540" preserveAspectRatio="none"></image><path d="M90 0 H0 V90" fill="none" stroke="rgba(255,255,255,0.7)" stroke-width="2"></path></pattern>
+<pattern id="sw29" width="90" height="90" patternUnits="userSpaceOnUse"><image href="assets/tile-atlas-hd.jpg" x="-450" y="-270" width="720" height="540" preserveAspectRatio="none"></image><path d="M90 0 H0 V90" fill="none" stroke="rgba(255,255,255,0.7)" stroke-width="2"></path></pattern>
+<pattern id="sw30" width="90" height="90" patternUnits="userSpaceOnUse"><image href="assets/tile-atlas-hd.jpg" x="-540" y="-270" width="720" height="540" preserveAspectRatio="none"></image><path d="M90 0 H0 V90" fill="none" stroke="rgba(255,255,255,0.7)" stroke-width="2"></path></pattern>
+<pattern id="sw31" width="90" height="90" patternUnits="userSpaceOnUse"><image href="assets/tile-atlas-hd.jpg" x="-630" y="-270" width="720" height="540" preserveAspectRatio="none"></image><path d="M90 0 H0 V90" fill="none" stroke="rgba(255,255,255,0.7)" stroke-width="2"></path></pattern>
+<pattern id="sw32" width="90" height="90" patternUnits="userSpaceOnUse"><image href="assets/tile-atlas-hd.jpg" x="0" y="-360" width="720" height="540" preserveAspectRatio="none"></image><path d="M90 0 H0 V90" fill="none" stroke="rgba(255,255,255,0.7)" stroke-width="2"></path></pattern>
+<pattern id="sw33" width="90" height="90" patternUnits="userSpaceOnUse"><image href="assets/tile-atlas-hd.jpg" x="-90" y="-360" width="720" height="540" preserveAspectRatio="none"></image><path d="M90 0 H0 V90" fill="none" stroke="rgba(255,255,255,0.7)" stroke-width="2"></path></pattern>
+<pattern id="sw34" width="90" height="90" patternUnits="userSpaceOnUse"><image href="assets/tile-atlas-hd.jpg" x="-180" y="-360" width="720" height="540" preserveAspectRatio="none"></image><path d="M90 0 H0 V90" fill="none" stroke="rgba(255,255,255,0.7)" stroke-width="2"></path></pattern>
+<pattern id="sw35" width="90" height="90" patternUnits="userSpaceOnUse"><image href="assets/tile-atlas-hd.jpg" x="-270" y="-360" width="720" height="540" preserveAspectRatio="none"></image><path d="M90 0 H0 V90" fill="none" stroke="rgba(255,255,255,0.7)" stroke-width="2"></path></pattern>
+<pattern id="sw36" width="90" height="90" patternUnits="userSpaceOnUse"><image href="assets/tile-atlas-hd.jpg" x="-360" y="-360" width="720" height="540" preserveAspectRatio="none"></image><path d="M90 0 H0 V90" fill="none" stroke="rgba(255,255,255,0.7)" stroke-width="2"></path></pattern>
+<pattern id="sw37" width="90" height="90" patternUnits="userSpaceOnUse"><image href="assets/tile-atlas-hd.jpg" x="-450" y="-360" width="720" height="540" preserveAspectRatio="none"></image><path d="M90 0 H0 V90" fill="none" stroke="rgba(255,255,255,0.7)" stroke-width="2"></path></pattern>
+<pattern id="sw38" width="90" height="90" patternUnits="userSpaceOnUse"><image href="assets/tile-atlas-hd.jpg" x="-540" y="-360" width="720" height="540" preserveAspectRatio="none"></image><path d="M90 0 H0 V90" fill="none" stroke="rgba(255,255,255,0.7)" stroke-width="2"></path></pattern>
+<pattern id="sw39" width="90" height="90" patternUnits="userSpaceOnUse"><image href="assets/tile-atlas-hd.jpg" x="-630" y="-360" width="720" height="540" preserveAspectRatio="none"></image><path d="M90 0 H0 V90" fill="none" stroke="rgba(255,255,255,0.7)" stroke-width="2"></path></pattern>
+<pattern id="sw40" width="90" height="90" patternUnits="userSpaceOnUse"><image href="assets/tile-atlas-hd.jpg" x="0" y="-450" width="720" height="540" preserveAspectRatio="none"></image><path d="M90 0 H0 V90" fill="none" stroke="rgba(255,255,255,0.7)" stroke-width="2"></path></pattern>
+<pattern id="sw41" width="90" height="90" patternUnits="userSpaceOnUse"><image href="assets/tile-atlas-hd.jpg" x="-90" y="-450" width="720" height="540" preserveAspectRatio="none"></image><path d="M90 0 H0 V90" fill="none" stroke="rgba(255,255,255,0.7)" stroke-width="2"></path></pattern>
+<pattern id="sw42" width="90" height="90" patternUnits="userSpaceOnUse"><image href="assets/tile-atlas-hd.jpg" x="-180" y="-450" width="720" height="540" preserveAspectRatio="none"></image><path d="M90 0 H0 V90" fill="none" stroke="rgba(255,255,255,0.7)" stroke-width="2"></path></pattern>
+<pattern id="sw43" width="90" height="90" patternUnits="userSpaceOnUse"><image href="assets/tile-atlas-hd.jpg" x="-270" y="-450" width="720" height="540" preserveAspectRatio="none"></image><path d="M90 0 H0 V90" fill="none" stroke="rgba(255,255,255,0.7)" stroke-width="2"></path></pattern>
+<pattern id="sw44" width="90" height="90" patternUnits="userSpaceOnUse"><image href="assets/tile-atlas-hd.jpg" x="-360" y="-450" width="720" height="540" preserveAspectRatio="none"></image><path d="M90 0 H0 V90" fill="none" stroke="rgba(255,255,255,0.7)" stroke-width="2"></path></pattern>
+<pattern id="sw45" width="90" height="90" patternUnits="userSpaceOnUse"><image href="assets/tile-atlas-hd.jpg" x="-450" y="-450" width="720" height="540" preserveAspectRatio="none"></image><path d="M90 0 H0 V90" fill="none" stroke="rgba(255,255,255,0.7)" stroke-width="2"></path></pattern>
+<pattern id="sw46" width="90" height="90" patternUnits="userSpaceOnUse"><image href="assets/tile-atlas-hd.jpg" x="-540" y="-450" width="720" height="540" preserveAspectRatio="none"></image><path d="M90 0 H0 V90" fill="none" stroke="rgba(255,255,255,0.7)" stroke-width="2"></path></pattern>
+<clipPath id="planclip"><rect x="40" y="40" width="1120" height="540"></rect></clipPath>
+</defs>
+<rect x="40" y="40" width="1120" height="540" fill="url(#tilegrid)"></rect>
+<g clip-path="url(#planclip)">
+<g class="flood">
+<path fill="#EFE6D3" d="M-160 -20 C-80 100 -180 210 -100 320 S-140 520 -70 640 H1400 V-20 Z"></path>
+<path fill="#F7F4EE" d="M-90 -20 C-10 110 -110 220 -30 330 S-70 520 0 640 H1400 V-20 Z"></path>
+</g>
+</g>
+<g class="zones">
+<g class="zone {{zc.lobby}}" onClick="{{zp.lobby}}"><rect x="40" y="40" width="420" height="540" fill="{{zf.lobby}}"></rect></g>
+<g class="zone {{zc.reception}}" onClick="{{zp.reception}}"><rect x="460" y="40" width="240" height="260" fill="{{zf.reception}}"></rect></g>
+<g class="zone {{zc.corridor}}" onClick="{{zp.corridor}}"><rect x="460" y="300" width="700" height="60" fill="{{zf.corridor}}"></rect></g>
+<g class="zone {{zc.rooms}}" onClick="{{zp.rooms}}"><rect x="700" y="40" width="230" height="260" fill="{{zf.rooms}}"></rect><rect x="930" y="40" width="230" height="260" fill="{{zf.rooms}}"></rect><rect x="460" y="360" width="233" height="220" fill="{{zf.rooms}}"></rect><rect x="693" y="360" width="233" height="220" fill="{{zf.rooms}}"></rect><rect x="926" y="360" width="234" height="220" fill="{{zf.rooms}}"></rect></g>
+<g class="zone {{zc.wash}}" onClick="{{zp.wash}}"><rect x="840" y="40" width="90" height="90" fill="{{zf.wash}}"></rect><rect x="1070" y="40" width="90" height="90" fill="{{zf.wash}}"></rect><rect x="603" y="490" width="90" height="90" fill="{{zf.wash}}"></rect><rect x="836" y="490" width="90" height="90" fill="{{zf.wash}}"></rect><rect x="1070" y="490" width="90" height="90" fill="{{zf.wash}}"></rect></g>
+</g>
+<g class="walls" fill="none" stroke="#1F1D1A" stroke-width="3" pointer-events="none">
+<path d="M40 280 V40 H1160 V580 H40 V360"></path>
+<path d="M460 40 V300 M460 360 V580 M700 40 V300 M930 40 V300 M693 360 V580 M926 360 V580"></path>
+<path d="M460 300 H560 M640 300 H780 M860 300 H1010 M1090 300 H1160 M460 360 H520 M600 360 H750 M830 360 H990 M1070 360 H1160"></path>
+<path d="M840 40 V130 H862 M898 130 H930 M1070 40 V130 H1160 M603 580 V490 H693 M836 580 V490 H926 M1070 580 V490 H1160"></path>
+<path d="M520 170 H640 V230 H520" stroke-width="2"></path>
+</g>
+<path class="route route-halo" pointer-events="none" d="M12 330 H795 Q820 330 820 305 V200 Q820 175 845 175 H862 Q880 175 880 157 V92" fill="none" stroke="#F7F4EE" stroke-width="7" stroke-linecap="round" stroke-linejoin="round" opacity="0.9"></path>
+<path class="route" pointer-events="none" d="M12 330 H795 Q820 330 820 305 V200 Q820 175 845 175 H862 Q880 175 880 157 V92" fill="none" stroke="#1F1D1A" stroke-width="2.5" stroke-dasharray="6 10" stroke-linecap="round"></path>
+<g class="labels" pointer-events="none" font-family="Manrope, sans-serif" font-size="15" letter-spacing="2.5" fill="#1F1D1A" stroke="#F7F4EE" stroke-width="4" paint-order="stroke">
+<text x="70" y="78">LOBBY</text>
+<text x="490" y="78">RECEPTION</text>
+<text x="730" y="78">ROOM</text>
+<text x="490" y="398">ROOM</text>
+<text x="885" y="70" font-size="12" text-anchor="middle">WASH</text>
+<text x="900" y="336" font-size="12">CORRIDOR</text>
+<text x="1188" y="606" text-anchor="end" font-size="12" fill="#6B655C">× 28 ROOMS</text>
+</g>
+</svg>
+<figcaption style="margin-top: 14px; font-size: 13px; color: #6B655C">Tap any space on the plan to select it.</figcaption>
+</figure>
+
+<div style="flex: 1 1 320px; max-width: 420px; display: flex; flex-direction: column; gap: 28px">
+<div>
+<p style="margin: 0 0 12px; font-size: 11px; letter-spacing: 0.24em; text-transform: uppercase; color: #7A5C25">Step 1 · Pick a space</p>
+<div style="display: flex; flex-direction: column; gap: 6px">
+<sc-for list="{{spaces}}" as="sp" hint-placeholder-count="5">
+<button onClick="{{sp.pick}}" aria-pressed="{{sp.pressed}}" style="display: flex; justify-content: space-between; align-items: center; gap: 12px; min-height: 48px; padding: 10px 14px; border: 1px solid {{sp.bc}}; background: {{sp.bg}}; color: {{sp.fg}}; font: 500 15px Manrope, sans-serif; text-align: left; cursor: pointer; transition: background .2s, color .2s">
+<span>{{sp.name}}</span><span style="font-size: 12px; opacity: 0.8">{{sp.tile}}</span>
+</button>
+</sc-for>
+</div>
+</div>
+<div>
+<p style="margin: 0 0 12px; font-size: 11px; letter-spacing: 0.24em; text-transform: uppercase; color: #7A5C25">Step 2 · Choose a tile for {{selName}}</p>
+<div style="display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 12px">
+<sc-for list="{{cats}}" as="ct" hint-placeholder-count="7">
+<button onClick="{{ct.pick}}" aria-pressed="{{ct.pressed}}" style="min-height: 34px; padding: 0 12px; border: 1px solid #1F1D1A; background: {{ct.bg}}; color: {{ct.fg}}; font: 600 11px Manrope, sans-serif; letter-spacing: 0.12em; text-transform: uppercase; cursor: pointer">{{ct.name}}</button>
+</sc-for>
+</div>
+<div style="display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 8px; max-height: 244px; overflow-y: auto; padding: 3px">
+<sc-for list="{{swatches}}" as="w" hint-placeholder-count="10">
+<button class="swi" onClick="{{w.apply}}" aria-label="{{w.name}}" title="{{w.name}}" style="aspect-ratio: 1; min-height: 44px; border: 0; padding: 0; cursor: pointer; background-position: {{w.pos}}; outline: {{w.ring}}; outline-offset: 2px"></button>
+</sc-for>
+</div>
+<p style="margin: 12px 0 0; font-size: 13px; color: #4A453E; min-height: 20px">{{selInfo}}</p>
+</div>
+<button onClick="{{clearPlan}}" style="align-self: flex-start; min-height: 44px; padding: 0 18px; border: 1px solid #1F1D1A; background: transparent; color: #1F1D1A; font: 600 12px Manrope, sans-serif; letter-spacing: 0.2em; text-transform: uppercase; cursor: pointer">Clear plan</button>
+</div>
+</div>
+
+<div style="position: relative; z-index: 1; margin-top: 64px; display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 32px">
+<div class="rise d1" style="border-top: 2px solid #1F1D1A; padding-top: 20px"><p style="margin: 0 0 6px; font-size: 12px; letter-spacing: 0.2em; color: #7A5C25">1 · LOBBY</p><h3 style="margin: 0 0 8px; font-family: 'Cormorant Garamond', Georgia, serif; font-weight: 500; font-size: 30px">Built for footfall</h3><p style="margin: 0; font-size: 15px; line-height: 1.6; color: #4A453E">Large-format, polished surfaces that shine under heavy traffic and make the space feel bigger.</p></div>
+<div class="rise d2" style="border-top: 2px solid #1F1D1A; padding-top: 20px"><p style="margin: 0 0 6px; font-size: 12px; letter-spacing: 0.2em; color: #7A5C25">2 · RECEPTION</p><h3 style="margin: 0 0 8px; font-family: 'Cormorant Garamond', Georgia, serif; font-weight: 500; font-size: 30px">A backdrop that welcomes</h3><p style="margin: 0; font-size: 15px; line-height: 1.6; color: #4A453E">Feature walls and statement decors behind the desk to give the hotel its signature look.</p></div>
+<div class="rise d3" style="border-top: 2px solid #1F1D1A; padding-top: 20px"><p style="margin: 0 0 6px; font-size: 12px; letter-spacing: 0.2em; color: #7A5C25">3 · ROOMS</p><h3 style="margin: 0 0 8px; font-family: 'Cormorant Garamond', Georgia, serif; font-weight: 500; font-size: 30px">Calm and warm</h3><p style="margin: 0; font-size: 15px; line-height: 1.6; color: #4A453E">Soft matte, stone and wood-look finishes that feel restful and clean easily day after day.</p></div>
+<div class="rise d4" style="border-top: 2px solid #1F1D1A; padding-top: 20px"><p style="margin: 0 0 6px; font-size: 12px; letter-spacing: 0.2em; color: #7A5C25">4 · WASHROOMS</p><h3 style="margin: 0 0 8px; font-family: 'Cormorant Garamond', Georgia, serif; font-weight: 500; font-size: 30px">Safe when wet</h3><p style="margin: 0; font-size: 15px; line-height: 1.6; color: #4A453E">Anti-skid floors and easy-care wall tiles that stand up to water, steam and daily cleaning.</p></div>
+</div>
+</section>
+
+<!-- 06 THE COLLECTION -->
+<section data-sec="6" class="{{c6}}" style="background: #141311; color: #F7F4EE; padding: 140px 0 72px; box-sizing: border-box">
+<div class="pour" aria-hidden="true"><svg viewBox="0 0 2880 160" preserveAspectRatio="none"><path fill="#F7F4EE" d="M0 80 C240 0 480 160 720 80 S1200 0 1440 80 S1920 160 2160 80 S2640 0 2880 80 V160 H0Z"></path></svg><div class="fill" style="background: #F7F4EE"></div></div>
+<div class="pour p2" aria-hidden="true"><svg viewBox="0 0 2880 160" preserveAspectRatio="none"><path fill="#B89A5E" d="M0 90 C240 30 480 150 720 90 S1200 30 1440 90 S1920 150 2160 90 S2640 30 2880 90 V160 H0Z"></path></svg><div class="fill" style="background: #B89A5E"></div></div>
+<div class="tiles" aria-hidden="true" style="--tc: #2C2925; --tc2: #3A3631"><sc-for list="{{tiles}}" as="t" hint-placeholder-count="40"><span class="tl {{t.k}}" style="animation-delay: {{t.d}}ms"></span></sc-for></div>
+<div style="padding: 0 8vw; display: flex; flex-wrap: wrap; justify-content: space-between; align-items: end; gap: 48px">
+<div style="flex: 1 1 480px">
+<p class="rise" style="margin: 0 0 20px; font-size: 12px; letter-spacing: 0.3em; text-transform: uppercase; color: #D9C49A">07 · Choose your tile</p>
+<h2 class="rise d1" style="margin: 0; max-width: 16ch; font-family: 'Cormorant Garamond', Georgia, serif; font-weight: 500; font-size: clamp(40px, 5vw, 76px); line-height: 1">A world of tiles to choose from.</h2>
+<p class="rise d2" style="margin: 28px 0 0; max-width: 520px; font-size: 17px; line-height: 1.7; color: #C9C2B6">Spin the sphere and hover any tile to bring it to life. Marble, stone, wood, plain colours and decors, from the brands we stock. We'll bring the full catalogues to your site.</p>
+</div>
+<div class="rise d3" style="flex: 0 1 380px; display: flex; flex-wrap: wrap; gap: 20px 24px; align-items: center; background: #F7F4EE; color: #1F1D1A; padding: 20px">
+<img src="assets/qr-visualizer.svg" alt="QR code linking to the Wow Ceramics 3D tile visualizer" style="width: 140px; height: 140px; display: block; flex: none">
+<div>
+<p style="margin: 0 0 8px; font-size: 11px; letter-spacing: 0.24em; text-transform: uppercase; color: #7A5C25">Scan to explore</p>
+<p style="margin: 0 0 12px; font-family: 'Cormorant Garamond', Georgia, serif; font-size: 28px; line-height: 1.1">See any tile in a real room, in 3D</p>
+<a href="https://wow-tiles.netlify.app" style="font-size: 14px">wow-tiles.netlify.app</a>
+</div>
+</div>
+</div>
+
+<div class="rise d2" style="position: relative; height: 680px; margin-top: 64px">
+<canvas data-im="1" ref="{{glRef}}" aria-label="Interactive sphere of tiles. Drag to spin, hover a tile to see it in colour." style="position: absolute; inset: 0; width: 100%; height: 100%; display: block; touch-action: pan-y"></canvas>
+<sc-if value="{{noGL}}" hint-placeholder-val="{{ false }}">
+<img src="assets/tile-atlas-hd.jpg" alt="A selection of tiles from the collection" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover">
+</sc-if>
+<div style="position: absolute; left: 8vw; bottom: 36px; max-width: 420px; pointer-events: none">
+<p style="margin: 0 0 10px; font-size: 11px; letter-spacing: 0.24em; text-transform: uppercase; color: #D9C49A">{{info.cat}}</p>
+<p style="margin: 0; font-family: 'Cormorant Garamond', Georgia, serif; font-size: 48px; line-height: 1; transition: opacity .3s; opacity: {{info.op}}">{{info.title}}</p>
+<p style="margin: 12px 0 0; font-size: 14px; color: #C9C2B6">{{info.desc}}</p>
+</div>
+<div style="position: absolute; right: 8vw; top: 24px; display: flex; align-items: center; gap: 12px; font-size: 12px; letter-spacing: 0.2em; text-transform: uppercase; color: #C9C2B6; pointer-events: none">
+<svg width="22" height="22" viewBox="0 0 22 22" fill="none" stroke="#C9C2B6" stroke-width="1.4" aria-hidden="true"><circle cx="11" cy="11" r="9"></circle><path d="M2 11 C6 7 16 7 20 11 M2 11 C6 15 16 15 20 11"></path></svg>
+Drag to spin · Tap a tile for 3D
+</div>
+</div>
+
+<div style="margin: 72px 8vw 0; padding-top: 28px; border-top: 1px solid #3A3631; display: flex; flex-wrap: wrap; justify-content: space-between; gap: 16px; font-size: 13px; color: #A39B8F">
+<span>Wow Ceramics · Jabalpur</span>
+<a href="https://wowceramics.in" style="color: #D9C49A">wowceramics.in</a>
+</div>
+</section>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":6900}}'>
+var MAG = [["Exotica", "Stonex", "In a lounge"], ["Itaca", "Marble Touch", "Statuario white"], ["Simero", "Wood Collection", "In a guest room"], ["Simero", "Wood Collection", "Light oak plank"], ["Itaca", "Marble Touch", "In a restaurant"], ["Le Mina", "Mosaic", "Slate mosaic"], ["Simero", "600 × 1200", "In a washroom"], ["Lorence", "Rammed Earth", "Terracotta earth"], ["Lorence", "Botanica", "In a café"], ["Simero", "600 × 1200", "Grey marble"], ["Exotica", "Stonex", "In a dining hall"], ["Le Mina", "Mosaic", "Pool mosaic"], ["Simero", "600 × 1200", "In a bedroom"], ["Itaca", "Marble Touch", "Beige marble"], ["Lorence", "Rammed Earth", "In a suite"], ["Simero", "Wood Collection", "Wood-look bath"]];
+var TILES = [["Celebrity Parla", "Itaca", "600 × 1200 mm", "Marble", "Matte"], ["Alboran Beige", "Itaca", "1800 × 1200 mm", "Marble", "Gloss"], ["Crema Europa", "Nexion", "600 × 1200 mm", "Marble", "Gloss"], ["Native Bianco", "Icon", "600 × 600 mm", "Marble", "Gloss"], ["Galaxy Nero", "Icon", "800 × 2400 mm", "Marble", "Gloss"], ["Kilkenny Nero", "Nexion", "600 × 1200 mm", "Marble", "Gloss"], ["Palmiro Bianco", "Itaca", "1200 × 600 mm", "Stone", "Gloss"], ["Abbey Stone Sand", "Exotica", "1200 × 600 mm", "Stone", "Matte"], ["Cotto Punch", "Icon", "600 × 600 mm", "Stone", "Matte"], ["Galaxy Grey", "Icon", "800 × 2400 mm", "Stone", "Gloss"], ["Klinker", "Icon", "600 × 600 mm", "Stone", "Matte"], ["Vol 02 Beige", "Icon", "600 × 1200 mm", "Stone", "Matte"], ["Structura Beige", "Lorence", "1200 × 600 mm", "Stone", "Matte"], ["Dolerite Taupe", "Itaca", "1200 × 600 mm", "Stone", "Matte"], ["Faenza Miniral", "Pavit", "1200 × 600 mm", "Stone", "Satin"], ["Blaze Bianco", "Pavit", "1200 × 600 mm", "Wood", "Gloss"], ["Medusa Parquet", "Icon", "600 × 600 mm", "Wood", "Matte"], ["Wood Linear", "Icon", "600 × 600 mm", "Wood", "Matte"], ["Oak Light Grande", "Icon", "600 × 1200 mm", "Wood", "Matte"], ["Branswood", "Pavit", "1200 × 600 mm", "Wood", "Matte"], ["Royal Oak Montana", "Simero", "600 × 1200 mm", "Wood", "Matte"], ["Master Wood Slat", "Simero", "600 × 1200 mm", "Wood", "Matte"], ["Natural Olive Kota", "Icon", "600 × 600 mm", "Plain", "Matte"], ["Pietra Bianco", "Icon", "600 × 600 mm", "Plain", "Satin"], ["Crystal White", "Icon", "800 × 2400 mm", "Plain", "Gloss"], ["Soft Grey Grande", "Icon", "600 × 1200 mm", "Plain", "Satin"], ["Portostone White", "Itaca", "1200 × 600 mm", "Plain", "Matte"], ["Wilton Grey", "Itaca", "1200 × 600 mm", "Plain", "Matte"], ["Bulgari Crema", "Itaca", "1800 × 1200 mm", "Plain", "Satin"], ["Photoframe Nevi", "Exotica", "1200 × 600 mm", "Plain", "Matte"], ["Flowlux", "Exotica", "1200 × 600 mm", "Decor", "Matte"], ["Cube Gris", "Icon", "600 × 600 mm", "Decor", "Gloss"], ["Blanco Decor", "Icon", "600 × 1200 mm", "Decor", "Matte"], ["Florina", "Icon", "1200 × 600 mm", "Decor", "Gloss"], ["Olivia", "Lorence", "1200 × 600 mm", "Decor", "Matte"], ["Agate", "Exotica", "1200 × 600 mm", "Decor", "Satin"], ["Garnet", "Icon", "600 × 600 mm", "Decor", "Satin"], ["Cali Glitter", "Icon", "600 × 600 mm", "Decor", "Satin"], ["Cube", "Icon", "600 × 600 mm", "Decor", "Satin"], ["Decor Grande", "Icon", "600 × 1200 mm", "Decor", "Satin"], ["Denver Decor", "Icon", "600 × 1200 mm", "Decor", "Matte"], ["Mandala", "Lorence", "1200 × 600 mm", "Decor", "Matte"], ["Foglia", "Lorence", "1200 × 600 mm", "Decor", "Matte"], ["Glass Mosaic Rosso", "Exotica", "1200 × 600 mm", "Mosaic", "Satin"], ["Mosaic Art Glitter", "Icon", "600 × 600 mm", "Mosaic", "Satin"], ["Cloudysage", "Icon", "600 × 600 mm", "Mosaic", "Gloss"], ["Pietro", "Le Mina", "600 × 600 mm", "Mosaic", "Matte"]];
+var COUNT = 160, TILE_SIZE = 0.63, ROUND = 0.2, ZOOM = 1.65, PULLBACK = 1, INERTIA = 0.6, AUTOPLAY = 3, DIM = 0.5;
+
+function m3mul(a, b) { var o = new Array(9); for (var c = 0; c < 3; c++) for (var r = 0; r < 3; r++) o[c * 3 + r] = a[r] * b[c * 3] + a[3 + r] * b[c * 3 + 1] + a[6 + r] * b[c * 3 + 2]; return o; }
+function m3axis(x, y, z, t) { var c = Math.cos(t), s = Math.sin(t), k = 1 - c; return [c + x * x * k, y * x * k + z * s, z * x * k - y * s, x * y * k - z * s, c + y * y * k, z * y * k + x * s, x * z * k + y * s, y * z * k - x * s, c + z * z * k]; }
+function m3v(m, v) { return [m[0] * v[0] + m[3] * v[1] + m[6] * v[2], m[1] * v[0] + m[4] * v[1] + m[7] * v[2], m[2] * v[0] + m[5] * v[1] + m[8] * v[2]]; }
+function ortho(m) { var a = [m[0], m[1], m[2]], b = [m[3], m[4], m[5]]; var la = Math.hypot(a[0], a[1], a[2]); a = [a[0] / la, a[1] / la, a[2] / la]; var d = a[0] * b[0] + a[1] * b[1] + a[2] * b[2]; b = [b[0] - d * a[0], b[1] - d * a[1], b[2] - d * a[2]]; var lb = Math.hypot(b[0], b[1], b[2]); b = [b[0] / lb, b[1] / lb, b[2] / lb]; var c = [a[1] * b[2] - a[2] * b[1], a[2] * b[0] - a[0] * b[2], a[0] * b[1] - a[1] * b[0]]; return a.concat(b, c); }
+
+var VS = 'attribute vec3 aC;attribute vec2 aQ;attribute vec4 aUV;attribute float aI;' +
+  'uniform mat4 uP;uniform mat3 uR;uniform float uCam,uSize,uIntro,uHover,uFocus;' +
+  'varying vec2 vUV;varying vec2 vQ;varying float vFace;varying float vSel;' +
+  'void main(){vec3 n=normalize(aC);vec3 rt=normalize(cross(vec3(0.,1.,0.),n));vec3 up=cross(n,rt);' +
+  'float sel=(abs(aI-uHover)<.5)?1.:((abs(aI-uFocus)<.5)?.75:0.);' +
+  'float s=uSize*(1.+.16*step(.9,sel))*uIntro;' +
+  'vec3 p=n*(.35+.65*uIntro)+(rt*aQ.x+up*aQ.y)*s;vec3 w=uR*p;vFace=(uR*n).z;' +
+  'gl_Position=uP*vec4(w.xy,w.z-uCam,1.);' +
+  'vUV=aUV.xy+vec2((aQ.x+1.)*.5,(1.-aQ.y)*.5)*aUV.zw;vQ=aQ;vSel=sel;}';
+var FS = 'precision mediump float;uniform sampler2D uT;uniform float uRound,uDim;' +
+  'varying vec2 vUV;varying vec2 vQ;varying float vFace;varying float vSel;' +
+  'void main(){if(vFace<-.15)discard;vec2 q=abs(vQ)-vec2(1.-uRound);float d=length(max(q,0.))+min(max(q.x,q.y),0.)-uRound;' +
+  'float a=1.-smoothstep(-.03,.01,d);if(a<.01)discard;vec3 c=texture2D(uT,vUV).rgb;float g=dot(c,vec3(.299,.587,.114));' +
+  'vec3 col=mix(vec3(g)*uDim,c,vSel);col*=mix(.25,1.,smoothstep(-.1,.7,vFace));' +
+  'float edge=smoothstep(-.09,-.03,d)*step(.9,vSel);col=mix(col,vec3(1.),edge*.9);' +
+  'gl_FragColor=vec4(col,a*smoothstep(-.15,.2,vFace));}';
+
+class Component extends DCLogic {
+  constructor(props) {
+    super(props);
+    this.state = { zSel: 'lobby', zPick: {}, ready: false, open: false, seen: {}, active: 0, idx: 0, hover: -1, noGL: false };
+    var self = this;
+    this.glRef = function (el) { if (el) self.canvas = el; };
+  }
+  componentDidMount() {
+    var self = this;
+    setTimeout(function () { self.setState({ open: true }); }, 700);
+    setTimeout(function () {
+      var secs = document.querySelectorAll('[data-sec]');
+      if (!secs.length || !('IntersectionObserver' in window)) return;
+      self.setState({ ready: true });
+      self.scrolled = false; self.inView = {};
+      var onScroll = function () {
+        if (self.scrolled) return; self.scrolled = true;
+        var seen = Object.assign({}, self.state.seen), any = false;
+        for (var k in self.inView) if (self.inView[k]) { seen[k] = true; any = true; }
+        if (any) self.setState({ seen: seen });
+      };
+      document.addEventListener('scroll', onScroll, true);
+      window.addEventListener('wheel', onScroll, { passive: true });
+      window.addEventListener('touchmove', onScroll, { passive: true });
+      self.offScroll = function () { document.removeEventListener('scroll', onScroll, true); window.removeEventListener('wheel', onScroll); window.removeEventListener('touchmove', onScroll); };
+      self.io = new IntersectionObserver(function (entries) {
+        entries.forEach(function (e) {
+          var i = +e.target.getAttribute('data-sec');
+          self.inView[i] = e.isIntersecting;
+          if (e.isIntersecting) {
+            if (self.scrolled) { var seen = Object.assign({}, self.state.seen); seen[i] = true; self.setState({ seen: seen, active: i }); }
+            else self.setState({ active: i });
+          }
+        });
+      }, { threshold: 0, rootMargin: '0px 0px -30% 0px' });
+      secs.forEach(function (s) { self.io.observe(s); });
+      self.initMenu();
+      self.initMagazine();
+      self.initBalls();
+      self.initWaves();
+      self.initMagnet();
+      self.initTileGlow();
+    }, 60);
+  }
+  componentWillUnmount() {
+    this.dead = true;
+    if (this.io) this.io.disconnect();
+    if (this.offScroll) this.offScroll();
+    if (this.io2) this.io2.disconnect();
+    if (this.raf) cancelAnimationFrame(this.raf);
+    if (this.offWin) this.offWin();
+    if (this.bpOff) this.bpOff();
+    if (this.wvOff) this.wvOff();
+    if (this.mlOff) this.mlOff();
+    if (this.tgOff) this.tgOff();
+    if (this.magOff) this.magOff();
+  }
+  initMenu() {
+    var self = this;
+    var cv = this.canvas || document.querySelector('canvas[data-im]');
+    if (!cv) return;
+    this.canvas = cv;
+    var gl = cv.getContext('webgl', { antialias: true, premultipliedAlpha: false });
+    if (!gl) { this.setState({ noGL: true }); return; }
+    function sh(t, src) { var s = gl.createShader(t); gl.shaderSource(s, src); gl.compileShader(s); return s; }
+    var pr = gl.createProgram();
+    gl.attachShader(pr, sh(gl.VERTEX_SHADER, VS)); gl.attachShader(pr, sh(gl.FRAGMENT_SHADER, FS)); gl.linkProgram(pr);
+    if (!gl.getProgramParameter(pr, gl.LINK_STATUS)) { this.setState({ noGL: true }); return; }
+    gl.useProgram(pr);
+
+    // Fibonacci sphere
+    var N = COUNT, cen = [], data = [];
+    var spacing = Math.sqrt(4 * Math.PI / N);
+    this.size = spacing * TILE_SIZE * 0.5;
+    var corners = [[-1, -1], [1, -1], [1, 1], [-1, -1], [1, 1], [-1, 1]];
+    for (var i = 0; i < N; i++) {
+      var y = 1 - (i + 0.5) * 2 / N, r = Math.sqrt(1 - y * y), th = i * 2.399963;
+      var c = [Math.cos(th) * r, y, Math.sin(th) * r];
+      cen.push(c);
+      var t = i % TILES.length, col = t % 8, row = Math.floor(t / 8);
+      for (var k = 0; k < 6; k++) data.push(c[0], c[1], c[2], corners[k][0], corners[k][1], col / 8, row / 6, 1 / 8, 1 / 6, i);
+    }
+    this.cen = cen;
+    var buf = gl.createBuffer(); gl.bindBuffer(gl.ARRAY_BUFFER, buf); gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(data), gl.STATIC_DRAW);
+    var st = 40;
+    function at(n, sz, off) { var l = gl.getAttribLocation(pr, n); gl.enableVertexAttribArray(l); gl.vertexAttribPointer(l, sz, gl.FLOAT, false, st, off); }
+    at('aC', 3, 0); at('aQ', 2, 12); at('aUV', 4, 20); at('aI', 1, 36);
+    var U = {}; ['uP', 'uR', 'uCam', 'uSize', 'uIntro', 'uHover', 'uFocus', 'uT', 'uRound', 'uDim'].forEach(function (n) { U[n] = gl.getUniformLocation(pr, n); });
+    gl.uniform1f(U.uRound, ROUND); gl.uniform1f(U.uDim, DIM); gl.uniform1f(U.uSize, this.size);
+
+    var tex = gl.createTexture(); gl.bindTexture(gl.TEXTURE_2D, tex);
+    gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, 1, 1, 0, gl.RGBA, gl.UNSIGNED_BYTE, new Uint8Array([60, 56, 52, 255]));
+    gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.LINEAR); gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, gl.LINEAR);
+    gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, gl.CLAMP_TO_EDGE); gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.CLAMP_TO_EDGE);
+    var img = new Image();
+    img.onload = function () { gl.bindTexture(gl.TEXTURE_2D, tex); gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, gl.RGBA, gl.UNSIGNED_BYTE, img); };
+    img.src = 'assets/tile-atlas-hd.jpg';
+    gl.uniform1i(U.uT, 0);
+    gl.enable(gl.BLEND); gl.blendFunc(gl.SRC_ALPHA, gl.ONE_MINUS_SRC_ALPHA);
+    gl.enable(gl.DEPTH_TEST); gl.clearColor(0, 0, 0, 0);
+
+    var R = m3axis(1, 0, 0, 0.25), vel = [0, 0], drag = null, lastMove = 0, intro = 0, introOn = false;
+    var cam = 1 + 1.25 / ZOOM, mouse = null, fov = 0.75, W = 1, H = 1, visible = false, focus = 0, hover = -1;
+    var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (reduce) intro = 1;
+
+    function persp() {
+      var f = 1 / Math.tan(fov / 2), a = W / H, n = 0.05, fa = 20;
+      return [f / a, 0, 0, 0, 0, f, 0, 0, 0, 0, (fa + n) / (n - fa), -1, 0, 0, 2 * fa * n / (n - fa), 0];
+    }
+    function resize() {
+      var dpr = Math.min(window.devicePixelRatio || 1, 2);
+      W = cv.clientWidth || 1; H = cv.clientHeight || 1;
+      cv.width = Math.round(W * dpr); cv.height = Math.round(H * dpr);
+      gl.viewport(0, 0, cv.width, cv.height);
+    }
+    function project(c) {
+      var w = m3v(R, c), z = cam - w[2], f = 1 / Math.tan(fov / 2);
+      return { x: (w[0] * f / (W / H) / z * 0.5 + 0.5) * W, y: (0.5 - w[1] * f / z * 0.5) * H, face: w[2], rad: self.size * f / z * 0.5 * H };
+    }
+    function pick() {
+      if (!mouse || drag) return -1;
+      var best = -1, bd = 1e9;
+      for (var i = 0; i < N; i++) {
+        var p = project(self.cen[i]); if (p.face < 0.25) continue;
+        var d = Math.hypot(p.x - mouse[0], p.y - mouse[1]);
+        if (d < p.rad * 1.05 && d < bd) { bd = d; best = i; }
+      }
+      return best;
+    }
+    function pos(e) { var r = cv.getBoundingClientRect(); return [e.clientX - r.left, e.clientY - r.top]; }
+    function down(e) { drag = { p: pos(e), s: pos(e), moved: 0 }; lastMove = performance.now(); if (cv.setPointerCapture) try { cv.setPointerCapture(e.pointerId); } catch (x) {} }
+    function move(e) {
+      var p = pos(e); mouse = p;
+      if (drag) {
+        var dx = p[0] - drag.p[0], dy = p[1] - drag.p[1]; drag.p = p; drag.moved += Math.abs(dx) + Math.abs(dy);
+        var k = 2.2 / H; vel = [dx * k, dy * k];
+        R = ortho(m3mul(m3mul(m3axis(0, 1, 0, dx * k), m3axis(1, 0, 0, dy * k)), R));
+        lastMove = performance.now();
+      }
+    }
+    function up() {
+      if (drag && drag.moved < 6) { var h = pick2(); if (h >= 0) window.open('https://wow-tiles.netlify.app', '_blank', 'noopener'); }
+      drag = null; lastMove = performance.now();
+    }
+    function pick2() { var d = drag; drag = null; var h = pick(); drag = d; return h; }
+    function leave() { mouse = null; }
+    cv.addEventListener('pointerdown', down); cv.addEventListener('pointermove', move);
+    cv.addEventListener('pointerup', up); cv.addEventListener('pointercancel', up); cv.addEventListener('pointerleave', leave);
+    window.addEventListener('resize', resize);
+    this.offWin = function () { window.removeEventListener('resize', resize); };
+
+    this.io2 = new IntersectionObserver(function (es) {
+      visible = es[0].isIntersecting;
+      if (visible) { resize(); if (!introOn) { introOn = true; } if (!self.raf) self.raf = requestAnimationFrame(frame); }
+    }, { threshold: 0.05 });
+    this.io2.observe(cv);
+
+    var last = performance.now();
+    function frame(now) {
+      self.raf = 0;
+      if (self.dead || !visible) return;
+      var dt = Math.min((now - last) / 16.67, 3); last = now;
+      if (introOn && intro < 1) { intro = Math.min(1, intro + 0.012 * dt); R = ortho(m3mul(m3axis(0, 1, 0, 0.05 * (1 - intro) * dt), R)); }
+      var idle = (now - lastMove) / 1000;
+      if (!drag) {
+        var sp = Math.hypot(vel[0], vel[1]);
+        if (sp > 0.0002) {
+          R = ortho(m3mul(m3mul(m3axis(0, 1, 0, vel[0] * dt), m3axis(1, 0, 0, vel[1] * dt)), R));
+          var decay = Math.pow(0.86 + 0.12 * INERTIA, dt); vel = [vel[0] * decay, vel[1] * decay];
+        } else if (!reduce && idle > AUTOPLAY && hover < 0) {
+          R = ortho(m3mul(m3axis(0, 1, 0, 0.0022 * dt), R));
+        } else {
+          var w = m3v(R, self.cen[focus]), ax = [w[1], -w[0], 0], l = Math.hypot(ax[0], ax[1]);
+          if (l > 1e-4) R = ortho(m3mul(m3axis(ax[0] / l, ax[1] / l, 0, Math.asin(Math.min(l, 1)) * 0.08 * dt), R));
+        }
+      }
+      var best = 0, bz = -2;
+      for (var i = 0; i < N; i++) { var z = R[2] * self.cen[i][0] + R[5] * self.cen[i][1] + R[8] * self.cen[i][2]; if (z > bz) { bz = z; best = i; } }
+      if (drag) focus = best; else if (Math.hypot(vel[0], vel[1]) > 0.0002 || idle > AUTOPLAY) focus = best; else if (focus !== best && bz - (R[2] * self.cen[focus][0] + R[5] * self.cen[focus][1] + R[8] * self.cen[focus][2]) > 0.08) focus = best;
+      hover = pick();
+      var spd = Math.hypot(vel[0], vel[1]) * (drag ? 1 : 0.6);
+      var target = 1 + 1.25 / ZOOM + PULLBACK * Math.min(spd * 9, 0.9);
+      cam += (target - cam) * 0.08 * dt;
+      cv.style.cursor = drag ? 'grabbing' : (hover >= 0 ? 'pointer' : 'grab');
+      gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
+      gl.uniformMatrix4fv(U.uP, false, new Float32Array(persp()));
+      gl.uniformMatrix3fv(U.uR, false, new Float32Array(R));
+      gl.uniform1f(U.uCam, cam); gl.uniform1f(U.uIntro, 1 - Math.pow(1 - intro, 3));
+      gl.uniform1f(U.uHover, hover); gl.uniform1f(U.uFocus, focus);
+      gl.drawArrays(gl.TRIANGLES, 0, N * 6);
+      var show = hover >= 0 ? hover : focus;
+      if (show !== self.state.idx || hover !== self.state.hover) self.setState({ idx: show, hover: hover });
+      self.raf = requestAnimationFrame(frame);
+    }
+  }
+  initBalls() {
+    var self = this;
+    var cv = document.querySelector('canvas[data-bp]');
+    if (!cv || !cv.getContext) return;
+    var host = cv.parentElement;
+    var ctx = cv.getContext('2d');
+    var DRIFT = 0.4, BAND = 500;
+    var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    function sprite(draw) { var c = document.createElement('canvas'); c.width = c.height = 160; draw(c.getContext('2d')); return c; }
+    var ball = sprite(function (g) {
+      var gr = g.createRadialGradient(62, 52, 4, 80, 80, 80);
+      gr.addColorStop(0, '#ffffff'); gr.addColorStop(0.45, '#fbf9f6'); gr.addColorStop(0.8, '#e4ded4'); gr.addColorStop(1, '#cfc7ba');
+      g.fillStyle = gr; g.beginPath(); g.arc(80, 80, 79, 0, Math.PI * 2); g.fill();
+      var sh = g.createRadialGradient(56, 44, 0, 56, 44, 34);
+      sh.addColorStop(0, 'rgba(255,255,255,0.9)'); sh.addColorStop(1, 'rgba(255,255,255,0)');
+      g.fillStyle = sh; g.beginPath(); g.arc(80, 80, 79, 0, Math.PI * 2); g.fill();
+      var rim = g.createRadialGradient(80, 80, 64, 80, 80, 80);
+      rim.addColorStop(0, 'rgba(184,154,94,0)'); rim.addColorStop(1, 'rgba(184,154,94,0.18)');
+      g.fillStyle = rim; g.beginPath(); g.arc(80, 80, 79, 0, Math.PI * 2); g.fill();
+    });
+    var shadow = sprite(function (g) {
+      var gr = g.createRadialGradient(80, 80, 0, 80, 80, 80);
+      gr.addColorStop(0, 'rgba(31,29,26,0.22)'); gr.addColorStop(0.6, 'rgba(31,29,26,0.08)'); gr.addColorStop(1, 'rgba(31,29,26,0)');
+      g.fillStyle = gr; g.fillRect(0, 0, 160, 160);
+    });
+    var W = 0, H = 0, B = [], pointer = null, prevPointer = null, grabbed = -1, downAt = null, moved = 0, visible = false, raf = 0, base = 20, dropT = -1;
+    function resize() {
+      var dpr = Math.min(window.devicePixelRatio || 1, 2);
+      var w = cv.clientWidth || 1, h = cv.clientHeight || 1;
+      if (w === W && h === H) return;
+      var sx = W ? w / W : 1; W = w; H = h;
+      cv.width = Math.round(W * dpr); cv.height = Math.round(H * dpr);
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      if (!B.length) {
+        base = Math.sqrt(W * BAND * 0.5 / (200 * Math.PI));
+        var n = Math.max(200, Math.min(380, Math.round(200 * H / BAND * 0.35)));
+        for (var i = 0; i < n; i++) {
+          var r = i === 0 ? base * 1.9 : base * (0.6 + Math.random() * 0.75);
+          B.push({ x: r + Math.random() * (W - 2 * r), y: r + Math.random() * (BAND - 2 * r), vx: (Math.random() - 0.5) * 2, vy: 0, r: r, a: Math.random() * 6.28, rest: 0 });
+        }
+        B.forEach(function (b, i) { b.rest = i < 120 ? b.y : b.r + Math.random() * (H - 2 * b.r); });
+      } else B.forEach(function (b) { b.x *= sx; b.rest = Math.min(b.rest, H - b.r); if (b.y > H - b.r) b.y = H - b.r; });
+    }
+    function at(e) { var r = cv.getBoundingClientRect(); return { x: e.clientX - r.left, y: e.clientY - r.top }; }
+    function hit(p) { for (var i = B.length - 1; i > 0; i--) { var b = B[i]; if (Math.hypot(b.x - p.x, b.y - p.y) < b.r) return i; } return -1; }
+    host.addEventListener('pointermove', function (e) { prevPointer = pointer; pointer = at(e); if (downAt) moved += prevPointer ? Math.hypot(pointer.x - prevPointer.x, pointer.y - prevPointer.y) : 0; host.style.cursor = grabbed > 0 ? 'grabbing' : (hit(pointer) > 0 ? 'grab' : ''); });
+    host.addEventListener('pointerleave', function () { pointer = null; prevPointer = null; });
+    host.addEventListener('pointerdown', function (e) { if (e.target.closest && e.target.closest('a,button')) return; pointer = at(e); downAt = pointer; moved = 0; grabbed = hit(pointer); });
+    function release() {
+      if (downAt && moved < 6) {
+        var c = downAt;
+        B.forEach(function (b, i) { if (i === 0) return; var dx = b.x - c.x, dy = b.y - c.y, d = Math.hypot(dx, dy) || 1; if (d < 340) { var f = (1 - d / 340) * 22; b.vx += dx / d * f; b.vy += dy / d * f; } });
+      } else if (grabbed > 0 && pointer && prevPointer) { B[grabbed].vx = (pointer.x - prevPointer.x) * 1.2; B[grabbed].vy = (pointer.y - prevPointer.y) * 1.2; }
+      grabbed = -1; downAt = null;
+    }
+    host.addEventListener('pointerup', release); host.addEventListener('pointercancel', release);
+    var ro = window.ResizeObserver ? new ResizeObserver(function () { resize(); }) : null;
+    if (ro) ro.observe(host); else window.addEventListener('resize', resize);
+    this.bpOff = function () { if (ro) ro.disconnect(); else window.removeEventListener('resize', resize); if (raf) cancelAnimationFrame(raf); if (io) io.disconnect(); };
+
+    function step(dt, now) {
+      var n = B.length, i, j, b;
+      var dropping = dropT >= 0 && now - dropT < 4200;
+      var c0 = B[0];
+      if (pointer && grabbed <= 0) { c0.vx = (pointer.x - c0.x) * 0.25; c0.vy = (pointer.y - c0.y) * 0.25; }
+      for (i = 0; i < n; i++) {
+        b = B[i];
+        if (i === grabbed && pointer) { b.vx = pointer.x - b.x; b.vy = pointer.y - b.y; b.x = pointer.x; b.y = pointer.y; continue; }
+        if (i === 0 && pointer && grabbed <= 0) { b.x += b.vx * dt; b.y += b.vy * dt; continue; }
+        if (dropping && b.y < b.rest) b.vy += 0.45 * dt;
+        b.a += (Math.random() - 0.5) * 0.3 * dt;
+        b.vx += Math.cos(b.a) * 0.06 * DRIFT * dt; b.vy += Math.sin(b.a) * 0.06 * DRIFT * dt;
+        var damp = Math.pow(dropping ? 0.985 : 0.975, dt); b.vx *= damp; b.vy *= damp;
+        if (dropping && b.y >= b.rest && b.vy > 0) b.vy *= 0.8;
+        b.x += b.vx * dt; b.y += b.vy * dt;
+        if (b.x < b.r) { b.x = b.r; b.vx = Math.abs(b.vx) * 0.6; } else if (b.x > W - b.r) { b.x = W - b.r; b.vx = -Math.abs(b.vx) * 0.6; }
+        if (b.y < b.r) { b.y = b.r; b.vy = Math.abs(b.vy) * 0.6; } else if (b.y > H - b.r) { b.y = H - b.r; b.vy = -Math.abs(b.vy) * 0.6; }
+      }
+      // spatial grid collisions
+      var cs = base * 3, cols = Math.ceil(W / cs) + 1, grid = {};
+      for (i = 0; i < n; i++) { b = B[i]; var key = Math.floor(b.x / cs) + Math.floor(b.y / cs) * cols; (grid[key] || (grid[key] = [])).push(i); }
+      for (var it = 0; it < 2; it++) {
+        for (i = 0; i < n; i++) {
+          var a = B[i], gx = Math.floor(a.x / cs), gy = Math.floor(a.y / cs);
+          for (var ox = -1; ox <= 1; ox++) for (var oy = -1; oy <= 1; oy++) {
+            var cell = grid[(gx + ox) + (gy + oy) * cols]; if (!cell) continue;
+            for (var q = 0; q < cell.length; q++) {
+              j = cell[q]; if (j <= i) continue; b = B[j];
+              var dx = b.x - a.x, dy = b.y - a.y, rr = a.r + b.r;
+              var d2 = dx * dx + dy * dy; if (d2 >= rr * rr || d2 === 0) continue;
+              var d = Math.sqrt(d2), nx = dx / d, ny = dy / d, ov = rr - d;
+              var fa = (i === grabbed || (i === 0 && pointer && grabbed <= 0)) ? 0 : a.r * a.r;
+              var fb = (j === grabbed || (j === 0 && pointer && grabbed <= 0)) ? 0 : b.r * b.r;
+              var ia = fa ? 1 / fa : 0, ib = fb ? 1 / fb : 0, s = ia + ib; if (!s) continue;
+              a.x -= nx * ov * ia / s; a.y -= ny * ov * ia / s; b.x += nx * ov * ib / s; b.y += ny * ov * ib / s;
+              var rv = (b.vx - a.vx) * nx + (b.vy - a.vy) * ny;
+              if (rv < 0) { var imp = -1.5 * rv / s; a.vx -= imp * ia * nx; a.vy -= imp * ia * ny; b.vx += imp * ib * nx; b.vy += imp * ib * ny; }
+            }
+          }
+        }
+      }
+    }
+    function draw() {
+      ctx.clearRect(0, 0, W, H);
+      var i, b;
+      for (i = 0; i < B.length; i++) { b = B[i]; ctx.drawImage(shadow, b.x - b.r * 1.1 + b.r * 0.18, b.y - b.r * 1.1 + b.r * 0.3, b.r * 2.2, b.r * 2.2); }
+      for (i = 0; i < B.length; i++) { b = B[i]; ctx.drawImage(ball, b.x - b.r, b.y - b.r, b.r * 2, b.r * 2); }
+    }
+    var last = performance.now();
+    function frame(now) {
+      raf = 0; if (!visible || self.dead) return;
+      var dt = Math.min((now - last) / 16.67, 2); last = now;
+      if (dropT < 0 && cv.getBoundingClientRect().top < window.innerHeight * 0.35) dropT = now;
+      step(dt, now); draw();
+      raf = requestAnimationFrame(frame);
+    }
+    var io = new IntersectionObserver(function (es) {
+      visible = es[0].isIntersecting;
+      if (visible) {
+        resize();
+        if (reduce) { B.forEach(function (b) { b.y = b.rest; }); for (var k = 0; k < 60; k++) step(1, 0); draw(); return; }
+        last = performance.now(); if (!raf) raf = requestAnimationFrame(frame);
+      }
+    }, { threshold: 0.02 });
+    io.observe(cv);
+  }
+  initMagnet() {
+    var self = this;
+    var cv = document.querySelector('canvas[data-ml]');
+    if (!cv || !cv.getContext) return;
+    var host = cv.parentElement, ctx = cv.getContext('2d');
+    var COLOR = '#D3C7B1', SPACING = 30, LW = 2, LH = 18, RADIUS = 200, FADE = 0.65;
+    var W = 0, H = 0, L = [], pointer = null, aim = { x: 0, y: 0 }, visible = false, raf = 0, t0 = performance.now();
+    var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    function resize() {
+      var dpr = Math.min(window.devicePixelRatio || 1, 2);
+      var w = cv.clientWidth || 1, h = cv.clientHeight || 1; if (w === W && h === H) return;
+      W = w; H = h; cv.width = Math.round(W * dpr); cv.height = Math.round(H * dpr); ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      L = [];
+      for (var y = SPACING / 2; y < H; y += SPACING) for (var x = SPACING / 2; x < W; x += SPACING) L.push({ x: x, y: y, a: 0 });
+      aim = { x: W / 2, y: H / 2 };
+    }
+    function at(e) { var r = cv.getBoundingClientRect(); return { x: e.clientX - r.left, y: e.clientY - r.top }; }
+    host.addEventListener('pointermove', function (e) { pointer = at(e); });
+    host.addEventListener('pointerleave', function () { pointer = null; });
+    var ro = window.ResizeObserver ? new ResizeObserver(resize) : null; if (ro) ro.observe(host);
+    this.mlOff = function () { if (ro) ro.disconnect(); if (raf) cancelAnimationFrame(raf); if (io) io.disconnect(); };
+    function draw(now, dt) {
+      var t = (now - t0) / 1000;
+      var goal = pointer || { x: W * (0.5 + 0.3 * Math.cos(t * 0.3)), y: H * (0.5 + 0.3 * Math.sin(t * 0.45)) };
+      aim.x += (goal.x - aim.x) * 0.15 * dt; aim.y += (goal.y - aim.y) * 0.15 * dt;
+      ctx.clearRect(0, 0, W, H); ctx.strokeStyle = COLOR; ctx.lineWidth = LW; ctx.lineCap = 'round';
+      for (var i = 0; i < L.length; i++) {
+        var l = L[i], dx = aim.x - l.x, dy = aim.y - l.y, d = Math.hypot(dx, dy);
+        var target = Math.atan2(dy, dx) + Math.PI / 2;
+        var diff = Math.atan2(Math.sin(target - l.a), Math.cos(target - l.a)); l.a += diff * Math.min(1, 0.18 * dt);
+        var near = d < RADIUS ? 1 : Math.max(0, 1 - (d - RADIUS) / (RADIUS * 3));
+        ctx.globalAlpha = (1 - FADE) + FADE * near;
+        var s = (LH / 2) * (0.75 + 0.25 * near), cx = Math.cos(l.a) * s, cy = Math.sin(l.a) * s;
+        ctx.beginPath(); ctx.moveTo(l.x - cx, l.y - cy); ctx.lineTo(l.x + cx, l.y + cy); ctx.stroke();
+      }
+      ctx.globalAlpha = 1;
+    }
+    var last = performance.now();
+    function frame(now) { raf = 0; if (!visible || self.dead) return; var dt = Math.min((now - last) / 16.67, 2); last = now; draw(now, dt); raf = requestAnimationFrame(frame); }
+    var io = new IntersectionObserver(function (es) {
+      visible = es[0].isIntersecting;
+      if (visible) { resize(); if (reduce) { draw(performance.now(), 10); return; } last = performance.now(); if (!raf) raf = requestAnimationFrame(frame); }
+    }, { threshold: 0.02 });
+    io.observe(cv);
+  }
+  initWaves() {
+    var self = this;
+    var cv = document.querySelector('canvas[data-wv]');
+    if (!cv || !cv.getContext) return;
+    var host = cv.parentElement, ctx = cv.getContext('2d');
+    var COLOR = 'rgba(255,255,255,0.16)', SPACING = 10, AMP = 32, TWIST = 1, SPEED = 1, MR = 175, MS = 1, STEP = 12;
+    var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    var W = 0, H = 0, lines = [], mouse = null, prev = null, mv = { x: 0, y: 0 }, visible = false, raf = 0, t0 = performance.now();
+    function resize() {
+      var dpr = Math.min(window.devicePixelRatio || 1, 2);
+      var w = cv.clientWidth || 1, h = cv.clientHeight || 1; if (w === W && h === H) return;
+      W = w; H = h; cv.width = Math.round(W * dpr); cv.height = Math.round(H * dpr); ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      lines = [];
+      for (var x = -AMP; x < W + AMP; x += SPACING) { var pts = []; for (var y = -STEP; y < H + STEP; y += STEP) pts.push({ x: x, y: y, cx: 0, cy: 0, vx: 0, vy: 0 }); lines.push(pts); }
+    }
+    function noise(x, y, t) {
+      return Math.sin(x * 0.0065 + t * 0.55 + Math.sin(y * 0.009 - t * 0.25) * 1.8 * TWIST) * 0.6 + Math.sin(y * 0.005 + x * 0.003 - t * 0.4) * 0.4;
+    }
+    function at(e) { var r = cv.getBoundingClientRect(); return { x: e.clientX - r.left, y: e.clientY - r.top }; }
+    host.addEventListener('pointermove', function (e) { var p = at(e); if (mouse) { mv.x = p.x - mouse.x; mv.y = p.y - mouse.y; } mouse = p; });
+    host.addEventListener('pointerleave', function () { mouse = null; mv = { x: 0, y: 0 }; });
+    var ro = window.ResizeObserver ? new ResizeObserver(resize) : null; if (ro) ro.observe(host);
+    this.wvOff = function () { if (ro) ro.disconnect(); if (raf) cancelAnimationFrame(raf); if (io) io.disconnect(); };
+    function draw(now, dt) {
+      var t = (now - t0) / 1000 * SPEED;
+      ctx.clearRect(0, 0, W, H); ctx.strokeStyle = COLOR; ctx.lineWidth = 1;
+      var mvx = Math.max(-40, Math.min(40, mv.x)), mvy = Math.max(-40, Math.min(40, mv.y));
+      mv.x *= 0.8; mv.y *= 0.8;
+      for (var i = 0; i < lines.length; i++) {
+        var pts = lines[i];
+        ctx.beginPath();
+        for (var j = 0; j < pts.length; j++) {
+          var p = pts[j];
+          var a = noise(p.x, p.y, t) * Math.PI * 2 * TWIST;
+          var ox = Math.cos(a) * AMP, oy = Math.sin(a) * AMP * 0.35;
+          if (mouse) {
+            var dx = p.x + ox + p.cx - mouse.x, dy = p.y + oy + p.cy - mouse.y, d = Math.hypot(dx, dy);
+            if (d < MR) { var f = (1 - d / MR) * MS; p.vx += mvx * f * 0.08 * dt; p.vy += mvy * f * 0.08 * dt; }
+          }
+          p.vx += -p.cx * 0.01 * dt; p.vy += -p.cy * 0.01 * dt;
+          var damp = Math.pow(0.93, dt); p.vx *= damp; p.vy *= damp;
+          p.cx += p.vx * dt; p.cy += p.vy * dt;
+          var X = p.x + ox + p.cx, Y = p.y + oy + p.cy;
+          if (j === 0) ctx.moveTo(X, Y); else ctx.lineTo(X, Y);
+        }
+        ctx.stroke();
+      }
+    }
+    var last = performance.now();
+    function frame(now) { raf = 0; if (!visible || self.dead) return; var dt = Math.min((now - last) / 16.67, 2); last = now; draw(now, dt); raf = requestAnimationFrame(frame); }
+    var io = new IntersectionObserver(function (es) {
+      visible = es[0].isIntersecting;
+      if (visible) { resize(); if (reduce) { draw(performance.now(), 1); return; } last = performance.now(); if (!raf) raf = requestAnimationFrame(frame); }
+    }, { threshold: 0.02 });
+    io.observe(cv);
+  }
+  initTileGlow() {
+    var self = this;
+    var cv = document.querySelector('canvas[data-tg]');
+    if (!cv || !cv.getContext) return;
+    var host = cv.parentElement, ctx = cv.getContext('2d');
+    var CELL = 56, W = 0, H = 0, cols = 0, rows = 0, heat = null, mouse = null, prev = null, visible = false, raf = 0;
+    function resize() {
+      var dpr = Math.min(window.devicePixelRatio || 1, 2);
+      var w = cv.clientWidth || 1, h = cv.clientHeight || 1; if (w === W && h === H) return;
+      W = w; H = h; cv.width = Math.round(W * dpr); cv.height = Math.round(H * dpr); ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      cols = Math.ceil(W / CELL); rows = Math.ceil(H / CELL); heat = new Float32Array(cols * rows);
+    }
+    function at(e) { var r = cv.getBoundingClientRect(); return { x: e.clientX - r.left, y: e.clientY - r.top }; }
+    host.addEventListener('pointermove', function (e) { prev = mouse; mouse = at(e); });
+    host.addEventListener('pointerleave', function () { mouse = null; prev = null; });
+    var ro = window.ResizeObserver ? new ResizeObserver(resize) : null; if (ro) ro.observe(host);
+    this.tgOff = function () { if (ro) ro.disconnect(); if (raf) cancelAnimationFrame(raf); if (io) io.disconnect(); };
+    function stamp(x, y, s) {
+      var R = 2.2, cx = x / CELL, cy = y / CELL;
+      for (var gy = Math.max(0, Math.floor(cy - R)); gy <= Math.min(rows - 1, Math.floor(cy + R)); gy++)
+        for (var gx = Math.max(0, Math.floor(cx - R)); gx <= Math.min(cols - 1, Math.floor(cx + R)); gx++) {
+          var d = Math.hypot(gx + 0.5 - cx, gy + 0.5 - cy); if (d < R) { var k = gy * cols + gx; heat[k] = Math.min(1, heat[k] + (1 - d / R) * s); }
+        }
+    }
+    function frame() {
+      raf = 0; if (!visible || self.dead) return;
+      if (mouse) {
+        if (prev) { var n = Math.ceil(Math.hypot(mouse.x - prev.x, mouse.y - prev.y) / 20); for (var i = 1; i <= n; i++) stamp(prev.x + (mouse.x - prev.x) * i / n, prev.y + (mouse.y - prev.y) * i / n, 0.18); prev = { x: mouse.x, y: mouse.y }; }
+        stamp(mouse.x, mouse.y, 0.06);
+      }
+      ctx.clearRect(0, 0, W, H);
+      ctx.strokeStyle = 'rgba(184,154,94,0.14)'; ctx.lineWidth = 1; ctx.beginPath();
+      for (var x = 0; x <= W; x += CELL) { ctx.moveTo(x + 0.5, 0); ctx.lineTo(x + 0.5, H); }
+      for (var y = 0; y <= H; y += CELL) { ctx.moveTo(0, y + 0.5); ctx.lineTo(W, y + 0.5); }
+      ctx.stroke();
+      for (var k = 0; k < heat.length; k++) {
+        var h = heat[k]; if (h < 0.01) { heat[k] = 0; continue; }
+        var gx = k % cols, gy = (k / cols) | 0, inset = (1 - h) * CELL * 0.3;
+        ctx.fillStyle = 'rgba(184,154,94,' + (h * 0.32).toFixed(3) + ')';
+        ctx.fillRect(gx * CELL + 2 + inset, gy * CELL + 2 + inset, CELL - 4 - inset * 2, CELL - 4 - inset * 2);
+        ctx.strokeStyle = 'rgba(122,92,37,' + (h * 0.5).toFixed(3) + ')';
+        ctx.strokeRect(gx * CELL + 1.5, gy * CELL + 1.5, CELL - 3, CELL - 3);
+        heat[k] = h * 0.955;
+      }
+      raf = requestAnimationFrame(frame);
+    }
+    var io = new IntersectionObserver(function (es) { visible = es[0].isIntersecting; if (visible) { resize(); if (!raf) raf = requestAnimationFrame(frame); } }, { threshold: 0.02 });
+    io.observe(cv);
+  }
+  initMagazine() {
+    var self = this;
+    var host = document.querySelector('[data-mag]'); if (!host) return;
+    var cv = host.querySelector('canvas'); if (!cv) return;
+    var gl = cv.getContext('webgl2', { antialias: true, alpha: true });
+    if (!gl) { this.setState({ magNoGL: true }); return; }
+    var CAM_FOV = 75, CAM_Z = 6, VIEW_H = 2 * CAM_Z * Math.tan(CAM_FOV * Math.PI / 360), SEG = 24, PAGES = 24, NTILES = 16;
+    var VS = '#version 300 es\nin vec3 position;in vec2 uv;uniform mat4 uProj;uniform mat4 uView;' +
+      'uniform float uPageWidth,uPageHeight,uMeshCount,uPageSpacing,uScrollY,uSpeedY,uWave,uTilt,uTurn,uFocusIndex,uFocusProgress,uFocusScale,uFocusZ;' +
+      'out vec2 vUv;out vec4 vRect;out float vIdx;out float vDim;' +
+      'mat3 rotY(float a){return mat3(cos(a),0.,sin(a),0.,1.,0.,-sin(a),0.,cos(a));}' +
+      'mat3 rotX(float a){return mat3(1.,0.,0.,0.,cos(a),-sin(a),0.,sin(a),cos(a));}' +
+      'void main(){float PI=3.14159265359;float aIndex=float(gl_InstanceID);' +
+      'float t=mod(aIndex,' + NTILES + '.);float c=mod(t,4.);float r=floor(t/4.);vec2 px=vec2(1.5/4096.,1.5/4096.);vRect=vec4(c/4.+px.x,1.-(r+1.)/4.+px.y,(c+1.)/4.-px.x,1.-r/4.-px.y);' +
+      'vec3 basePos=vec3(position.x*uPageWidth,position.y*uPageHeight,0.);vec3 rc=vec3(-uPageWidth*.5,0.,0.);' +
+      'float fm=aIndex-(uMeshCount-1.)*.5;float yA=-PI*.5+uTurn;float xA=uTilt;float bz=uPageSpacing*(-fm);float maxZ=uMeshCount*uPageSpacing*.5;' +
+      'float bow=sin((position.y+.5)*2.)*uWave;float sp=clamp(uSpeedY/uPageWidth*4.,-2.,2.);' +
+      'float zc=mod(bz-uScrollY+maxZ,2.*maxZ)-maxZ-bow*sp;' +
+      'float focused=step(abs(aIndex-uFocusIndex),.5);float e=focused*uFocusProgress;float k=mix(1.,uFocusScale,e);vec3 pv=rc*(1.-e);' +
+      'vec3 vl=basePos*k-pv;vl.z+=zc*(1.-e);vec3 ro=rotY(yA*(1.-e))*vl+pv;ro.z-=uPageWidth*.5*(1.-e);ro.x+=uPageWidth*.5*(1.-e);' +
+      'vec3 np=rotX(xA*(1.-e))*ro;np.z+=uFocusZ*e;gl_Position=uProj*uView*vec4(np,1.);' +
+      'vUv=uv;vIdx=aIndex;vDim=uFocusProgress*(1.-focused);}';
+    var FS = '#version 300 es\nprecision highp float;uniform sampler2D uAtlas;uniform float uPageAspect;in vec2 vUv;in vec4 vRect;in float vIdx;in float vDim;out vec4 o;' +
+      'void main(){vec2 uv=vUv;float s=1./uPageAspect;float band=min(s,1./s);if(s>=1.){uv.x=(uv.x-.5)*band+.5;}else{uv.y=(uv.y-.5)*band+.5;}' +
+      'vec4 col=texture(uAtlas,mix(vRect.xy,vRect.zw,clamp(uv,0.,1.)));' +
+      'float edge=smoothstep(0.,.012,min(min(vUv.x,1.-vUv.x),min(vUv.y,1.-vUv.y)));' +
+      'o=vec4(col.rgb*mix(1.,.22,vDim)*mix(.55,1.,edge),1.);}';
+    var PFS = '#version 300 es\nprecision highp float;in vec2 vUv;in vec4 vRect;in float vIdx;in float vDim;out vec4 o;void main(){o=vec4((vIdx+1.)/255.,0.,0.,1.);}';
+    function prog(fs) {
+      var p = gl.createProgram();
+      [[gl.VERTEX_SHADER, VS], [gl.FRAGMENT_SHADER, fs]].forEach(function (d) { var s = gl.createShader(d[0]); gl.shaderSource(s, d[1]); gl.compileShader(s); gl.attachShader(p, s); });
+      gl.bindAttribLocation(p, 0, 'position'); gl.bindAttribLocation(p, 1, 'uv'); gl.linkProgram(p);
+      return gl.getProgramParameter(p, gl.LINK_STATUS) ? p : null;
+    }
+    var P = prog(FS), PP = prog(PFS);
+    if (!P || !PP) { this.setState({ magNoGL: true }); return; }
+    var pos = [], uvs = [], idx = [];
+    for (var j = 0; j <= SEG; j++) for (var i = 0; i <= SEG; i++) { pos.push(i / SEG - 0.5, j / SEG - 0.5, 0); uvs.push(i / SEG, j / SEG); }
+    for (j = 0; j < SEG; j++) for (i = 0; i < SEG; i++) { var a = j * (SEG + 1) + i, b = a + 1, c = a + SEG + 1, d = c + 1; idx.push(a, b, d, a, d, c); }
+    var vao = gl.createVertexArray(); gl.bindVertexArray(vao);
+    var b0 = gl.createBuffer(); gl.bindBuffer(gl.ARRAY_BUFFER, b0); gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(pos), gl.STATIC_DRAW); gl.enableVertexAttribArray(0); gl.vertexAttribPointer(0, 3, gl.FLOAT, false, 0, 0);
+    var b1 = gl.createBuffer(); gl.bindBuffer(gl.ARRAY_BUFFER, b1); gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(uvs), gl.STATIC_DRAW); gl.enableVertexAttribArray(1); gl.vertexAttribPointer(1, 2, gl.FLOAT, false, 0, 0);
+    var ib = gl.createBuffer(); gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, ib); gl.bufferData(gl.ELEMENT_ARRAY_BUFFER, new Uint16Array(idx), gl.STATIC_DRAW);
+    var NI = idx.length;
+    var tex = gl.createTexture(); gl.bindTexture(gl.TEXTURE_2D, tex);
+    gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, 1, 1, 0, gl.RGBA, gl.UNSIGNED_BYTE, new Uint8Array([46, 46, 48, 255]));
+    var img = new Image();
+    img.onload = function () { gl.bindTexture(gl.TEXTURE_2D, tex); gl.pixelStorei(gl.UNPACK_FLIP_Y_WEBGL, true); gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, gl.RGBA, gl.UNSIGNED_BYTE, img); gl.generateMipmap(gl.TEXTURE_2D); gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.LINEAR_MIPMAP_LINEAR); var an = gl.getExtension('EXT_texture_filter_anisotropic'); if (an) gl.texParameterf(gl.TEXTURE_2D, an.TEXTURE_MAX_ANISOTROPY_EXT, Math.min(8, gl.getParameter(an.MAX_TEXTURE_MAX_ANISOTROPY_EXT))); gl.pixelStorei(gl.UNPACK_FLIP_Y_WEBGL, false); };
+    img.src = 'assets/mag-atlas.jpg';
+    gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, gl.LINEAR); gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, gl.CLAMP_TO_EDGE); gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.CLAMP_TO_EDGE);
+    function U(p) { var o = {}; ['uProj', 'uView', 'uPageWidth', 'uPageHeight', 'uMeshCount', 'uPageSpacing', 'uScrollY', 'uSpeedY', 'uWave', 'uTilt', 'uTurn', 'uFocusIndex', 'uFocusProgress', 'uFocusScale', 'uFocusZ', 'uAtlas', 'uPageAspect'].forEach(function (n) { o[n] = gl.getUniformLocation(p, n); }); return o; }
+    var UP = U(P), UPP = U(PP);
+    var W = 1, H = 1, S = null, visible = false, raf = 0, manual = 0, scrollCur = 0, lastTarget = null, speed = 0;
+    var focus = { index: -1, t: 0, target: 0 }, tap = null, drag = null;
+    var fbo = gl.createFramebuffer(), ftex = gl.createTexture(), frb = gl.createRenderbuffer(), fw = 0, fh = 0;
+    function settings() {
+      var wpp = VIEW_H / H, aspect = W / H, pxs = Math.min(520, W * 0.62, H * 0.82), pw = pxs * wpp, ph = pxs * wpp;
+      var focusZ = Math.min(CAM_Z * 0.55, pw * 0.75), planeH = VIEW_H * (CAM_Z - focusZ) / CAM_Z, planeW = planeH * aspect;
+      return { wpp: wpp, pw: pw, ph: ph, spacing: pw * 0.5, wave: pw * 0.2, lerp: 0.35 * Math.pow(0.82, 5), drift: 2 * pw * 0.15, wheel: 1.2, focusZ: focusZ, focusScale: Math.min(planeH * 0.62 / ph, planeW * 0.62 / pw), dur: 0.95 };
+    }
+    function resize() {
+      var dpr = Math.min(window.devicePixelRatio || 1, 2);
+      W = host.clientWidth || 1; H = host.clientHeight || 1;
+      cv.width = Math.round(W * dpr); cv.height = Math.round(H * dpr); S = settings();
+    }
+    function persp() { var f = 1 / Math.tan(CAM_FOV * Math.PI / 360), a = W / H, n = 0.1, fa = 200; return new Float32Array([f / a, 0, 0, 0, 0, f, 0, 0, 0, 0, (fa + n) / (n - fa), -1, 0, 0, 2 * fa * n / (n - fa), 0]); }
+    var VIEW = new Float32Array([1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, -CAM_Z, 1]);
+    function setU(u) {
+      gl.uniformMatrix4fv(u.uProj, false, persp()); gl.uniformMatrix4fv(u.uView, false, VIEW);
+      gl.uniform1f(u.uPageWidth, S.pw); gl.uniform1f(u.uPageHeight, S.ph); gl.uniform1f(u.uMeshCount, PAGES); gl.uniform1f(u.uPageSpacing, S.spacing);
+      gl.uniform1f(u.uScrollY, scrollCur); gl.uniform1f(u.uSpeedY, speed); gl.uniform1f(u.uWave, S.wave); gl.uniform1f(u.uTilt, 0); gl.uniform1f(u.uTurn, 0);
+      gl.uniform1f(u.uFocusIndex, focus.index); var t = focus.t; gl.uniform1f(u.uFocusProgress, t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2);
+      gl.uniform1f(u.uFocusScale, S.focusScale); gl.uniform1f(u.uFocusZ, S.focusZ);
+      if (u.uAtlas) gl.uniform1i(u.uAtlas, 0); if (u.uPageAspect) gl.uniform1f(u.uPageAspect, 1);
+    }
+    function draw(p, u) { gl.useProgram(p); setU(u); gl.bindVertexArray(vao); gl.drawElementsInstanced(gl.TRIANGLES, NI, gl.UNSIGNED_SHORT, 0, PAGES); }
+    function pick(cx, cy) {
+      var r = host.getBoundingClientRect(), u = (cx - r.left) / r.width, v = (cy - r.top) / r.height;
+      if (u < 0 || v < 0 || u >= 1 || v >= 1) return -1;
+      var tw = Math.max(1, Math.round(W / 2)), th = Math.max(1, Math.round(H / 2));
+      if (tw !== fw || th !== fh) {
+        fw = tw; fh = th;
+        gl.bindTexture(gl.TEXTURE_2D, ftex); gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA8, fw, fh, 0, gl.RGBA, gl.UNSIGNED_BYTE, null);
+        gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.NEAREST); gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, gl.NEAREST);
+        gl.bindRenderbuffer(gl.RENDERBUFFER, frb); gl.renderbufferStorage(gl.RENDERBUFFER, gl.DEPTH_COMPONENT16, fw, fh);
+        gl.bindFramebuffer(gl.FRAMEBUFFER, fbo); gl.framebufferTexture2D(gl.FRAMEBUFFER, gl.COLOR_ATTACHMENT0, gl.TEXTURE_2D, ftex, 0); gl.framebufferRenderbuffer(gl.FRAMEBUFFER, gl.DEPTH_ATTACHMENT, gl.RENDERBUFFER, frb);
+        gl.bindTexture(gl.TEXTURE_2D, tex);
+      }
+      gl.bindFramebuffer(gl.FRAMEBUFFER, fbo); gl.viewport(0, 0, fw, fh); gl.clearColor(0, 0, 0, 1); gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
+      draw(PP, UPP);
+      var px = new Uint8Array(4); gl.readPixels(Math.min(fw - 1, Math.floor(u * fw)), Math.min(fh - 1, Math.floor((1 - v) * fh)), 1, 1, gl.RGBA, gl.UNSIGNED_BYTE, px);
+      gl.bindFramebuffer(gl.FRAMEBUFFER, null); gl.clearColor(0, 0, 0, 0);
+      var hit = px[0] - 1; return hit >= 0 && hit < PAGES ? hit : -1;
+    }
+    host.addEventListener('pointerdown', function (e) {
+      if (e.button !== 0) return;
+      tap = { x: e.clientX, y: e.clientY, at: performance.now() };
+      if (focus.index < 0) drag = { x: e.clientX };
+    });
+    host.addEventListener('pointermove', function (e) { if (drag) { var dx = drag.x - e.clientX; drag.x = e.clientX; manual += dx * 2 * S.wpp * S.wheel; } });
+    function up(e) {
+      drag = null; if (!tap) return;
+      var moved = Math.hypot(e.clientX - tap.x, e.clientY - tap.y), quick = performance.now() - tap.at < 600; tap = null;
+      if (moved > 6 || !quick) return;
+      if (focus.index >= 0) { focus.target = 0; return; }
+      var h = pick(e.clientX, e.clientY); if (h >= 0) { focus.index = h; focus.target = 1; }
+    }
+    host.addEventListener('pointerup', up); host.addEventListener('pointercancel', function () { drag = null; tap = null; });
+    function onKey(e) { if (e.key === 'Escape' && focus.index >= 0) focus.target = 0; }
+    window.addEventListener('keydown', onKey);
+    var last = performance.now();
+    function frame(now) {
+      raf = 0; if (!visible || self.dead) return;
+      var dt = Math.min(Math.max((now - last) / 1000, 0), 0.05); last = now;
+      if (focus.index >= 0) { var rate = dt / S.dur; focus.t = Math.min(1, Math.max(0, focus.t + (focus.target ? rate : -rate))); if (focus.t === 0 && focus.target === 0) focus.index = -1; }
+      host.style.cursor = focus.index >= 0 && focus.target === 1 ? 'zoom-out' : 'grab';
+      var capIdx = focus.index >= 0 && focus.target === 1 && focus.t > 0.5 ? focus.index % NTILES : -1;
+      if (capIdx !== (self.state.magIdx == null ? -1 : self.state.magIdx)) self.setState({ magIdx: capIdx });
+      if (focus.index < 0) manual += S.drift * dt;
+      var r = host.getBoundingClientRect(), vh = window.innerHeight || H;
+      var prog01 = Math.min(1, Math.max(0, (vh - r.top) / (vh + r.height)));
+      var target = manual + prog01 * PAGES * S.spacing * 1.2;
+      if (lastTarget !== null && focus.index < 0) speed += target - lastTarget;
+      lastTarget = target;
+      var k = dt * 60, ease = 1 - Math.pow(1 - S.lerp, k);
+      if (focus.index < 0) scrollCur += (target - scrollCur) * ease;
+      speed *= Math.pow(0.835, k);
+      gl.viewport(0, 0, cv.width, cv.height); gl.enable(gl.DEPTH_TEST); gl.disable(gl.CULL_FACE);
+      gl.clearColor(0, 0, 0, 0); gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
+      gl.activeTexture(gl.TEXTURE0); gl.bindTexture(gl.TEXTURE_2D, tex);
+      draw(P, UP);
+      raf = requestAnimationFrame(frame);
+    }
+    var ro = window.ResizeObserver ? new ResizeObserver(resize) : null; if (ro) ro.observe(host);
+    resize();
+    var io = new IntersectionObserver(function (es) { visible = es[0].isIntersecting; if (visible) { resize(); last = performance.now(); if (!raf) raf = requestAnimationFrame(frame); } }, { threshold: 0.01 });
+    io.observe(host);
+    this.magOff = function () { if (ro) ro.disconnect(); io.disconnect(); if (raf) cancelAnimationFrame(raf); window.removeEventListener('keydown', onKey); };
+  }
+  cls(i) {
+    if (!this.state.ready) return 'sec';
+    return this.state.seen[i] ? 'sec armed in' : 'sec armed';
+  }
+  renderVals() {
+    var self = this;
+    var labels = ['Arrival', 'Welcome', 'Our stays', 'Your hotel', 'Up close', 'Every space', 'Collection'];
+    var rail = labels.map(function (l, i) {
+      return {
+        label: l, w: self.state.active === i ? 40 : 14, op: self.state.active === i ? 1 : 0,
+        go: function () { var el = document.querySelector('[data-sec="' + i + '"]'); if (el) el.scrollIntoView({ behavior: 'smooth' }); }
+      };
+    });
+    var rooms = [];
+    for (var r = 0; r < 28; r++) rooms.push({ d: 1500 + r * 25 });
+    var tiles = [];
+    for (var ti = 0; ti < 40; ti++) { var tc = ti % 8, tr = Math.floor(ti / 8); tiles.push({ d: (tc + tr) * 45, k: (tc * 7 + tr * 3) % 5 === 0 ? 'b' : 'a' }); }
+    var ZONES = [['lobby', 'Lobby'], ['reception', 'Reception'], ['corridor', 'Corridor'], ['rooms', 'Guest rooms ×28'], ['wash', 'Washrooms']];
+    var zCat = this.state.zCat || 'All';
+    var SWS = []; for (var si = 0; si < TILES.length; si++) if (zCat === 'All' || TILES[si][3] === zCat) SWS.push(si);
+    var cats = ['All', 'Marble', 'Stone', 'Wood', 'Plain', 'Decor', 'Mosaic'].map(function (c) { var on = c === zCat; return { name: c, pressed: on ? 'true' : 'false', bg: on ? '#1F1D1A' : 'transparent', fg: on ? '#F7F4EE' : '#1F1D1A', pick: function () { self.setState({ zCat: c }); } }; });
+    var zSel = this.state.zSel, zPick = this.state.zPick, zc = {}, zf = {}, zp = {};
+    ZONES.forEach(function (z) {
+      var has = zPick[z[0]] != null;
+      zc[z[0]] = (zSel === z[0] ? 'on ' : '') + (has ? 'has' : '');
+      zf[z[0]] = has ? 'url(#sw' + zPick[z[0]] + ')' : '#B89A5E';
+      zp[z[0]] = function () { self.setState({ zSel: z[0] }); };
+    });
+    var spaces = ZONES.map(function (z) {
+      var on = zSel === z[0], pk = zPick[z[0]];
+      return { name: z[1], tile: pk != null ? TILES[pk][0] : 'Not chosen', pick: zp[z[0]], pressed: on ? 'true' : 'false', bc: on ? '#1F1D1A' : '#D9CFBD', bg: on ? '#1F1D1A' : 'rgba(247,244,238,0.85)', fg: on ? '#F7F4EE' : '#1F1D1A' };
+    });
+    var swatches = SWS.map(function (i) {
+      var c = i % 8, r = Math.floor(i / 8);
+      return {
+        name: TILES[i][0] + ' · ' + TILES[i][3], pos: (c / 7 * 100) + '% ' + (r / 5 * 100) + '%',
+        ring: zPick[zSel] === i ? '2px solid #1F1D1A' : '2px solid transparent',
+        apply: function () {
+          var np = Object.assign({}, self.state.zPick); np[self.state.zSel] = i;
+          var next = self.state.zSel;
+          for (var q = 0; q < ZONES.length; q++) { if (np[ZONES[q][0]] == null) { next = ZONES[q][0]; break; } }
+          self.setState({ zPick: np, zSel: next, zLast: i, zLastZone: self.state.zSel });
+        }
+      };
+    });
+    var selName = (ZONES.filter(function (z) { return z[0] === zSel; })[0] || ZONES[0])[1].toLowerCase();
+    var lastT = this.state.zLast != null ? TILES[this.state.zLast] : null;
+    var lastZ = this.state.zLastZone ? (ZONES.filter(function (z) { return z[0] === self.state.zLastZone; })[0] || ['', ''])[1] : '';
+    var selInfo = lastT ? lastZ + ': ' + lastT[0] + ' (' + lastT[1] + ', ' + lastT[2] + ', ' + lastT[4].toLowerCase() + ')' : 'Hover a swatch to see its name, tap to lay it.';
+    var clearPlan = function () { self.setState({ zPick: {}, zSel: 'lobby', zLast: null, zLastZone: '' }); };
+    var t = TILES[this.state.idx % TILES.length];
+    return {
+      cover: !this.state.ready ? 'sec' : (this.state.open ? 'sec armed opened' : 'sec armed'),
+      c1: this.cls(1), c2: this.cls(2), c3: this.cls(3), c4: this.cls(4), c5: this.cls(5), c6: this.cls(6), magNoGL: !!this.state.magNoGL,
+      rail: rail, rooms: rooms, tiles: tiles, magCap: (function (m) { var x = m != null && m >= 0 ? MAG[m] : null; return x ? { op: 1, sub: x[0] + ' · ' + x[1], title: x[2] } : { op: 0, sub: '', title: '' }; })(this.state.magIdx), zc: zc, zf: zf, zp: zp, spaces: spaces, swatches: swatches, cats: cats, selName: selName, selInfo: selInfo, clearPlan: clearPlan, glRef: this.glRef, noGL: this.state.noGL, cursor: 'grab',
+      info: { title: t[0], desc: t[1] + ' · ' + t[2] + ' · ' + t[4], cat: t[3], op: 1 }
+    };
+  }
+}
+</script>
+</body>
+</html>
