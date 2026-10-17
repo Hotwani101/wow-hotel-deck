@@ -3,7 +3,6 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="icon" href="data:,">
 <title>The Guest's Journey — Wow Ceramics</title>
 <script src="./support.js"></script>
 </head>
@@ -89,6 +88,54 @@ a{color:#7A5C25}a:hover{color:#1F1D1A}
 .armed.opened .crise{opacity:1;transform:none;transition:opacity 1.8s ease,transform 2.4s cubic-bezier(.16,1,.3,1)}
 .armed.opened .cr1{transition-delay:1.6s}.armed.opened .cr2{transition-delay:2s}.armed.opened .cr3{transition-delay:2.6s}.armed.opened .cr4{transition-delay:3.1s}
 @media (prefers-reduced-motion:reduce){.crise{transition:none!important;opacity:1!important;transform:none!important}}
+
+.orb{position:relative;z-index:1;margin:24px -8vw 0;height:clamp(520px,50vw,760px);isolation:isolate;user-select:none;-webkit-user-select:none;cursor:grab;touch-action:pan-y}
+.orb[data-dragging],.orb[data-dragging] *{cursor:grabbing}
+.orb-path{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:0}
+.orb-item{position:absolute;top:0;left:0;will-change:transform,opacity;cursor:pointer;outline:none}
+.orb[data-intro] .orb-item{opacity:0}
+.orb-in{width:100%;height:100%;overflow:hidden;border-radius:6px;box-shadow:0 10px 26px rgba(31,29,26,.22);transition:transform .45s cubic-bezier(.2,.8,.2,1),box-shadow .3s}
+.orb-in img{display:block;width:100%;height:100%;object-fit:cover;pointer-events:none}
+.orb-item:hover .orb-in,.orb-item:focus-visible .orb-in{transform:scale(1.08)}
+.orb-item.hit .orb-in{box-shadow:0 0 0 3px #B89A5E,0 10px 26px rgba(31,29,26,.25)}
+.orb-center{position:absolute;left:50%;top:50%;z-index:300;width:240px;height:300px;transform:translate(-50%,-50%);cursor:zoom-in;outline:none}
+.orb-zoom{position:relative;width:100%;height:100%;overflow:hidden;border-radius:8px;box-shadow:0 30px 70px rgba(31,29,26,.35),0 0 0 1px rgba(255,255,255,.4) inset}
+.orb[data-intro] .orb-zoom{opacity:0;transform:scale(.6)}
+.orb-zoom{transition:opacity .9s ease .5s,transform 1.1s cubic-bezier(.16,1,.3,1) .5s}
+.orb-l{position:absolute;inset:0;display:block;width:100%;height:100%;object-fit:cover;opacity:0;transform:scale(1.05);transition:opacity .7s ease,transform 1.1s cubic-bezier(.16,1,.3,1)}.orb-l.on{opacity:1;transform:none}
+.orb-tag{position:absolute;z-index:2;left:0;right:0;bottom:0;padding:40px 16px 14px;background:linear-gradient(transparent,rgba(20,19,17,.78));color:#F7F4EE;display:flex;flex-direction:column;gap:6px;pointer-events:none}
+.orb-tag p{margin:0}.ot-k{font-size:10px;letter-spacing:.22em;text-transform:uppercase;color:#E6D3A8}
+.ot-n{font:500 clamp(22px,2vw,30px)/1 'Cormorant Garamond',Georgia,serif}
+.orb-full{z-index:2;position:absolute;top:14px;right:14px;padding:6px 10px;background:rgba(20,19,17,.6);color:#F7F4EE;font-size:10px;letter-spacing:.18em;text-transform:uppercase;border-radius:3px;opacity:0;transition:opacity .3s}
+.orb-center:hover .orb-full,.orb-center:focus-visible .orb-full{opacity:1}
+.orb-center:focus-visible .orb-zoom{outline:2px solid #1F1D1A;outline-offset:4px}
+.lbox{position:fixed;inset:0;z-index:1000;background:rgba(20,19,17,.92);display:flex;align-items:center;justify-content:center;padding:4vh 4vw;box-sizing:border-box;animation:lbIn .35s ease;cursor:zoom-out}
+.lbox figure{margin:0;display:flex;flex-wrap:wrap;gap:28px 40px;align-items:center;justify-content:center;max-width:1280px;cursor:default}
+.lbox img{display:block;height:min(88vh,1000px);max-width:92vw;aspect-ratio:4/5;object-fit:cover;border-radius:6px;box-shadow:0 30px 80px rgba(0,0,0,.5);animation:lbZoom .5s cubic-bezier(.16,1,.3,1)}
+.lbox figcaption{flex:0 1 340px;color:#F7F4EE;display:flex;flex-direction:column;gap:12px}
+.lbox figcaption p{margin:0}.lb-k{font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:#D9C49A}
+.lb-n{font:500 48px/1 'Cormorant Garamond',Georgia,serif}
+.lb-m{font-size:17px;line-height:1.6;color:#C9C2B6}
+.lb-c{font-size:13px;line-height:1.7;color:#A39B8F}
+.lbox-x{position:absolute;top:20px;right:24px;min-height:44px;padding:0 16px;border:1px solid #6B655C;background:transparent;color:#F7F4EE;font:600 12px Manrope,sans-serif;letter-spacing:.14em;text-transform:uppercase;cursor:pointer}
+@keyframes lbIn{from{opacity:0}}@keyframes lbZoom{from{transform:scale(.85);opacity:0}}
+@media (max-width:700px){.orb{height:560px}.lbox img{height:auto;width:92vw}.lb-n{font-size:36px}}
+.cc{--cc-radius:10px;--cc-inner:.4;position:absolute;inset:0;overflow:hidden;outline:none;touch-action:pan-y;user-select:none;-webkit-user-select:none;cursor:grab}
+.cc[data-dragging]{cursor:grabbing}
+.cc:focus-visible{box-shadow:inset 0 0 0 2px rgba(217,196,154,.5)}
+.cc-view{position:absolute;inset:0}
+.cc-stage{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;opacity:0;transition:opacity .45s ease}
+.cc[data-ready] .cc-stage{opacity:1}
+.cc-cam,.cc-ring,.cc-card{width:0;height:0;transform-style:preserve-3d}
+.cc-cam{position:relative}.cc-ring,.cc-card{position:absolute;left:0;top:0}
+.cc-card{cursor:pointer}
+.cc-tile{position:absolute;outline:1px solid transparent;backface-visibility:hidden;-webkit-backface-visibility:hidden}
+.cc-frame{position:absolute;left:0;top:0;width:100%;overflow:hidden}
+.cc-photo{position:absolute;display:block;max-width:none;object-fit:cover;pointer-events:none;-webkit-user-drag:none}
+.cc-shade,.cc-inner{position:absolute;inset:0;pointer-events:none}
+.cc-shade{background:#141311;opacity:var(--cc-depth,0)}
+.cc-inner{background:#000;opacity:var(--cc-inner)}
+@media (max-width:700px){.cc-wrap{height:500px!important}}
 </style>
 </helmet>
 <div style="font-family: Manrope, 'Segoe UI', sans-serif; color: #1F1D1A; background: #F7F4EE; width: 100%">
@@ -129,7 +176,6 @@ Scroll to step inside
 </svg>
 </section>
 
-<!-- 03 OUR STAYS -->
 <section data-sec="1" class="{{c1}}" style="background: #EFEAE1; padding: 140px 8vw; box-sizing: border-box">
 <canvas data-ml="1" aria-hidden="true" style="position: absolute; inset: 0; width: 100%; height: 100%; display: block; pointer-events: none; z-index: 0"></canvas>
 <div class="pour" aria-hidden="true"><svg viewBox="0 0 2880 160" preserveAspectRatio="none"><path fill="#F7F4EE" d="M0 80 C240 0 480 160 720 80 S1200 0 1440 80 S1920 160 2160 80 S2640 0 2880 80 V160 H0Z"></path></svg><div class="fill" style="background: #F7F4EE"></div></div>
@@ -159,14 +205,56 @@ Scroll to step inside
 <p style="margin: 0; font-size: 15px; line-height: 1.6; color: #6B655C">One point of contact for quantities, scheduling and delivery, phased to match your site.</p>
 </div>
 </div>
-</section><section data-sec="2" class="{{c2}}" style="padding: 0 8vw 140px; box-sizing: border-box; touch-action: pan-y">
+</section>
+
+<!-- OUR WORK -->
+<section data-sec="2" class="{{c2}}" style="background: #141311; color: #F7F4EE; padding: 140px 0 120px; box-sizing: border-box">
+<div class="tiles" aria-hidden="true"><sc-for list="{{tiles}}" as="t" hint-placeholder-count="40"><span class="tl {{t.k}}" style="animation-delay: {{t.d}}ms"></span></sc-for></div>
+<div style="position: relative; z-index: 1; padding: 0 8vw; display: flex; flex-wrap: wrap; justify-content: space-between; align-items: end; gap: 32px 64px">
+<div style="flex: 1 1 520px">
+<p class="rise" style="margin: 0 0 20px; font-size: 12px; letter-spacing: 0.3em; text-transform: uppercase; color: #D9C49A">03 · Our work</p>
+<h2 class="rise d1" style="margin: 0; max-width: 15ch; font-family: 'Cormorant Garamond', Georgia, serif; font-weight: 500; font-size: clamp(40px, 5vw, 76px); line-height: 1">Jabalpur's landmarks stand on our tiles.</h2>
+</div>
+<p class="rise d2" style="flex: 0 1 420px; margin: 0; font-size: 17px; line-height: 1.7; color: #C9C2B6">Wow Ceramics has supplied tiles to hotels, restaurants, hospitals, schools, a mall and even the city's railway station. Every project here was planned, sampled and delivered by our team.</p>
+</div>
+
+<div class="cc-wrap" style="position: relative; z-index: 1; margin-top: 40px; height: 640px">
+<div data-cc="work" class="cc" tabindex="0" role="region" aria-roledescription="carousel" aria-label="Our projects. Scroll or drag to turn, click a photo to bring it to the front."><div class="cc-view"><div class="cc-stage" data-cc-stage=""><div class="cc-cam" data-cc-cam=""><div class="cc-ring" data-cc-ring=""></div></div></div></div></div>
+<div style="position: absolute; left: 8vw; right: 8vw; bottom: 8px; display: flex; flex-wrap: wrap; justify-content: space-between; align-items: end; gap: 12px; pointer-events: none">
+<div style="transition: opacity .3s; opacity: {{wk.op}}">
+<p style="margin: 0 0 8px; font-size: 11px; letter-spacing: 0.24em; text-transform: uppercase; color: #D9C49A">{{wk.n}} · {{wk.sector}}</p>
+<p style="margin: 0; font-family: 'Cormorant Garamond', Georgia, serif; font-size: clamp(30px, 3vw, 44px); line-height: 1">{{wk.name}}</p>
+<p style="margin: 8px 0 0; font-size: 13px; color: #A39B8F">{{wk.place}}</p>
+</div>
+<p style="margin: 0; font-size: 12px; letter-spacing: 0.2em; text-transform: uppercase; color: #A39B8F">Scroll or drag to turn · Click to focus</p>
+</div>
+</div>
+
+<div style="position: relative; z-index: 1; padding: 0 8vw; margin-top: 88px">
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1px; background: #3A3631; border: 1px solid #3A3631">
+<div class="rise d1" style="background: #141311; padding: 28px 24px"><p style="margin: 0 0 12px; font-size: 11px; letter-spacing: 0.24em; text-transform: uppercase; color: #D9C49A">Hospitality</p><p style="margin: 0; font-size: 15px; line-height: 1.7; color: #C9C2B6">Vijan Mahal · Shawn Elizey · Welcome Hotel by ITC · Club Mahindra, Bandhavgarh · Singhai Palace</p></div>
+<div class="rise d2" style="background: #141311; padding: 28px 24px"><p style="margin: 0 0 12px; font-size: 11px; letter-spacing: 0.24em; text-transform: uppercase; color: #D9C49A">Food &amp; nightlife</p><p style="margin: 0; font-size: 15px; line-height: 1.7; color: #C9C2B6">Hytte Rooftop · Lord of the Drinks · The Burger House</p></div>
+<div class="rise d3" style="background: #141311; padding: 28px 24px"><p style="margin: 0 0 12px; font-size: 11px; letter-spacing: 0.24em; text-transform: uppercase; color: #D9C49A">Healthcare</p><p style="margin: 0; font-size: 15px; line-height: 1.7; color: #C9C2B6">Apollo Hospital · Golden Heart Hospital · Metro Hospital</p></div>
+<div class="rise d4" style="background: #141311; padding: 28px 24px"><p style="margin: 0 0 12px; font-size: 11px; letter-spacing: 0.24em; text-transform: uppercase; color: #D9C49A">Education &amp; public</p><p style="margin: 0; font-size: 15px; line-height: 1.7; color: #C9C2B6">G.D. Goenka School · Shriram College · Mall 11 · Jabalpur Railway Station</p></div>
+</div>
+</div>
+
+<div class="rise d2" style="position: relative; z-index: 1; padding: 0 8vw; margin-top: 64px">
+<p style="margin: 0 0 18px; font-size: 11px; letter-spacing: 0.24em; text-transform: uppercase; color: #D9C49A">Brands we supply</p>
+<p style="margin: 0; font-family: 'Cormorant Garamond', Georgia, serif; font-size: clamp(24px, 2.6vw, 36px); line-height: 1.45; color: #F7F4EE">Simero · Lioli · Itaca · Icon · Exotica · Morson · Scientifica · Lorence · Le Mina · Kivos · Creates · Croce · Marfil · Nexion · Pavit · Varmora</p>
+<p style="margin: 18px 0 0; font-size: 15px; color: #A39B8F">Formats from 50 × 200 mm mosaic strips to 1200 × 2400 mm slabs, in gloss, satin, matte and anti-skid finishes.</p>
+</div>
+</section>
+
+<!-- 04 OUR STAYS -->
+<section data-sec="3" class="{{c3}}" style="padding: 0 8vw 140px; box-sizing: border-box; touch-action: pan-y">
 <div class="pour" aria-hidden="true"><svg viewBox="0 0 2880 160" preserveAspectRatio="none"><path fill="#EFEAE1" d="M0 80 C240 0 480 160 720 80 S1200 0 1440 80 S1920 160 2160 80 S2640 0 2880 80 V160 H0Z"></path></svg><div class="fill" style="background: #EFEAE1"></div></div>
 <div class="pour p2" aria-hidden="true"><svg viewBox="0 0 2880 160" preserveAspectRatio="none"><path fill="#1F1D1A" d="M0 90 C240 30 480 150 720 90 S1200 30 1440 90 S1920 150 2160 90 S2640 30 2880 90 V160 H0Z"></path></svg><div class="fill" style="background: #1F1D1A"></div></div>
 <div class="tiles" aria-hidden="true" style="--tc: #E6DCC8; --tc2: #D9CBB0"><sc-for list="{{tiles}}" as="t" hint-placeholder-count="40"><span class="tl {{t.k}}" style="animation-delay: {{t.d}}ms"></span></sc-for></div>
 <canvas data-bp="1" aria-label="Interactive field of white spheres. Move the cursor to push them, drag one to grab it, click to burst them apart." style="position: absolute; inset: 0; width: 100%; height: 100%; display: block; pointer-events: none; z-index: 0"></canvas>
 <div class="ballpit" style="position: relative; z-index: 1; height: 500px; margin: 0 -8vw">
 <div style="position: absolute; inset: 0; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; padding: 0 8vw; pointer-events: none">
-<p class="rise" style="margin: 0 0 20px; font-size: 12px; letter-spacing: 0.3em; text-transform: uppercase; color: #7A5C25">03 · Hotels that trust us</p>
+<p class="rise" style="margin: 0 0 20px; font-size: 12px; letter-spacing: 0.3em; text-transform: uppercase; color: #7A5C25">04 · Hotels that trust us</p>
 <h2 class="rise d1" style="margin: 0; max-width: 16ch; font-family: 'Cormorant Garamond', Georgia, serif; font-weight: 500; font-size: clamp(44px, 6vw, 96px); line-height: 1; color: #1F1D1A">Their guests already walk on our tiles.</h2>
 </div>
 </div>
@@ -194,12 +282,12 @@ Scroll to step inside
 </section>
 
 <!-- 04 YOUR HOTEL -->
-<section data-sec="3" class="{{c3}}" style="background: #1F1D1A; color: #F7F4EE; padding: 140px 8vw; box-sizing: border-box">
+<section data-sec="4" class="{{c4}}" style="background: #1F1D1A; color: #F7F4EE; padding: 140px 8vw; box-sizing: border-box">
 <canvas data-wv="1" aria-hidden="true" style="position: absolute; inset: 0; width: 100%; height: 100%; display: block; pointer-events: none; z-index: 0"></canvas>
 <div class="pour" aria-hidden="true"><svg viewBox="0 0 2880 160" preserveAspectRatio="none"><path fill="#F7F4EE" d="M0 80 C240 0 480 160 720 80 S1200 0 1440 80 S1920 160 2160 80 S2640 0 2880 80 V160 H0Z"></path></svg><div class="fill" style="background: #F7F4EE"></div></div>
 <div class="pour p2" aria-hidden="true"><svg viewBox="0 0 2880 160" preserveAspectRatio="none"><path fill="#B89A5E" d="M0 90 C240 30 480 150 720 90 S1200 30 1440 90 S1920 150 2160 90 S2640 30 2880 90 V160 H0Z"></path></svg><div class="fill" style="background: #B89A5E"></div></div>
 <div class="tiles" aria-hidden="true" style="--tc: #2C2925; --tc2: #3A3631"><sc-for list="{{tiles}}" as="t" hint-placeholder-count="40"><span class="tl {{t.k}}" style="animation-delay: {{t.d}}ms"></span></sc-for></div>
-<p class="rise" style="position: relative; z-index: 1; margin: 0 0 20px; font-size: 12px; letter-spacing: 0.3em; text-transform: uppercase; color: #D9C49A">04 · Your hotel</p>
+<p class="rise" style="position: relative; z-index: 1; margin: 0 0 20px; font-size: 12px; letter-spacing: 0.3em; text-transform: uppercase; color: #D9C49A">05 · Your hotel</p>
 <h2 class="rise d1" style="position: relative; z-index: 1; margin: 0; max-width: 16ch; font-family: 'Cormorant Garamond', Georgia, serif; font-weight: 500; font-size: clamp(40px, 5vw, 76px); line-height: 1">Four kinds of space, one walk through.</h2>
 <div style="position: relative; z-index: 1; margin-top: 88px; display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 1px">
 <div class="rise d1" style="background: rgba(31, 29, 26, 0.72); box-shadow: 0 0 0 1px #4A453E; padding: 40px 32px; min-height: 340px; box-sizing: border-box; display: flex; flex-direction: column; justify-content: space-between">
@@ -226,11 +314,11 @@ Scroll to step inside
 </section>
 
 <!-- 05 UP CLOSE -->
-<section data-sec="4" class="{{c4}}" style="background: #0B0A09; color: #F7F4EE; padding: 120px 0 0; box-sizing: border-box">
+<section data-sec="5" class="{{c5}}" style="background: #0B0A09; color: #F7F4EE; padding: 120px 0 0; box-sizing: border-box">
 <div class="tiles" aria-hidden="true"><sc-for list="{{tiles}}" as="t" hint-placeholder-count="40"><span class="tl {{t.k}}" style="animation-delay: {{t.d}}ms"></span></sc-for></div>
 <div style="position: relative; z-index: 1; padding: 0 8vw; display: flex; flex-wrap: wrap; justify-content: space-between; align-items: end; gap: 24px 64px">
 <div style="flex: 1 1 480px">
-<p class="rise" style="margin: 0 0 20px; font-size: 12px; letter-spacing: 0.3em; text-transform: uppercase; color: #D9C49A">05 · Up close</p>
+<p class="rise" style="margin: 0 0 20px; font-size: 12px; letter-spacing: 0.3em; text-transform: uppercase; color: #D9C49A">06 · Up close</p>
 <h2 class="rise d1" style="margin: 0; max-width: 15ch; font-family: 'Cormorant Garamond', Georgia, serif; font-weight: 500; font-size: clamp(40px, 5vw, 76px); line-height: 1">Leaf through the surfaces, one by one.</h2>
 </div>
 <p class="rise d2" style="flex: 0 1 380px; margin: 0; font-size: 16px; line-height: 1.7; color: #C9C2B6">Scroll or drag to move through our collections, in real rooms and up close. Tap any picture to hold it up, and tap again to put it back.</p>
@@ -247,15 +335,66 @@ Scroll to step inside
 </div>
 </section>
 
-<!-- 06 EVERY SPACE -->
-<section data-sec="5" class="{{c5}}" style="background: #F7F4EE; padding: 140px 8vw; box-sizing: border-box">
+<!-- THEMES -->
+<section data-sec="6" class="{{c6}}" style="background: #EFEAE1; padding: 140px 8vw; box-sizing: border-box">
+<div class="tiles" aria-hidden="true"><sc-for list="{{tiles}}" as="t" hint-placeholder-count="40"><span class="tl {{t.k}}" style="animation-delay: {{t.d}}ms"></span></sc-for></div>
+<div style="position: relative; z-index: 1; display: flex; flex-wrap: wrap; justify-content: space-between; align-items: end; gap: 32px 64px">
+<div style="flex: 1 1 520px">
+<p class="rise" style="margin: 0 0 20px; font-size: 12px; letter-spacing: 0.3em; text-transform: uppercase; color: #7A5C25">07 · Themes we carry</p>
+<h2 class="rise d1" style="margin: 0; max-width: 15ch; font-family: 'Cormorant Garamond', Georgia, serif; font-weight: 500; font-size: clamp(40px, 5vw, 76px); line-height: 1">Whatever mood you have in mind, we stock it.</h2>
+</div>
+<p class="rise d2" style="flex: 0 1 400px; margin: 0; font-size: 17px; line-height: 1.7; color: #4A453E">Nine looks drawn from our catalogues. Scroll and the ring turns; the theme at the front opens up large. Pick a space to bring its best match forward.</p>
+</div>
+
+<div class="rise d2" role="group" aria-label="Filter themes by space" style="position: relative; z-index: 1; margin-top: 48px; display: flex; flex-wrap: wrap; gap: 8px">
+<sc-for list="{{thFilters}}" as="f" hint-placeholder-count="6">
+<button onClick="{{f.pick}}" aria-pressed="{{f.pressed}}" style="min-height: 44px; padding: 0 18px; border: 1px solid #1F1D1A; background: {{f.bg}}; color: {{f.fg}}; font: 600 12px Manrope, sans-serif; letter-spacing: 0.14em; text-transform: uppercase; cursor: pointer; transition: background .25s, color .25s">{{f.name}}</button>
+</sc-for>
+</div>
+
+<div class="rise d3" style="position: relative; z-index: 1; margin-top: 28px; display: flex; flex-wrap: wrap; gap: 6px 18px; font-size: 13px">
+<sc-for list="{{themes}}" as="th" hint-placeholder-count="9">
+<button onClick="{{th.go}}" style="padding: 6px 0; border: 0; border-bottom: 1px solid {{th.bc}}; background: none; color: {{th.fg}}; font: 500 13px Manrope, sans-serif; cursor: pointer; transition: color .3s, border-color .3s">{{th.n}} {{th.name}}</button>
+</sc-for>
+</div>
+
+<div data-orbit="themes" data-intro="" class="orb" aria-label="Revolving ring of tile themes. Scroll or drag to turn it, click a theme to bring it to the front.">
+<svg class="orb-path" aria-hidden="true"><path data-orbit-path="" fill="none" stroke="#B89A5E" stroke-opacity="0.45" stroke-width="1" stroke-dasharray="3 6"></path></svg>
+<sc-for list="{{orbit}}" as="o" hint-placeholder-count="9">
+<div class="orb-item {{o.cls}}" data-orbit-item="{{o.i}}" tabindex="0" role="button" aria-label="{{o.name}}"><div class="orb-in"><img src="{{o.src}}" alt="" draggable="false"></div></div>
+</sc-for>
+<div class="orb-center" data-orbit-center="" onClick="{{thOpen}}" role="button" tabindex="0" aria-label="View {{thc.name}} full screen">
+<div class="orb-zoom" data-orb-zoom=""><img data-orb-layer="" class="orb-l on" alt="{{thc.name}} theme"><img data-orb-layer="" class="orb-l" alt=""><div class="orb-tag"><p class="ot-k">{{thc.n}} · {{thc.best}}</p><p class="ot-n">{{thc.name}}</p></div><span class="orb-full" aria-hidden="true">Tap to view full</span></div>
+</div>
+</div>
+<div style="position: relative; z-index: 1; margin-top: 8px; display: flex; flex-wrap: wrap; justify-content: space-between; gap: 24px 64px; transition: opacity .3s; opacity: {{thc.op}}">
+<div style="flex: 1 1 360px">
+<p style="margin: 0 0 8px; font-size: 11px; letter-spacing: 0.22em; text-transform: uppercase; color: #7A5C25">{{thc.n}} · {{thc.best}}<span style="margin-left: 12px; padding: 3px 8px; background: #1F1D1A; color: #F7F4EE; display: {{thc.tag}}">Best match</span></p>
+<h3 style="margin: 0 0 8px; font-family: 'Cormorant Garamond', Georgia, serif; font-weight: 500; font-size: clamp(34px, 3.4vw, 48px); line-height: 1.05">{{thc.name}}</h3>
+<p style="margin: 0; font-size: 16px; line-height: 1.6; color: #4A453E">{{thc.mood}}</p>
+</div>
+<div style="flex: 0 1 420px">
+<p style="margin: 0 0 8px; font-size: 11px; letter-spacing: 0.22em; text-transform: uppercase; color: #7A5C25">From our collections</p>
+<p style="margin: 0; font-size: 14px; line-height: 1.7; color: #6B655C">{{thc.cols}}</p>
+</div>
+</div>
+<sc-if value="{{thBox}}" hint-placeholder-val="{{ false }}">
+<div class="lbox" onClick="{{thClose}}" role="dialog" aria-modal="true" aria-label="{{lb.name}}">
+<figure onClick="{{stop}}"><img src="{{lb.src}}" alt="{{lb.name}} theme"><figcaption><p class="lb-k">{{lb.n}} · {{lb.best}}</p><p class="lb-n">{{lb.name}}</p><p class="lb-m">{{lb.mood}}</p><p class="lb-c">{{lb.cols}}</p></figcaption></figure>
+<button onClick="{{thClose}}" aria-label="Close" class="lbox-x">Close ✕</button>
+</div>
+</sc-if>
+</section>
+
+<!-- 08 EVERY SPACE -->
+<section data-sec="7" class="{{c7}}" style="background: #F7F4EE; padding: 140px 8vw; box-sizing: border-box">
 <canvas data-tg="1" aria-hidden="true" style="position: absolute; inset: 0; width: 100%; height: 100%; display: block; pointer-events: none; z-index: 0"></canvas>
 <div class="pour" aria-hidden="true"><svg viewBox="0 0 2880 160" preserveAspectRatio="none"><path fill="#1F1D1A" d="M0 80 C240 0 480 160 720 80 S1200 0 1440 80 S1920 160 2160 80 S2640 0 2880 80 V160 H0Z"></path></svg><div class="fill" style="background: #1F1D1A"></div></div>
 <div class="pour p2" aria-hidden="true"><svg viewBox="0 0 2880 160" preserveAspectRatio="none"><path fill="#B89A5E" d="M0 90 C240 30 480 150 720 90 S1200 30 1440 90 S1920 150 2160 90 S2640 30 2880 90 V160 H0Z"></path></svg><div class="fill" style="background: #B89A5E"></div></div>
 <div class="tiles" aria-hidden="true" style="--tc: #E6DCC8; --tc2: #D9CBB0"><sc-for list="{{tiles}}" as="t" hint-placeholder-count="40"><span class="tl {{t.k}}" style="animation-delay: {{t.d}}ms"></span></sc-for></div>
 <div style="position: relative; z-index: 1; display: flex; flex-wrap: wrap; justify-content: space-between; align-items: end; gap: 32px 64px">
 <div style="flex: 1 1 520px">
-<p class="rise" style="margin: 0 0 20px; font-size: 12px; letter-spacing: 0.3em; text-transform: uppercase; color: #7A5C25">06 · Every space, considered</p>
+<p class="rise" style="margin: 0 0 20px; font-size: 12px; letter-spacing: 0.3em; text-transform: uppercase; color: #7A5C25">08 · Every space, considered</p>
 <h2 class="rise d1" style="margin: 0; max-width: 14ch; font-family: 'Cormorant Garamond', Georgia, serif; font-weight: 500; font-size: clamp(44px, 5.6vw, 88px); line-height: 0.98">Planned room by room, from the front door in.</h2>
 </div>
 <p class="rise d2" style="flex: 0 1 380px; margin: 0; font-size: 17px; line-height: 1.7; color: #4A453E">We map your floor plan and match each space to the right tile: how much footfall it carries, how wet it gets and how it should feel underfoot.</p>
@@ -389,13 +528,13 @@ Scroll to step inside
 </section>
 
 <!-- 06 THE COLLECTION -->
-<section data-sec="6" class="{{c6}}" style="background: #141311; color: #F7F4EE; padding: 140px 0 72px; box-sizing: border-box">
+<section data-sec="8" class="{{c8}}" style="background: #141311; color: #F7F4EE; padding: 140px 0 72px; box-sizing: border-box">
 <div class="pour" aria-hidden="true"><svg viewBox="0 0 2880 160" preserveAspectRatio="none"><path fill="#F7F4EE" d="M0 80 C240 0 480 160 720 80 S1200 0 1440 80 S1920 160 2160 80 S2640 0 2880 80 V160 H0Z"></path></svg><div class="fill" style="background: #F7F4EE"></div></div>
 <div class="pour p2" aria-hidden="true"><svg viewBox="0 0 2880 160" preserveAspectRatio="none"><path fill="#B89A5E" d="M0 90 C240 30 480 150 720 90 S1200 30 1440 90 S1920 150 2160 90 S2640 30 2880 90 V160 H0Z"></path></svg><div class="fill" style="background: #B89A5E"></div></div>
 <div class="tiles" aria-hidden="true" style="--tc: #2C2925; --tc2: #3A3631"><sc-for list="{{tiles}}" as="t" hint-placeholder-count="40"><span class="tl {{t.k}}" style="animation-delay: {{t.d}}ms"></span></sc-for></div>
 <div style="padding: 0 8vw; display: flex; flex-wrap: wrap; justify-content: space-between; align-items: end; gap: 48px">
 <div style="flex: 1 1 480px">
-<p class="rise" style="margin: 0 0 20px; font-size: 12px; letter-spacing: 0.3em; text-transform: uppercase; color: #D9C49A">07 · Choose your tile</p>
+<p class="rise" style="margin: 0 0 20px; font-size: 12px; letter-spacing: 0.3em; text-transform: uppercase; color: #D9C49A">09 · Choose your tile</p>
 <h2 class="rise d1" style="margin: 0; max-width: 16ch; font-family: 'Cormorant Garamond', Georgia, serif; font-weight: 500; font-size: clamp(40px, 5vw, 76px); line-height: 1">A world of tiles to choose from.</h2>
 <p class="rise d2" style="margin: 28px 0 0; max-width: 520px; font-size: 17px; line-height: 1.7; color: #C9C2B6">Spin the sphere and hover any tile to bring it to life. Marble, stone, wood, plain colours and decors, from the brands we stock. We'll bring the full catalogues to your site.</p>
 </div>
@@ -433,7 +572,8 @@ Drag to spin · Tap a tile for 3D
 
 </div>
 </x-dc>
-<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":6900}}'>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":9600}}'>
+var BLOB = {"43815e51b80d99381452c54eb662d528": "theme-botanical.jpg", "9834ed87c948494a298f2c86e4fbe7bf": "welcome-itc.jpg", "ef32814582c090daf9f272e2594b97f2": "theme-soft-concrete.jpg", "3ff30ce853450dea95bb9bc4cb8fb153": "shawn-wash.jpg", "2415c2d90c9773f1260d00e07d71d754": "qr-visualizer.svg", "367fc743baf32e2d4f2ebe482f813323": "shawn-hall.jpg", "3e05dc2a2251addc8ac8921c7edc8379": "vijan-lobby.jpg", "46d4924af3183077c11f1500990dd1e0": "theme-warm-woods.jpg", "260bc9e6bc7cf850df27936d0ec4b136": "burger-house.jpg", "9f2b35b098a6f0b9236bfcec00b354ae": "theme-earth-stone.jpg", "2474bedc2c9fa6aed1012a5a94837ea6": "theme-royal-marble.jpg", "ef5156e96aa1d3b7f9040916bff56620": "vijan-mahal.jpg", "f533915c7c25a0c00e36785ad44b64d8": "railway-station.jpg", "4caf4b234ff90a24b48ad80d35bea9c9": "club-mahindra.jpg", "737ecc4fb116c13aa60400440864bae1": "mall-11.jpg", "19f558d65b6ac623f464dc8cf93c866f": "theme-terrazzo.jpg", "bd9408d23935a7da9d561df44be51360": "shriram-college.jpg", "2c105a986058d59aff7a2a948f92a6c3": "golden-heart.jpg", "eff6580fe218667c4098cc642a5a85bd": "vijan-room.jpg", "2923ce9ac481323fe222caa2e82ee6bb": "theme-spa-pool.jpg", "27cbd6cbf375e0104c4029eb833100f8": "lord-of-the-drinks.jpg", "72261279f8f4136c833c9488b8555164": "theme-statement-slabs.jpg", "32d5d54f3ae82d435390ebf95981a11c": "mag-atlas.jpg", "09e15a4c2214bbf320d01b8c06678d7f": "shawn-room.jpg", "2dff0d184e5ed4da8071eb55b7c2e5b7": "theme-noir-luxe.jpg", "2ff18e30e79de4dcff4260fa2a2587d4": "apollo.jpg", "7ac23fa81d28002c44ab5d722e5be55e": "shawn-elizey.jpg", "372d50002e10a4ce6d7fd154e0a963fd": "metro-hospital.jpg", "0ece8f2a3e363f9d87ba35363ab94fa3": "tile-atlas-hd.jpg"};
 var MAG = [["Exotica", "Stonex", "In a lounge"], ["Itaca", "Marble Touch", "Statuario white"], ["Simero", "Wood Collection", "In a guest room"], ["Simero", "Wood Collection", "Light oak plank"], ["Itaca", "Marble Touch", "In a restaurant"], ["Le Mina", "Mosaic", "Slate mosaic"], ["Simero", "600 × 1200", "In a washroom"], ["Lorence", "Rammed Earth", "Terracotta earth"], ["Lorence", "Botanica", "In a café"], ["Simero", "600 × 1200", "Grey marble"], ["Exotica", "Stonex", "In a dining hall"], ["Le Mina", "Mosaic", "Pool mosaic"], ["Simero", "600 × 1200", "In a bedroom"], ["Itaca", "Marble Touch", "Beige marble"], ["Lorence", "Rammed Earth", "In a suite"], ["Simero", "Wood Collection", "Wood-look bath"]];
 var TILES = [["Celebrity Parla", "Itaca", "600 × 1200 mm", "Marble", "Matte"], ["Alboran Beige", "Itaca", "1800 × 1200 mm", "Marble", "Gloss"], ["Crema Europa", "Nexion", "600 × 1200 mm", "Marble", "Gloss"], ["Native Bianco", "Icon", "600 × 600 mm", "Marble", "Gloss"], ["Galaxy Nero", "Icon", "800 × 2400 mm", "Marble", "Gloss"], ["Kilkenny Nero", "Nexion", "600 × 1200 mm", "Marble", "Gloss"], ["Palmiro Bianco", "Itaca", "1200 × 600 mm", "Stone", "Gloss"], ["Abbey Stone Sand", "Exotica", "1200 × 600 mm", "Stone", "Matte"], ["Cotto Punch", "Icon", "600 × 600 mm", "Stone", "Matte"], ["Galaxy Grey", "Icon", "800 × 2400 mm", "Stone", "Gloss"], ["Klinker", "Icon", "600 × 600 mm", "Stone", "Matte"], ["Vol 02 Beige", "Icon", "600 × 1200 mm", "Stone", "Matte"], ["Structura Beige", "Lorence", "1200 × 600 mm", "Stone", "Matte"], ["Dolerite Taupe", "Itaca", "1200 × 600 mm", "Stone", "Matte"], ["Faenza Miniral", "Pavit", "1200 × 600 mm", "Stone", "Satin"], ["Blaze Bianco", "Pavit", "1200 × 600 mm", "Wood", "Gloss"], ["Medusa Parquet", "Icon", "600 × 600 mm", "Wood", "Matte"], ["Wood Linear", "Icon", "600 × 600 mm", "Wood", "Matte"], ["Oak Light Grande", "Icon", "600 × 1200 mm", "Wood", "Matte"], ["Branswood", "Pavit", "1200 × 600 mm", "Wood", "Matte"], ["Royal Oak Montana", "Simero", "600 × 1200 mm", "Wood", "Matte"], ["Master Wood Slat", "Simero", "600 × 1200 mm", "Wood", "Matte"], ["Natural Olive Kota", "Icon", "600 × 600 mm", "Plain", "Matte"], ["Pietra Bianco", "Icon", "600 × 600 mm", "Plain", "Satin"], ["Crystal White", "Icon", "800 × 2400 mm", "Plain", "Gloss"], ["Soft Grey Grande", "Icon", "600 × 1200 mm", "Plain", "Satin"], ["Portostone White", "Itaca", "1200 × 600 mm", "Plain", "Matte"], ["Wilton Grey", "Itaca", "1200 × 600 mm", "Plain", "Matte"], ["Bulgari Crema", "Itaca", "1800 × 1200 mm", "Plain", "Satin"], ["Photoframe Nevi", "Exotica", "1200 × 600 mm", "Plain", "Matte"], ["Flowlux", "Exotica", "1200 × 600 mm", "Decor", "Matte"], ["Cube Gris", "Icon", "600 × 600 mm", "Decor", "Gloss"], ["Blanco Decor", "Icon", "600 × 1200 mm", "Decor", "Matte"], ["Florina", "Icon", "1200 × 600 mm", "Decor", "Gloss"], ["Olivia", "Lorence", "1200 × 600 mm", "Decor", "Matte"], ["Agate", "Exotica", "1200 × 600 mm", "Decor", "Satin"], ["Garnet", "Icon", "600 × 600 mm", "Decor", "Satin"], ["Cali Glitter", "Icon", "600 × 600 mm", "Decor", "Satin"], ["Cube", "Icon", "600 × 600 mm", "Decor", "Satin"], ["Decor Grande", "Icon", "600 × 1200 mm", "Decor", "Satin"], ["Denver Decor", "Icon", "600 × 1200 mm", "Decor", "Matte"], ["Mandala", "Lorence", "1200 × 600 mm", "Decor", "Matte"], ["Foglia", "Lorence", "1200 × 600 mm", "Decor", "Matte"], ["Glass Mosaic Rosso", "Exotica", "1200 × 600 mm", "Mosaic", "Satin"], ["Mosaic Art Glitter", "Icon", "600 × 600 mm", "Mosaic", "Satin"], ["Cloudysage", "Icon", "600 × 600 mm", "Mosaic", "Gloss"], ["Pietro", "Le Mina", "600 × 600 mm", "Mosaic", "Matte"]];
 var COUNT = 160, TILE_SIZE = 0.63, ROUND = 0.2, ZOOM = 1.65, PULLBACK = 1, INERTIA = 0.6, AUTOPLAY = 3, DIM = 0.5;
@@ -460,6 +600,218 @@ var FS = 'precision mediump float;uniform sampler2D uT;uniform float uRound,uDim
   'float edge=smoothstep(-.09,-.03,d)*step(.9,vSel);col=mix(col,vec3(1.),edge*.9);' +
   'gl_FragColor=vec4(col,a*smoothstep(-.15,.2,vFace));}';
 
+function CircRing(root, opt) {
+  var R2D = Math.PI / 180, N = opt.items.length, step = 360 / N, TILES = 8, SPRING = 90;
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var clamp = function (v, a, b) { return v < a ? a : v > b ? b : v; };
+  var wrapD = function (d) { return ((((d + 180) % 360) + 360) % 360) - 180; };
+  var rX = function (p, d) { var r = d * R2D, c = Math.cos(r), s = Math.sin(r); return [p[0], p[1] * c - p[2] * s, p[1] * s + p[2] * c]; };
+  var rY = function (p, d) { var r = d * R2D, c = Math.cos(r), s = Math.sin(r); return [p[0] * c + p[2] * s, p[1], -p[0] * s + p[2] * c]; };
+  var stage = root.querySelector('[data-cc-stage]'), cam = root.querySelector('[data-cc-cam]'), ring = root.querySelector('[data-cc-ring]');
+  var cardW = opt.cardW, cardH = opt.cardH, P = opt.perspective || 2500, tilt = opt.tilt == null ? -5 : opt.tilt;
+  var pitch = cardW + opt.gap, R = N * pitch / (2 * Math.PI);
+  var tiles = [];
+  for (var t = 0; t < TILES; t++) {
+    var len = cardW / TILES, st0 = t * len - (t > 0 ? 1.25 : 0), en = (t + 1) * len + (t < TILES - 1 ? 1.25 : 0), cen = (st0 + en) / 2 - cardW / 2, al = cen / R;
+    tiles.push({ i: t, start: st0, end: en, size: en - st0, move: 'translate3d(' + (R * Math.sin(al)).toFixed(2) + 'px,0px,' + (-R * (1 - Math.cos(al))).toFixed(2) + 'px) rotateY(' + (al / R2D).toFixed(3) + 'deg)' });
+  }
+  ring.innerHTML = '';
+  var cards = opt.items.map(function (it, idx) {
+    var card = document.createElement('div'); card.className = 'cc-card'; card.setAttribute('data-cc-index', idx);
+    [false, true].forEach(function (back) {
+      tiles.forEach(function (tl) {
+        var strip = back ? TILES - 1 - tl.i : tl.i, first = strip === 0, last = strip === TILES - 1, rr = 'var(--cc-radius)';
+        var off = back ? cardW - tl.end : tl.start;
+        var tile = document.createElement('div'); tile.className = 'cc-tile';
+        tile.style.cssText = 'left:' + (-tl.size / 2) + 'px;top:' + (-cardH / 2) + 'px;width:' + tl.size + 'px;height:' + cardH + 'px;transform:' + tl.move + (back ? ' rotateY(180deg)' : '');
+        var fr = document.createElement('div'); fr.className = 'cc-frame'; fr.style.height = cardH + 'px';
+        fr.style.borderRadius = (first ? rr : 0) + ' ' + (last ? rr : 0) + ' ' + (last ? rr : 0) + ' ' + (first ? rr : 0);
+        var img = document.createElement('img'); img.className = 'cc-photo'; img.alt = ''; img.draggable = false; img.decoding = 'async'; img.src = it.src;
+        img.style.cssText = 'left:' + (-off) + 'px;top:0;width:' + cardW + 'px;height:' + cardH + 'px';
+        fr.appendChild(img);
+        if (back) { var inn = document.createElement('div'); inn.className = 'cc-inner'; fr.appendChild(inn); }
+        var sh = document.createElement('div'); sh.className = 'cc-shade'; fr.appendChild(sh);
+        tile.appendChild(fr); card.appendChild(tile);
+      });
+    });
+    ring.appendChild(card); return card;
+  });
+  var S = { manual: 0, scroll: 0, scrollGoal: null, vel: 0, target: null, drag: null, yaw: 0, pitch: 0, ptr: null, intro: null, introDone: false, fit: 1, drop: 600, shift: 0, active: -1, last: 0, idle: 0, raf: 0, visible: false, dead: false, suppress: false };
+  function measure() {
+    var r = root.getBoundingClientRect(); if (!r.width || !r.height) return;
+    var room = opt.captionSpace || 0, w = r.width * 0.94, h = (r.height - room) * 0.92, x0 = 1e9, x1 = -1e9, y0 = 1e9, y1 = -1e9;
+    var cs = [[-cardW / 2, -cardH / 2], [cardW / 2, -cardH / 2], [-cardW / 2, cardH / 2], [cardW / 2, cardH / 2]];
+    for (var a = -180; a <= 180; a += 7.5) cs.forEach(function (c) { var p = rX(rY([c[0], c[1], R], a), tilt); p = [p[0], p[1], p[2] - R]; if (p[2] >= P * 0.95) return; var k = P / (P - p[2]); x0 = Math.min(x0, p[0] * k); x1 = Math.max(x1, p[0] * k); y0 = Math.min(y0, p[1] * k); y1 = Math.max(y1, p[1] * k); });
+    var fit = Math.min(1, (r.width < 700 ? 1.9 : 1) * w / Math.max(1, x1 - x0), h / Math.max(1, y1 - y0)); S.fit = fit; S.shift = -((y0 + y1) / 2) * fit - room / 2; S.drop = r.height / fit * 0.55 + cardH;
+    stage.style.perspective = P + 'px'; stage.style.transform = 'translate3d(0,' + S.shift.toFixed(1) + 'px,0) scale(' + fit.toFixed(4) + ')';
+  }
+  function scrollGoal() { var r = root.getBoundingClientRect(), vh = window.innerHeight || 800; return -clamp((vh - r.top) / (vh + r.height), 0, 1) * 360 * opt.scrollLaps; }
+  function angle() { return S.manual + S.scroll; }
+  function nearestManual() { var a = angle(); return S.manual + (Math.round(a / step) * step - a); }
+  function focus(i) { var goal = -i * step, a = angle(); goal += 360 * Math.round((a - goal) / 360); S.target = S.manual + (goal - a); wake(); }
+  function frame(now) {
+    S.raf = 0; if (S.dead || !S.visible) { S.last = 0; return; }
+    var dt = S.last ? Math.min((now - S.last) / 1000, 0.05) : 1 / 60; S.last = now;
+    if (!S.introDone && (!opt.gate || opt.gate())) {
+      if (!S.intro) { S.scroll = S.scrollGoal = scrollGoal(); S.manual = nearestManual() ; if (reduce) S.introDone = true; else S.intro = now; root.setAttribute('data-ready', ''); }
+      else if (now - S.intro >= 1500) { S.intro = null; S.introDone = true; }
+    }
+    if (S.introDone || S.intro) {
+      var g = scrollGoal(); if (S.scrollGoal === null || Math.abs(g - S.scrollGoal) > 0.01) { S.scrollGoal = g; S.idle = now; }
+      if (!S.intro) S.scroll += (S.scrollGoal - S.scroll) * (1 - Math.exp(-dt / 0.3));
+      if (Math.abs(S.scrollGoal - S.scroll) > 0.05) S.idle = now;
+    }
+    if (S.drag && S.drag.on) S.idle = now;
+    else if (S.target !== null) {
+      var rem = dt, damp = 2 * Math.sqrt(SPRING);
+      while (rem > 0) { var h = Math.min(rem, 1 / 240), acc = SPRING * (S.target - S.manual) - damp * S.vel; S.vel += acc * h; S.manual += S.vel * h; rem -= h; }
+      if (Math.abs(S.target - S.manual) < 0.004 && Math.abs(S.vel) < 0.03) { S.manual = S.target; S.vel = 0; S.target = null; }
+      S.idle = now;
+    } else if (Math.abs(S.vel) > 0.5) { S.manual += S.vel * dt; S.vel *= Math.exp(-dt / 0.45); S.idle = now; }
+    else if (!S.intro && S.introDone && now - S.idle > 260) { var nm = nearestManual(); if (Math.abs(nm - S.manual) > 0.01) S.target = nm; }
+    var ay = S.ptr ? S.ptr[0] * 0.3 * 9 : 0, ap = S.ptr ? -S.ptr[1] * 0.3 * 6 : 0, e = 1 - Math.exp(-dt / 0.35);
+    S.yaw += (ay - S.yaw) * e; S.pitch += (ap - S.pitch) * e;
+    render(now);
+    S.raf = requestAnimationFrame(frame);
+  }
+  function render(now) {
+    var el = S.intro ? now - S.intro : 0, a = angle(), swell = 1 + 0.06 * Math.min(1, Math.abs(S.vel) / 420), Rr = R * swell;
+    cam.style.transform = 'translate3d(0,0,' + (-Rr).toFixed(2) + 'px) rotateX(' + (tilt + S.pitch).toFixed(3) + 'deg) rotateY(' + S.yaw.toFixed(3) + 'deg)';
+    ring.style.transform = 'rotateY(' + a.toFixed(3) + 'deg)';
+    for (var i = 0; i < N; i++) {
+      var base = i * step, tr = 'rotateY(' + base + 'deg) translateZ(' + Rr.toFixed(2) + 'px)';
+      if (S.intro) { var reach = Math.abs(wrapD(base + a)), p = clamp((el - reach / 180 * 480) / 900, 0, 1); p = 1 - Math.pow(1 - p, 5); if (p < 1) tr += ' translateY(' + ((1 - p) * S.drop).toFixed(1) + 'px)'; }
+      else if (!S.introDone) tr += ' translateY(' + S.drop.toFixed(1) + 'px)';
+      cards[i].style.transform = tr;
+      var facing = Math.cos(wrapD(base + a) * R2D); cards[i].style.setProperty('--cc-depth', (0.55 * Math.pow((1 - facing) / 2, 1.25)).toFixed(3));
+    }
+    var idx = ((Math.round(-a / step) % N) + N) % N || 0;
+    if (idx !== S.active) { S.active = idx; if (opt.onChange) opt.onChange(idx); }
+  }
+  function wake() { if (!S.raf && S.visible && !S.dead) S.raf = requestAnimationFrame(frame); }
+  function perPx() { return 180 / (Math.PI * R * S.fit); }
+  root.addEventListener('pointerdown', function (e) { S.suppress = false; if (e.button !== 0 || !S.introDone) return; S.drag = { id: e.pointerId, x: e.clientX, y: e.clientY, m: S.manual, on: false, s: [[performance.now(), S.manual]] }; });
+  root.addEventListener('pointermove', function (e) {
+    if (e.pointerType === 'mouse') { var r = root.getBoundingClientRect(); S.ptr = [clamp((e.clientX - r.left) / r.width * 2 - 1, -1, 1), clamp((e.clientY - r.top) / r.height * 2 - 1, -1, 1)]; }
+    var d = S.drag; if (!d || d.id !== e.pointerId) return; var dx = e.clientX - d.x;
+    if (!d.on) { if (Math.abs(dx) < 5) return; if (Math.abs(e.clientY - d.y) > Math.abs(dx) * 1.2 && e.pointerType !== 'mouse') { S.drag = null; return; } d.on = true; d.o = dx; S.target = null; S.vel = 0; root.setAttribute('data-dragging', ''); try { root.setPointerCapture(e.pointerId); } catch (x) {} }
+    S.manual = d.m + (dx - d.o) * perPx(); var n = performance.now(); d.s.push([n, S.manual]); while (d.s.length > 2 && n - d.s[0][0] > 110) d.s.shift(); wake();
+  });
+  function release(e) {
+    var d = S.drag; if (!d || d.id !== e.pointerId) return; S.drag = null; if (!d.on) return; root.removeAttribute('data-dragging'); S.suppress = true;
+    var f = d.s[0], l = d.s[d.s.length - 1], sp = (l[0] - f[0]) / 1000, v = sp > 0.008 ? clamp((l[1] - f[1]) / sp, -1400, 1400) : 0;
+    var a = angle() + v * 0.35; S.target = S.manual + (Math.round(a / step) * step - angle()); S.vel = v; wake();
+  }
+  root.addEventListener('pointerup', release); root.addEventListener('pointercancel', release);
+  root.addEventListener('pointerleave', function () { S.ptr = null; });
+  root.addEventListener('click', function (e) { if (S.suppress) { S.suppress = false; return; } var c = e.target.closest && e.target.closest('[data-cc-index]'); if (c) focus(+c.getAttribute('data-cc-index')); });
+  root.addEventListener('keydown', function (e) { if (e.key === 'ArrowRight' || e.key === 'ArrowLeft') { e.preventDefault(); focus(((S.active + (e.key === 'ArrowRight' ? 1 : -1)) % N + N) % N); } });
+  var ro = window.ResizeObserver ? new ResizeObserver(function () { measure(); }) : null; if (ro) ro.observe(root);
+  var io = new IntersectionObserver(function (es) { S.visible = es[0].isIntersecting; if (S.visible) wake(); }, { threshold: 0.05 }); io.observe(root);
+  measure(); render(performance.now());
+  return { focus: focus, destroy: function () { S.dead = true; if (S.raf) cancelAnimationFrame(S.raf); io.disconnect(); if (ro) ro.disconnect(); } };
+}
+
+function OrbitRing(root, opt) {
+  var S = 720, TAU = Math.PI * 2, N = opt.count;
+  var st = { lut: null, front: 0, yMid: 0, yHalf: 1, bbox: [0, 0, 1, 1], W: 0, H: 0, scale: 0, size: 0, items: [], manual: 0, scrollOff: 0, scrollTarget: null, seek: null, glide: 0, drag: null, intro: -1, introDone: false, visible: false, raf: 0, last: 0, frontIdx: -1, idleSince: 0, dead: false, suppress: 0, geomKey: '' };
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var clamp = function (v, a, b) { return v < a ? a : v > b ? b : v; };
+  var wrap = function (v) { return v - Math.round(v); };
+  function geom() { return st.W < 700 ? opt.narrow : opt.wide; }
+  function build() {
+    var g = geom(), key = JSON.stringify(g); if (key === st.geomKey && st.lut) return; st.geomKey = key;
+    var lut = new Float32Array(S * 2), a = g.rotation * Math.PI / 180, c = Math.cos(a), s = Math.sin(a), x0 = 1e9, x1 = -1e9, y0 = 1e9, y1 = -1e9, front = 0;
+    for (var i = 0; i < S; i++) {
+      var t = i / S * TAU, ex = g.rx * Math.cos(t), ey = g.ry * Math.sin(t), x = ex * c - ey * s, y = ex * s + ey * c;
+      lut[i * 2] = x; lut[i * 2 + 1] = y; x0 = Math.min(x0, x); x1 = Math.max(x1, x); y0 = Math.min(y0, y); y1 = Math.max(y1, y);
+      if (y > lut[front * 2 + 1]) front = i;
+    }
+    st.lut = lut; st.front = front / S; st.yMid = (y0 + y1) / 2; st.yHalf = Math.max(1e-3, (y1 - y0) / 2);
+    var m = g.itemSize / 2 * (1 + opt.depth * 0.3) + 2; st.bbox = [x0 - m, y0 - m, x1 + m, y1 + m];
+  }
+  function sample(u) { var f = (((u % 1) + 1) % 1) * S, i0 = Math.floor(f) % S, i1 = (i0 + 1) % S, t = f - Math.floor(f), L = st.lut; return [L[i0 * 2] + (L[i1 * 2] - L[i0 * 2]) * t, L[i0 * 2 + 1] + (L[i1 * 2 + 1] - L[i0 * 2 + 1]) * t]; }
+  function layout() {
+    st.W = root.clientWidth; st.H = root.clientHeight; build();
+    var b = st.bbox, sc = Math.min(st.W / (b[2] - b[0]), st.H / (b[3] - b[1]));
+    st.scale = sc > 0 && isFinite(sc) ? sc : 0; st.size = geom().itemSize * st.scale;
+    st.items = Array.prototype.slice.call(root.querySelectorAll('[data-orbit-item]')).map(function (el) { return { el: el, t: '', o: '', z: '' }; });
+    st.items.forEach(function (it) { it.el.style.width = st.size + 'px'; it.el.style.height = st.size * 1.25 + 'px'; });
+    var cz = root.querySelector('[data-orbit-center]'); if (cz && st.scale) { var cw = Math.min(st.size * (opt.centerScale || 1.5), st.H * 0.8 / 1.25); cz.style.width = cw + 'px'; cz.style.height = cw * 1.25 + 'px'; }
+    var path = root.querySelector('[data-orbit-path]');
+    if (path && st.lut) { var d = ''; for (var i = 0; i <= S; i += 4) { var p = sample(i / S), X = p[0] * st.scale + st.W / 2, Y = p[1] * st.scale + st.H / 2; d += (i ? ' L ' : 'M ') + X.toFixed(1) + ' ' + Y.toFixed(1); } path.setAttribute('d', d + ' Z'); var svg = path.ownerSVGElement; if (svg) svg.setAttribute('viewBox', '0 0 ' + st.W + ' ' + st.H); }
+  }
+  function prog() { return st.manual + st.scrollOff; }
+  function write(it, k, prop, v) { if (it[k] !== v) { it[k] = v; it.el.style[prop] = v; } }
+  function render(now) {
+    if (!st.lut || !st.scale) return;
+    var p = prog(), dep = opt.depth, half = st.size / 2, introOn = st.intro >= 0, el = introOn ? (now - st.intro) / 1000 : 0;
+    var spread = introOn ? 1 - Math.pow(1 - clamp(el / 1.3, 0, 1), 5) : 1, appear = introOn ? clamp(el / 0.45, 0, 1) : 1;
+    var fi = ((Math.round((st.front - p) * N) % N) + N) % N;
+    for (var i = 0; i < st.items.length; i++) {
+      var it = st.items[i], u = p + i / N; if (introOn) u = st.front + wrap(u - st.front) * spread;
+      var xy = sample(u), d = clamp((xy[1] - st.yMid) / st.yHalf, -1, 1), w = (d + 1) / 2;
+      var sc = 1 + dep * (0.3 * w - 0.45 * (1 - w)), op = 1 - dep * 0.55 * (1 - w);
+      var lift = clamp(Math.abs(wrap(u - st.front)) * N / 0.55, 0, 1); op *= lift * lift; sc *= 0.75 + 0.25 * lift;
+      if (introOn) { sc *= 0.7 + 0.3 * appear; op *= appear * appear * (3 - 2 * appear); }
+      var sx = xy[0] * st.scale + st.W / 2 - half, sy = xy[1] * st.scale + st.H / 2 - half * 1.25;
+      var z = d <= 0 ? 10 + Math.round((d + 1) * 80) : 110 + Math.round(d * 80);
+      write(it, 't', 'transform', 'translate3d(' + sx.toFixed(2) + 'px,' + sy.toFixed(2) + 'px,0) scale(' + sc.toFixed(4) + ')');
+      write(it, 'o', 'opacity', op > 0.999 ? '1' : op.toFixed(3));
+      write(it, 'z', 'zIndex', String(z));
+      it.el.style.pointerEvents = op < 0.2 ? 'none' : '';
+    }
+    if (fi !== st.frontIdx && !introOn) { st.frontIdx = fi; swap(fi); if (opt.onFront) opt.onFront(fi); }
+  }
+  var layers = Array.prototype.slice.call(root.querySelectorAll('[data-orb-layer]')), cur = 0; if (layers.length && opt.srcs) { layers[0].src = opt.srcs[0]; layers[0].setAttribute('data-i', '0'); layers[1].src = opt.srcs[1 % opt.srcs.length]; }
+  function swap(i) { if (layers.length < 2 || !opt.srcs) return; var nx = layers[1 - cur], cu = layers[cur]; if (cu.getAttribute('data-i') === String(i)) return; nx.src = opt.srcs[i]; nx.setAttribute('data-i', i); nx.classList.add('on'); cu.classList.remove('on'); cur = 1 - cur; }
+  function scrollGoal() { var r = root.getBoundingClientRect(), vh = window.innerHeight || 800; return clamp((vh - r.top) / (vh + r.height), 0, 1) * opt.scrollLaps; }
+  function frame(now) {
+    st.raf = 0; if (st.dead || !st.visible) return;
+    var dt = st.last ? clamp((now - st.last) / 1000, 0, 0.1) : 0; st.last = now;
+    if (!st.introDone && st.intro === -1 && st.lut && st.scale && (!opt.gate || opt.gate())) { st.scrollOff = st.scrollTarget = scrollGoal(); if (reduce) st.introDone = true; else st.intro = now; root.removeAttribute('data-intro'); }
+    if (st.intro >= 0 && (now - st.intro) / 1000 >= 1.3) { st.intro = -2; st.introDone = true; }
+    if (st.introDone) {
+      var goal = scrollGoal(); if (st.scrollTarget === null) st.scrollTarget = goal;
+      if (Math.abs(goal - st.scrollTarget) > 1e-5) { st.scrollTarget = goal; st.idleSince = now; }
+      st.scrollOff += (st.scrollTarget - st.scrollOff) * (1 - Math.exp(-dt / 0.38));
+      if (Math.abs(st.scrollTarget - st.scrollOff) > 1e-4) st.idleSince = now;
+    }
+    if (st.drag && st.drag.active) st.idleSince = now;
+    else if (st.seek) { st.seek.t = Math.min(1, st.seek.t + dt / st.seek.dur); var e = st.seek.t < .5 ? 4 * Math.pow(st.seek.t, 3) : 1 - Math.pow(-2 * st.seek.t + 2, 3) / 2; st.manual = st.seek.from + st.seek.delta * e; if (st.seek.t >= 1) { st.seek = null; st.idleSince = now; } }
+    else if (st.glide) { st.manual += st.glide * dt; st.glide *= Math.exp(-dt / 0.5); if (Math.abs(st.glide) < 0.01) st.glide = 0; st.idleSince = now; }
+    else if (st.introDone && now - st.idleSince > 380) { var fi = ((Math.round((st.front - prog()) * N) % N) + N) % N, dl = wrap(st.front - (prog() + fi / N)); if (Math.abs(dl) > 1e-4) st.seek = { from: st.manual, delta: dl, t: 0, dur: 0.9 }; }
+    render(now);
+    st.raf = requestAnimationFrame(frame);
+  }
+  function wake() { if (!st.raf && !st.dead && st.visible) { st.last = 0; st.raf = requestAnimationFrame(frame); } }
+  function bringToFront(i) { if (!st.lut) return; var dl = wrap(st.front - (prog() + i / N)); st.glide = 0; st.seek = { from: st.manual, delta: dl, t: 0, dur: 0.7 + Math.abs(dl) * 1.6 }; wake(); }
+  function local(e) { var r = root.getBoundingClientRect(); return [e.clientX - r.left, e.clientY - r.top]; }
+  function idxOf(t) { var el = t && t.closest ? t.closest('[data-orbit-item]') : null; return el ? +el.getAttribute('data-orbit-item') : -1; }
+  function onDown(e) { if (e.pointerType === 'mouse' && e.button !== 0) return; if (e.target.closest && e.target.closest('[data-orbit-center]')) return; var p = local(e); st.drag = { id: e.pointerId, x: p[0], y: p[1], active: false, m: st.manual, s: [] }; }
+  function onMove(e) {
+    var d = st.drag; if (!d || e.pointerId !== d.id) return; var p = local(e), dx = p[0] - d.x;
+    if (!d.active) { if (Math.abs(dx) < 5) return; if (Math.abs(p[1] - d.y) > Math.abs(dx)) { st.drag = null; return; } d.active = true; d.anchor = dx; st.seek = null; st.glide = 0; try { root.setPointerCapture(e.pointerId); } catch (x) {} root.setAttribute('data-dragging', ''); }
+    var rate = geom().rx * st.scale * TAU * 0.5; st.manual = d.m - (dx - d.anchor) / rate;
+    var now = performance.now(); d.s.push([now, dx]); while (d.s.length > 2 && now - d.s[0][0] > 100) d.s.shift(); wake();
+  }
+  function onUp(e) {
+    var d = st.drag; if (!d || e.pointerId !== d.id) return; st.drag = null; if (!d.active) return; root.removeAttribute('data-dragging');
+    st.suppress = performance.now() + 400; var s = d.s, rate = geom().rx * st.scale * TAU * 0.5;
+    if (s.length > 1) { var a = s[0], b = s[s.length - 1]; if (b[0] > a[0] && performance.now() - b[0] < 80) st.glide = clamp(-((b[1] - a[1]) / (b[0] - a[0]) * 1000) / rate, -2, 2); }
+    wake();
+  }
+  function onClick(e) { if (performance.now() < st.suppress) { st.suppress = 0; return; } var i = idxOf(e.target); if (i >= 0) bringToFront(i); }
+  function onKey(e) { if ((e.key === 'Enter' || e.key === ' ') && idxOf(e.target) >= 0) { e.preventDefault(); bringToFront(idxOf(e.target)); } }
+  root.addEventListener('pointerdown', onDown); root.addEventListener('pointermove', onMove); root.addEventListener('pointerup', onUp); root.addEventListener('pointercancel', onUp); root.addEventListener('click', onClick); root.addEventListener('keydown', onKey);
+  var ro = window.ResizeObserver ? new ResizeObserver(function () { layout(); render(performance.now()); }) : null; if (ro) ro.observe(root);
+  var io = new IntersectionObserver(function (es) { st.visible = es[es.length - 1].isIntersecting; if (st.visible) wake(); }, { threshold: 0.05 }); io.observe(root);
+  layout();
+  return { bringToFront: bringToFront, refresh: function () { layout(); render(performance.now()); }, destroy: function () { st.dead = true; if (st.raf) cancelAnimationFrame(st.raf); io.disconnect(); if (ro) ro.disconnect(); } };
+}
+
+var TH = [["Royal Marble", "2474bedc2c9fa6aed1012a5a94837ea6", ["lobby", "rooms"], "Lobby & reception", "Polished veined marble looks that make an entrance feel grand.", "Itaca Marble Touch · Lioli 120 × 240 · Marfil Slab · Scientifica Royal · Simero Polished"], ["Noir Luxe", "2dff0d184e5ed4da8071eb55b7c2e5b7", ["wash", "dining", "lobby"], "Washrooms & bars", "Deep black marbles with bold white veins for drama after dark.", "Lioli 120 × 240 · Icon Sintered iSlab · Scientifica High Gloss"], ["Warm Woods", "46d4924af3183077c11f1500990dd1e0", ["rooms", "wash"], "Guest rooms", "The warmth of timber in a tile that never warps or needs polishing.", "Simero Wood Collection · Icon 20 × 120 Wood · Scientifica Wood · Kivos Matt & Wood"], ["Earth & Stone", "9f2b35b098a6f0b9236bfcec00b354ae", ["lobby", "outdoor"], "Lobby walls & outdoors", "Rammed earth, sandstone and natural stone textures with a grounded feel.", "Lorence Rammed Earth · Exotica Stonex · Simero StoneDeck · Icon Exterra"], ["Botanical Walls", "43815e51b80d99381452c54eb662d528", ["dining", "rooms", "wash"], "Feature walls", "Leaf and floral murals that turn a wall into the room’s centrepiece.", "Lorence Botanica · Itaca Fabula & Evoluta · Exotica Decotech · Simero Kaleido panels"], ["Terrazzo", "19f558d65b6ac623f464dc8cf93c866f", ["dining", "lobby"], "Cafés & corridors", "Playful chips of colour in a hard-wearing, easy-clean surface.", "Kivos Terrazzo collection"], ["Soft Concrete", "ef32814582c090daf9f272e2594b97f2", ["rooms", "wash"], "Modern rooms", "Calm, plaster-like greys for a clean, contemporary look.", "Simero Pozzolana · Itaca Plaster Spark · Lorence Artbay · Nexion Lithic"], ["Spa & Pool", "2923ce9ac481323fe222caa2e82ee6bb", ["wash", "outdoor"], "Pool, spa & wet areas", "Glass and stone mosaics made for water, with grip underfoot.", "Le Mina Mosaic · Le Mina Cloudy & Shallow · Icon Mini Tiles"], ["Statement Slabs", "72261279f8f4136c833c9488b8555164", ["lobby", "wash"], "Large feature walls", "Seamless large slabs with dramatic prints and very few joints.", "Lioli 120 × 240 · Simero 1200 × 2400 · Icon iSlab 80 × 240"]];
+var WORK = [["Vijan Mahal", "Jabalpur", "Hotel", "ef5156e96aa1d3b7f9040916bff56620"], ["Shawn Elizey", "Jabalpur", "Hotel", "7ac23fa81d28002c44ab5d722e5be55e"], ["Welcome Hotel by ITC", "Jabalpur", "Hotel", "9834ed87c948494a298f2c86e4fbe7bf"], ["Club Mahindra", "Bandhavgarh", "Resort", "4caf4b234ff90a24b48ad80d35bea9c9"], ["Lord of the Drinks", "Jabalpur", "Restaurant & bar", "27cbd6cbf375e0104c4029eb833100f8"], ["The Burger House", "Jabalpur", "Restaurant", "260bc9e6bc7cf850df27936d0ec4b136"], ["Apollo Hospital", "Jabalpur", "Healthcare", "2ff18e30e79de4dcff4260fa2a2587d4"], ["Golden Heart Hospital", "Jabalpur", "Healthcare", "2c105a986058d59aff7a2a948f92a6c3"], ["Metro Hospital", "Jabalpur", "Healthcare", "372d50002e10a4ce6d7fd154e0a963fd"], ["Shriram College", "Jabalpur", "Education", "bd9408d23935a7da9d561df44be51360"], ["Mall 11", "Jabalpur", "Retail", "737ecc4fb116c13aa60400440864bae1"], ["Jabalpur Railway Station", "Jabalpur", "Public", "f533915c7c25a0c00e36785ad44b64d8"]];
 class Component extends DCLogic {
   constructor(props) {
     super(props);
@@ -502,9 +854,21 @@ class Component extends DCLogic {
       self.initWaves();
       self.initMagnet();
       self.initTileGlow();
+      self.initGlass();
     }, 60);
   }
+  thOrder(f) { var a = [], b = []; TH.forEach(function (t, i) { (f !== 'all' && t[2].indexOf(f) >= 0 ? a : b).push(i); }); return a.concat(b); }
+  pickTheme(f) { this.setState({ thF: f }); if (this.orb && f !== 'all') { var o = this.thOrder(f); this.orb.bringToFront(o[0]); } }
+  initGlass() {
+    var self = this, gate = function () { return !!self.scrolled; };
+    var cw = document.querySelector('[data-cc="work"]'), ct = document.querySelector('[data-gc="themes"]');
+    if (cw) this.gcWork = CircRing(cw, { items: WORK.map(function (w) { return { src: BLOB[w[3]] }; }), cardW: 320, cardH: 240, gap: 26, tilt: -5, perspective: 2500, scrollLaps: 1, captionSpace: 110, gate: gate, onChange: function (i) { if (!self.dead) self.setState({ workIdx: i }); } });
+    var ob = document.querySelector('[data-orbit="themes"]');
+    if (ob) this.orb = OrbitRing(ob, { count: TH.length, depth: 0.5, scrollLaps: 1, gate: gate, wide: { rx: 640, ry: 230, rotation: -8, itemSize: 200 }, narrow: { rx: 400, ry: 300, rotation: -6, itemSize: 240 }, centerScale: 1.45, srcs: TH.map(function (t) { return BLOB[t[1]]; }), onFront: function (i) { if (self.dead) return; self.setState({ thIdx: i }); } });
+    this.thKey = function (e) { if (e.key === 'Escape' && self.state.thBox) self.setState({ thBox: false }); }; window.addEventListener('keydown', this.thKey);
+  }
   componentWillUnmount() {
+    if (this.gcWork) this.gcWork.destroy(); if (this.orb) this.orb.destroy(); if (this.thKey) window.removeEventListener('keydown', this.thKey);
     this.dead = true;
     if (this.io) this.io.disconnect();
     if (this.offScroll) this.offScroll();
@@ -1077,7 +1441,7 @@ class Component extends DCLogic {
   }
   renderVals() {
     var self = this;
-    var labels = ['Arrival', 'Welcome', 'Our stays', 'Your hotel', 'Up close', 'Every space', 'Collection'];
+    var labels = ['Arrival', 'Welcome', 'Our work', 'Our stays', 'Your hotel', 'Up close', 'Themes', 'Every space', 'Collection'];
     var rail = labels.map(function (l, i) {
       return {
         label: l, w: self.state.active === i ? 40 : 14, op: self.state.active === i ? 1 : 0,
@@ -1121,10 +1485,21 @@ class Component extends DCLogic {
     var lastZ = this.state.zLastZone ? (ZONES.filter(function (z) { return z[0] === self.state.zLastZone; })[0] || ['', ''])[1] : '';
     var selInfo = lastT ? lastZ + ': ' + lastT[0] + ' (' + lastT[1] + ', ' + lastT[2] + ', ' + lastT[4].toLowerCase() + ')' : 'Hover a swatch to see its name, tap to lay it.';
     var clearPlan = function () { self.setState({ zPick: {}, zSel: 'lobby', zLast: null, zLastZone: '' }); };
+    var thF = this.state.thF || 'all';
+    var FL = [['all', 'All spaces'], ['lobby', 'Lobby & reception'], ['rooms', 'Guest rooms'], ['wash', 'Washrooms & spa'], ['dining', 'Dining'], ['outdoor', 'Pool & outdoor']];
+    var thFilters = FL.map(function (f) { var on = f[0] === thF; return { name: f[1], pressed: on ? 'true' : 'false', bg: on ? '#1F1D1A' : 'transparent', fg: on ? '#F7F4EE' : '#1F1D1A', pick: function () { self.pickTheme(f[0]); } }; });
+    var hitT = function (i) { return thF !== 'all' && TH[i][2].indexOf(thF) >= 0; };
+    var thOrd = this.thOrder(thF), thI = this.state.thIdx;
+    var themes = thOrd.map(function (i) { var hm = hitT(i), cur = i === thI; return { name: TH[i][0], n: (i < 9 ? '0' : '') + (i + 1), fg: cur ? '#1F1D1A' : (hm || thF === 'all' ? '#4A453E' : '#9A9285'), bc: cur ? '#1F1D1A' : (hm ? '#B89A5E' : 'transparent'), go: function () { if (self.orb) self.orb.bringToFront(i); } }; });
+    if (thI == null) thI = 0;
+    var thc = { op: 1, n: (thI < 9 ? '0' : '') + (thI + 1), best: TH[thI][3], name: TH[thI][0], mood: TH[thI][4], cols: TH[thI][5], tag: hitT(thI) ? 'inline-block' : 'none', src: BLOB[TH[thI][1]] };
+    var orbit = TH.map(function (t, i) { return { i: i, name: t[0], src: BLOB[t[1]], cls: hitT(i) ? 'hit' : '' }; });
+    var thOpen = function () { self.setState({ thBox: thI + 1 }); }, thClose = function () { self.setState({ thBox: false }); }, stop = function (e) { if (e && e.stopPropagation) e.stopPropagation(); };
+    var wI = this.state.workIdx, wk = wI == null ? { op: 0, n: '', sector: '', name: '', place: '' } : { op: 1, n: (wI < 9 ? '0' : '') + (wI + 1) + ' / ' + WORK.length, sector: WORK[wI][2], name: WORK[wI][0], place: WORK[wI][1] };
     var t = TILES[this.state.idx % TILES.length];
     return {
       cover: !this.state.ready ? 'sec' : (this.state.open ? 'sec armed opened' : 'sec armed'),
-      c1: this.cls(1), c2: this.cls(2), c3: this.cls(3), c4: this.cls(4), c5: this.cls(5), c6: this.cls(6), magNoGL: !!this.state.magNoGL,
+      c1: this.cls(1), c2: this.cls(2), c3: this.cls(3), c4: this.cls(4), c5: this.cls(5), c6: this.cls(6), c7: this.cls(7), c8: this.cls(8), wk: wk, thc: thc, themes: themes, orbit: orbit, thOpen: thOpen, thClose: thClose, stop: stop, thBox: !!this.state.thBox, lb: (function (k) { var t = TH[k]; return { n: (k < 9 ? '0' : '') + (k + 1), best: t[3], name: t[0], mood: t[4], cols: t[5], src: BLOB[t[1]] }; })(this.state.thBox ? this.state.thBox - 1 : thI), thFilters: thFilters, magNoGL: !!this.state.magNoGL,
       rail: rail, rooms: rooms, tiles: tiles, magCap: (function (m) { var x = m != null && m >= 0 ? MAG[m] : null; return x ? { op: 1, sub: x[0] + ' · ' + x[1], title: x[2] } : { op: 0, sub: '', title: '' }; })(this.state.magIdx), zc: zc, zf: zf, zp: zp, spaces: spaces, swatches: swatches, cats: cats, selName: selName, selInfo: selInfo, clearPlan: clearPlan, glRef: this.glRef, noGL: this.state.noGL, cursor: 'grab',
       info: { title: t[0], desc: t[1] + ' · ' + t[2] + ' · ' + t[4], cat: t[3], op: 1 }
     };
